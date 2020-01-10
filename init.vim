@@ -28,7 +28,7 @@ endif
 " ===
 " === System
 " ===
-"set clipboard=unnamed
+"set clipboard=unnamedplus
 let &t_ut=''
 set autochdir
 
@@ -66,6 +66,7 @@ set ignorecase
 set smartcase
 set shortmess+=c
 set inccommand=split
+set completeopt=longest,noinsert,menuone,noselect,preview
 set ttyfast "should make scrolling faster
 set lazyredraw "same as above
 set visualbell
@@ -84,26 +85,27 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 
 " ===
-" === Terminal Behavior
+" === Terminal Behaviors
 " ===
 let g:neoterm_autoscroll = 1
 autocmd TermOpen term://* startinsert
 tnoremap <C-N> <C-\><C-N>
-let g:terminal_color_0   = '#000000'
-let g:terminal_color_1   = '#FF5555'
-let g:terminal_color_2   = '#50FA7B'
-let g:terminal_color_3   = '#F1FA8C'
-let g:terminal_color_4   = '#BD93F9'
-let g:terminal_color_5   = '#FF79C6'
-let g:terminal_color_6   = '#8BE9FD'
-let g:terminal_color_7   = '#BFBFBF'
-let g:terminal_color_8   = '#4D4D4D'
-let g:terminal_color_9   = '#FF6E67'
-let g:terminal_color_10  = '#5AF78E'
-let g:terminal_color_11  = '#F4F99D'
-let g:terminal_color_12  = '#CAA9FA'
-let g:terminal_color_13  = '#FF92D0'
-let g:terminal_color_14  = '#9AEDFE'
+tnoremap <C-O> <C-\><C-N><C-O>
+let g:terminal_color_0  = '#000000'
+let g:terminal_color_1  = '#FF5555'
+let g:terminal_color_2  = '#50FA7B'
+let g:terminal_color_3  = '#F1FA8C'
+let g:terminal_color_4  = '#BD93F9'
+let g:terminal_color_5  = '#FF79C6'
+let g:terminal_color_6  = '#8BE9FD'
+let g:terminal_color_7  = '#BFBFBF'
+let g:terminal_color_8  = '#4D4D4D'
+let g:terminal_color_9  = '#FF6E67'
+let g:terminal_color_10 = '#5AF78E'
+let g:terminal_color_11 = '#F4F99D'
+let g:terminal_color_12 = '#CAA9FA'
+let g:terminal_color_13 = '#FF92D0'
+let g:terminal_color_14 = '#9AEDFE'
 
 
 " ===
@@ -112,6 +114,7 @@ let g:terminal_color_14  = '#9AEDFE'
 " Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
 noremap ; :
+noremap : q:i
 
 " Save & quit
 noremap Q :q<CR>
@@ -147,10 +150,15 @@ noremap <LEADER><CR> :nohlsearch<CR>
 noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
 
 " Space to Tab
-noremap <LEADER>tt :%s/    /\t/g
+nnoremap <LEADER>tt :%s/    /\t/g
+vnoremap <LEADER>tt :s/    /\t/g
 
 " Folding
 noremap <silent> <LEADER>o za
+
+" Open up lazygit
+noremap \g :term lazygit<CR>
+noremap <c-g> :term lazygit<CR>
 
 
 " ===
@@ -162,10 +170,10 @@ noremap <silent> <LEADER>o za
 " < n   i >
 "     e
 "     v
-noremap <silent> u k
-noremap <silent> n h
-noremap <silent> e j
-noremap <silent> i l
+"noremap <silent> u k
+"noremap <silent> n h
+"noremap <silent> e j
+"noremap <silent> i l
 
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> U 5k
@@ -187,6 +195,7 @@ noremap h e
 noremap <C-U> 5<C-y>
 noremap <C-E> 5<C-e>
 
+
 " ===
 " === Insert Mode Cursor Movement
 " ===
@@ -194,14 +203,27 @@ inoremap <C-a> <ESC>A
 
 
 " ===
+" === Command Mode Cursor Movement
+" ===
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <M-b> <S-Left>
+cnoremap <M-w> <S-Right>
+
+
+" ===
 " === Window management
 " ===
 " Use <space> + new arrow keys for moving the cursor around windows
 noremap <LEADER>w <C-w>w
-noremap <LEADER>u <C-w>k
-noremap <LEADER>e <C-w>j
-noremap <LEADER>n <C-w>h
-noremap <LEADER>i <C-w>l
+noremap <LEADER><Up> <C-w>k
+noremap <LEADER><Down> <C-w>j
+noremap <LEADER><Left> <C-w>h
+noremap <LEADER><Right> <C-w>l
 
 " Disable the default s key
 noremap s <nop>
@@ -213,10 +235,10 @@ noremap sn :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap si :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
-noremap <up> :res +5<CR>
-noremap <down> :res -5<CR>
-noremap <left> :vertical resize-5<CR>
-noremap <right> :vertical resize+5<CR>
+noremap <S-up> :res +5<CR>
+noremap <S-down> :res -5<CR>
+noremap <S-left> :vertical resize-5<CR>
+noremap <S-right> :vertical resize+5<CR>
 
 " Place the two screens up and down
 noremap sh <C-w>t<C-w>K
@@ -239,8 +261,6 @@ noremap tu :tabe<CR>
 " Move around tabs with tn and ti
 noremap tn :-tabnext<CR>
 noremap ti :+tabnext<CR>
-nnoremap <c-n> :-tabnext<CR>
-nnoremap <c-i> :+tabnext<CR>
 " Move the tabs with tmn and tmi
 noremap tmn :-tabmove<CR>
 noremap tmi :+tabmove<CR>
@@ -265,7 +285,7 @@ nnoremap \p 1<C-G>
 inoremap <C-u> <ESC>lx$p
 
 " Opening a terminal window
-noremap <LEADER>/ :set splitbelow<CR>:sp<CR>:term<CR>
+noremap <LEADER>/ :term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
@@ -286,6 +306,9 @@ noremap tx :r !figlet
 
 noremap <LEADER>- :lN<CR>
 noremap <LEADER>= :lne<CR>
+
+" find and replace
+noremap \s :%s//g<left><left>
 
 " Compile function
 noremap r :call CompileRunGcc()<CR>
@@ -324,14 +347,12 @@ func! CompileRunGcc()
 endfunc
 
 
-
 " ===
 " === Install Plugins with Vim-Plug
 " ===
 
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'junegunn/goyo.vim'
 
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
@@ -340,8 +361,8 @@ Plug 'theniceboy/vim-calc'
 Plug 'theniceboy/eleline.vim'
 Plug 'bling/vim-bufferline'
 "Plug 'liuchengxu/space-vim-theme'
-Plug 'morhetz/gruvbox'
-Plug 'ayu-theme/ayu-vim'
+"Plug 'morhetz/gruvbox'
+"Plug 'ayu-theme/ayu-vim'
 "Plug 'rakr/vim-one'
 "Plug 'mhartington/oceanic-next'
 "Plug 'kristijanhusak/vim-hybrid-material'
@@ -352,19 +373,20 @@ Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 
 " File navigation
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf.vim'
+"Plug 'yuki-ycino/fzf-preview.vim'
 "Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-Plug 'junegunn/fzf'
+"Plug 'junegunn/fzf'
 Plug 'francoiscabrol/ranger.vim'
-
 
 " Taglist
 Plug 'liuchengxu/vista.vim'
 
 " Error checking
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
+Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -379,8 +401,6 @@ Plug 'mbbill/undotree'
 " Git
 Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
-Plug 'tpope/vim-fugitive' " gv dependency
-Plug 'junegunn/gv.vim' " gv (normal) to show git log
 "Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
 
@@ -393,19 +413,21 @@ Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim depend
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json'
-Plug 'hail2u/vim-css3-syntax'
+Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'pangloss/vim-javascript' ", { 'for' :['javascript', 'vim-plug'] }
-Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'jaxbot/browserlink.vim'
 
 " Go
-Plug 'fatih/vim-go' " , { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
 " Python
-Plug 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim'
@@ -416,20 +438,28 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'theniceboy/bullets.vim'
 
 " Editor Enhancement
+"Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
+Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 Plug 'AndrewRadev/switch.vim' " gs to switch
-Plug 'tpope/vim-surround' " type ysks' to wrap the word with '' or type cs'` to change 'word' to `word`
-Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
-Plug 'godlygeek/tabular' " type ;Tabularize /= to align the =
+Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
+Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
+Plug 'junegunn/vim-after-object' " da= to delete what's after =
+Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph, 
 Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
+Plug 'Konfekt/FastFold'
+Plug 'junegunn/vim-peekaboo'
+
+" Input Method Autoswitch
+Plug 'rlue/vim-barbaric'
 
 " Formatter
 Plug 'Chiel92/vim-autoformat'
 
 " For general writing
+Plug 'junegunn/goyo.vim'
 "Plug 'reedes/vim-wordy'
 "Plug 'ron89/thesaurus_query.vim'
 
@@ -437,27 +467,29 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'kshenoy/vim-signature'
 
 " Find & Replace
-Plug 'wsdjeg/FlyGrep.vim' " Ctrl+f (normal) to find file content
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
 Plug 'osyo-manga/vim-anzu'
 
 " Documentation
-Plug 'KabbAmine/zeavim.vim' " <LEADER>z to find doc
+"Plug 'KabbAmine/zeavim.vim' " <LEADER>z to find doc
 
 " Mini Vim-APP
-Plug 'mhinz/vim-startify'
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
 "Plug 'jceb/vim-orgmode'
+Plug 'mhinz/vim-startify'
+Plug 'theniceboy/vim-leader-mapper'
 
 " Vim Applications
 Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
 Plug 'ryanoasis/vim-devicons'
+Plug 'luochen1990/rainbow'
 
 " Other useful utilities
 Plug 'tpope/vim-eunuch' " do stuff like :SudoWrite
+Plug 'makerj/vim-pdf'
 
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -470,7 +502,6 @@ call plug#end()
 " experimental
 set lazyredraw
 set regexpengine=1
-
 
 
 " ===
@@ -495,7 +526,6 @@ set background=dark
 "let g:oceanic_next_terminal_italic = 1
 "let g:one_allow_italics = 1
 
-
 "color dracula
 "color one
 color deus
@@ -503,6 +533,7 @@ color deus
 "let ayucolor="light"
 "color ayu
 "set background=light
+"color xcodedark
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
@@ -512,28 +543,45 @@ hi NonText ctermfg=gray guifg=grey10
 let g:airline_powerline_fonts = 0
 
 
-" ===
-" === NERDTree
-" ===
-noremap tt :NERDTreeToggle<CR>
-let NERDTreeMapOpenExpl = ""
-let NERDTreeMapUpdir = "N"
-let NERDTreeMapUpdirKeepOpen = "n"
-let NERDTreeMapOpenSplit = ""
-let NERDTreeMapOpenVSplit = "I"
-let NERDTreeMapActivateNode = "i"
-let NERDTreeMapOpenInTab = "o"
-let NERDTreeMapOpenInTabSilent = "O"
-let NERDTreeMapPreview = ""
-let NERDTreeMapCloseDir = ""
-let NERDTreeMapChangeRoot = "l"
-let NERDTreeMapMenu = ","
-let NERDTreeMapToggleHidden = "zh"
+"" ===
+"" === NERDTree
+"" ===
+"noremap tt :NERDTreeToggle<CR>
+"let NERDTreeMapOpenExpl = ""
+"let NERDTreeMapUpdir = "N"
+"let NERDTreeMapUpdirKeepOpen = "n"
+"let NERDTreeMapOpenSplit = ""
+"let NERDTreeMapOpenVSplit = "I"
+"let NERDTreeMapActivateNode = "i"
+"let NERDTreeMapOpenInTab = "o"
+"let NERDTreeMapOpenInTabSilent = "O"
+"let NERDTreeMapPreview = ""
+"let NERDTreeMapCloseDir = ""
+"let NERDTreeMapChangeRoot = "l"
+"let NERDTreeMapMenu = ","
+"let NERDTreeMapToggleHidden = "zh"
+
+
+"" ==
+"" == NERDTree-git
+"" ==
+"let g:NERDTreeIndicatorMapCustom = {
+			"\ "Modified"	: "✹",
+			"\ "Staged"		: "✚",
+			"\ "Untracked" : "✭",
+			"\ "Renamed"	 : "➜",
+			"\ "Unmerged"	: "═",
+			"\ "Deleted"	 : "✖",
+			"\ "Dirty"		 : "✗",
+			"\ "Clean"		 : "✔︎",
+			"\ "Unknown"	 : "?"
+			"\ }
 
 
 " ==
 " == GitGutter
 " ==
+let g:gitgutter_signs = 0
 let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
@@ -544,29 +592,13 @@ nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
 
-" ==
-" == NERDTree-git
-" ==
-let g:NERDTreeIndicatorMapCustom = {
-			\ "Modified"	: "✹",
-			\ "Staged"		: "✚",
-			\ "Untracked" : "✭",
-			\ "Renamed"	 : "➜",
-			\ "Unmerged"	: "═",
-			\ "Deleted"	 : "✖",
-			\ "Dirty"		 : "✗",
-			\ "Clean"		 : "✔︎",
-			\ "Unknown"	 : "?"
-			\ }
-
-
 " ===
 " === coc
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-emmet', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore']
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer']
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
 	let col = col('.') - 1
@@ -577,32 +609,46 @@ inoremap <silent><expr> <Tab>
 			\ <SID>check_back_space() ? "\<Tab>" :
 			\ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 " Useful commands
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gy <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
-nnoremap <leader>rn <Plug>(coc-rename)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+nmap tt :CocCommand explorer<CR>
+" coc-todolist
+noremap ta :CocCommand todolist.create<CR>
+noremap td :CocCommand todolist.upload<CR>
+noremap tD :CocCommand todolist.download<CR>
+noremap tc :CocCommand todolist.clearNotice<CR>
+noremap tc :CocCommand todolist.clearNotice<CR>
+noremap tl :CocList --normal todolist<CR>
 
 
 " ===
 " === some error checking
 " ===
-let g:ale_virtualtext_cursor = 1
-let g:ale_linters = {
-			\ 'cs': ['OmniSharp'],
-			\ 'go': ['vim-go'],
-			\ 'c' : ['ccls']
-			\}
-let g:ale_cpp_ccls_init_options = {
-\   'cache': {
-\       'directory': '/tmp/ccls/cache'
-\   }
-\ }
-let g:ale_c_gcc_executable = '/usr/bin/gcc'
+"let g:ale_virtualtext_cursor = 1
+"let g:ale_linters = {
+			"\ 'cs': ['OmniSharp'],
+			"\ 'go': ['vim-go'],
+			"\ 'c' : ['ccls']
+			"\}
+"let g:ale_cpp_ccls_init_options = {
+			"\   'cache': {
+			"\       'directory': '/tmp/ccls/cache'
+			"\   }
+			"\ }
+"let g:ale_c_gcc_executable = '/usr/bin/gcc'
 "let g:ale_c_gcc_options="-Wall -O2"
+"
 
 
 " ===
@@ -649,7 +695,67 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 " ===
 " === FZF
 " ===
+set rtp+=/usr/local/opt/fzf
+set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 noremap <C-p> :FZF<CR>
+noremap <C-f> :Ag<CR>
+noremap <C-h> :MRU<CR>
+noremap <C-t> :BTags<CR>
+noremap <C-l> :LinesWithPreview<CR>
+noremap <C-w> :Buffers<CR>
+"noremap ; :History:<CR>
+
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 ruler
+
+command! -bang -nargs=* Buffers
+  \ call fzf#vim#buffers(
+  \   '',
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:0%', '?'),
+  \   <bang>0)
+
+
+command! -bang -nargs=* LinesWithPreview
+    \ call fzf#vim#grep(
+    \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
+    \   fzf#vim#with_preview({}, 'up:50%', '?'),
+    \   1)
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(
+  \   '',
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%', '?'),
+  \   <bang>0)
+
+
+command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
+
+command! -bang BTags
+  \ call fzf#vim#buffer_tags('', {
+  \     'down': '40%',
+  \     'options': '--with-nth 1 
+  \                 --reverse 
+  \                 --prompt "> " 
+  \                 --preview-window="70%" 
+  \                 --preview "
+  \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
+  \                     head -n 16"'
+  \ })
+
+
+"" ===
+"" === fzf-preview.vim
+"" ===
+"noremap <C-w> :BuffersPreview<CR>
+"let g:fzf_preview_default_key_bindings = 'ctrl-e:down,ctrl-u:up'
+"let g:fzf_preview_layout = 'belowright split new'
+"let g:fzf_preview_rate = 0.4
+"let g:fzf_full_preview_toggle_key = '<C-f>'
+"let g:fzf_preview_command = 'ccat --color=always {-1}'
+"let g:fzf_binary_preview_command = 'echo "It is a binary file"'
 
 
 " ===
@@ -693,6 +799,15 @@ noremap L :UndotreeToggle<CR>
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
+let g:undotree_WindowLayout = 2
+let g:undotree_DiffpanelHeight = 8
+let g:undotree_SplitWidth = 24
+function g:Undotree_CustomMap()
+	nmap <buffer> u <plug>UndotreeNextState
+	nmap <buffer> e <plug>UndotreePreviousState
+	nmap <buffer> U 5<plug>UndotreeNextState
+	nmap <buffer> E 5<plug>UndotreePreviousState
+endfunc
 
 
 " ==
@@ -705,23 +820,14 @@ let g:multi_cursor_start_key = 'g<c-k>'
 let g:multi_cursor_select_all_key = 'g<a-k>'
 let g:multi_cursor_next_key = '<c-k>'
 let g:multi_cursor_prev_key = '<c-p>'
-let g:multi_cursor_skip_key = '<C-x>'
+let g:multi_cursor_skip_key = '<C-s>'
 let g:multi_cursor_quit_key = '<Esc>'
-
-
-" Startify
-let g:startify_lists = [
-			\ { 'type': 'files',		 'header': ['	 MRU']						},
-			\ { 'type': 'bookmarks', 'header': ['	 Bookmarks']			},
-			\ { 'type': 'commands',	'header': ['	 Commands']			 },
-			\ ]
 
 
 " ===
 " === Far.vim
 " ===
-noremap <LEADER>fa :F	%<left><left>
-noremap <LEADER>fr :Farp<CR>
+noremap <LEADER>f :F  %<left><left>
 
 
 " ===
@@ -739,18 +845,18 @@ noremap <LEADER>a :call Calc()<CR>
 " ===
 "let g:bullets_set_mappings = 0
 let g:bullets_enabled_file_types = [
-    \ 'markdown',
-    \ 'text',
-    \ 'gitcommit',
-    \ 'scratch'
-    \]
+			\ 'markdown',
+			\ 'text',
+			\ 'gitcommit',
+			\ 'scratch'
+			\]
 
 
 " ===
 " === Vista.vim
 " ===
 noremap <silent> T :Vista!!<CR>
-noremap <silent> <C-t> :Vista finder<CR>
+"noremap <silent> <C-t> :Vista finder<CR>
 function! NearestMethodOrFunction() abort
 	return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
@@ -764,7 +870,7 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 " To enable fzf's preview window set g:vista_fzf_preview.
 " The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
 " For example:
-let g:vista_fzf_preview = ['right:50%']
+"let g:vista_fzf_preview = ['right:50%']
 
 
 " ===
@@ -804,12 +910,6 @@ let maplocalleader=' '
 
 
 " ===
-" === FlyGrep
-" ===
-nnoremap <c-f> :FlyGrep<CR>
-
-
-" ===
 " === GV
 " ===
 nnoremap gv :GV<CR>
@@ -818,7 +918,7 @@ nnoremap gv :GV<CR>
 " ===
 " === vim-calendar
 " ===
-noremap \c :Calendar -position=here<CR>
+"noremap \c :Calendar -position=here<CR>
 noremap \\ :Calendar -view=clock -position=here<CR>
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
@@ -852,10 +952,11 @@ nnoremap - N
 " ===
 " === vim-go
 " ===
+let g:go_def_mapping_enabled = 0
 let g:go_template_autocreate = 0
 let g:go_textobj_enabled = 0
 let g:go_auto_type_info = 1
-"let g:go_def_mapping_enabled = 1
+let g:go_def_mapping_enabled = 0
 let g:go_highlight_array_whitespace_error    = 1
 let g:go_highlight_build_constraints         = 1
 let g:go_highlight_chan_whitespace_error     = 1
@@ -943,47 +1044,107 @@ let g:colorizer_syntax = 1
 
 
 " ===
-" === vim-clap
-" ===
-""nnoremap ,c :Clap bcommits<CR>
-""nnoremap ,l :Clap blines<CR>
-"nnoremap ,b :Clap buffers<CR>
-"nnoremap ,C :Clap colors<CR>
-""nnoremap ,h :Clap hist<CR>
-"nnoremap ,c :Clap commits<CR>
-""nnoremap ,f :Clap files<CR>
-"nnoremap ,t :Clap filetypes<CR>
-"nnoremap ,g :Clap gfiles<CR>
-""nnoremap , :Clap grep<CR>
-""nnoremap ,a :Clap jumps<CR>
-""nnoremap , :Clap marks<CR>
-""nnoremap ,t :Clap tags<CR>
-"nnoremap ,w :Clap window<CR>
-
-
-" ===
 " === vim-easymotion
 " ===
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_do_shade = 0
 let g:EasyMotion_smartcase = 1
-" 'f{char} to move to {char}
-map f <Plug>(easymotion-bd-f)
-nmap f <Plug>(easymotion-overwin-f)
-map \; <Plug>(easymotion-prefix)
-" 's{char}{char} to move to {char}{char}
-"nmap 's <Plug>(easymotion-overwin-f2)
-" Move to line
+map ' <Plug>(easymotion-bd-f)
+nmap ' <Plug>(easymotion-bd-f)
+"map E <Plug>(easymotion-j)
+"map U <Plug>(easymotion-k)
+"nmap f <Plug>(easymotion-overwin-f)
+"map \; <Plug>(easymotion-prefix)
+"nmap ' <Plug>(easymotion-overwin-f2)
 "map 'l <Plug>(easymotion-bd-jk)
 "nmap 'l <Plug>(easymotion-overwin-line)
-" Move to word
 "map  'w <Plug>(easymotion-bd-w)
 "nmap 'w <Plug>(easymotion-overwin-w)
-
 
 " ===
 " === goyo
 " ===
 map <LEADER>gy :Goyo<CR>
 
+
+" ===
+" === jsx
+" ===
+let g:vim_jsx_pretty_colorful_config = 1
+
+
+" ===
+" === fastfold
+" ===
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
+
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 1
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:ruby_fold = 1
+let g:perl_fold = 1
+let g:perl_fold_blocks = 1
+let g:r_syntax_folding = 1
+let g:rust_fold = 1
+let g:php_folding = 1
+
+
+" ===
+" === fzf-quickfix
+" ===
+nnoremap <c-q> :Quickfix!<CR>
+
+
+" ===
+" === vim-easy-align
+" ===
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+
+" ===
+" === vim-after-object
+" ===
+autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
+
+
+" ===
+" === vim-map-leader
+" ===
+let g:leaderMenu = {'name':  "Shortcut Menu",
+\'SPC f':  ['Advanced find'],
+\'SPC rc': ['Edit nvim config'],
+\'SPC Enter':  ['Clear search'],
+\'SPC dw':  ['Remove adj. dup. words'],
+\'SPC tt':  ['spc to tabs'],
+\'SPC o':  ['Open folds'],
+\'SPC q':  ['Close win below'],
+\'SPC /':  ['Open terminal'],
+\'SPC <SPC>':  ['Find <++>'],
+\'SPC sc':  ['Toggle spell-check'],
+\'SPC gf':  ['Fold unchanged'],
+\'SPC g-':  ['Previous hunk'],
+\'SPC g=':  ['Next Hunk'],
+\'SPC rn':  ['Rename variable'],
+\'SPC tm':  ['Toggle table-mode'],
+\'SPC a':  ['Calculate equation'],
+\'SPC gi':  ['New .gitignore'],
+\'SPC gy':  ['Toggle focus mode'],
+\}
+nnoremap <silent> ? :call leaderMapper#start() "<Space>"<CR>
+let g:leaderMapperWidth = 80
+
+
+" ===
+" === rainbow
+" ===
+let g:rainbow_active = 1
 
 
 " ===================== End of Plugin Settings =====================
@@ -992,6 +1153,8 @@ map <LEADER>gy :Goyo<CR>
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
+
+
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
