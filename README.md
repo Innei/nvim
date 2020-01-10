@@ -99,10 +99,10 @@ Python:
 #### 1.2 Remapped Cursor Movement
 | Shortcut   | Action                                                    | Equivalent |
 |------------|-----------------------------------------------------------|------------|
-| `u`        | Cursor up a terminal line                                 | `k`        |
-| `e`        | Cursor down a terminal line                               | `j`        |
-| `n`        | Cursor left                                               | `h`        |
-| `i`        | Cursor right                                              | `l`        |
+| `↑`        | Cursor up a terminal line                                 | `k`        |
+| `↓`        | Cursor down a terminal line                               | `j`        |
+| `←`        | Cursor left                                               | `h`        |
+| `→`        | Cursor right                                              | `l`        |
 | `U`        | Cursor up 5 terminal lines                                | `5k`       |
 | `E`        | Cursor down 5 terminal lines                              | `5j`       |
 | `N`        | Cursor to the start of the line                           | `0`        |
@@ -122,7 +122,7 @@ Python:
 #### 1.4 Remapped Text Manipulating Commands in Normal Mode
 | Shortcut        | Action                                |
 |-----------------|---------------------------------------|
-| `l`             | **undo**                              |
+| `u`             | **undo**                              |
 | `<`             | Un-indent                             |
 | `>`             | Indent                                |
 | `Ctrl` `a`      | Increase the number under cursor by 1 |
@@ -160,13 +160,13 @@ Python:
 | Shortcut      | Action                         |
 |---------------|--------------------------------|
 | `SPACE` + `w` | Move cursor to the next window |
-| `SPACE` + `n` | Move cursor one window left    |
-| `SPACE` + `i` | Move cursor one window right   |
-| `SPACE` + `u` | Move cursor one window up      |
-| `SPACE` + `e` | Move cursor one window down    |
+| `SPACE` + `↑` | Move cursor one window up      |
+| `SPACE` + `↓` | Move cursor one window down    |
+| `SPACE` + `←` | Move cursor one window left    |
+| `SPACE` + `→` | Move cursor one window right   |
 
 #### 2.3 Resizing Different Windows
-Use the arrow keys to resize the current window.
+Use the **Shift + arrow keys** to resize the current window.
 
 #### 2.4 Closing Windows
 | Shortcut    | Action                                                                                                     |
