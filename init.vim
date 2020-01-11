@@ -24,7 +24,6 @@ endif
 " ====================
 " === Editor Setup ===
 " ====================
-
 " ===
 " === System
 " ===
@@ -72,6 +71,7 @@ set lazyredraw "same as above
 set visualbell
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
+silent !mkdir -p ~/.config/nvim/tmp/sessions
 set backupdir=~/.config/nvim/tmp/backup,.
 set directory=~/.config/nvim/tmp/backup,.
 if has('persistent_undo')
@@ -118,13 +118,14 @@ noremap : q:i
 
 " Save & quit
 noremap Q :q<CR>
+noremap <C-q> :qa<CR>
 noremap S :w<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 " Open Startify
-noremap <LEADER>st :Startify<CR>
+"noremap <LEADER>st :Startify<CR>
 
 " Undo operations
 noremap l u
@@ -278,9 +279,6 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 " ===
 " === Other useful stuff
 " ===
-" \p to show the current buffer file path
-nnoremap \p 1<C-G>
-
 " Move the next character to the end of the line with ctrl+9
 inoremap <C-u> <ESC>lx$p
 
@@ -353,6 +351,9 @@ endfunc
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'mg979/vim-xtabline'
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc' " vim-session dep
 
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
@@ -384,9 +385,7 @@ Plug 'francoiscabrol/ranger.vim'
 " Taglist
 Plug 'liuchengxu/vista.vim'
 
-" Error checking
-"Plug 'dense-analysis/ale'
-Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
+" Error checking, handled by coc
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -453,7 +452,7 @@ Plug 'Konfekt/FastFold'
 Plug 'junegunn/vim-peekaboo'
 
 " Input Method Autoswitch
-Plug 'rlue/vim-barbaric'
+"Plug 'rlue/vim-barbaric' " slowing down vim-multiple-cursors
 
 " Formatter
 Plug 'Chiel92/vim-autoformat'
@@ -464,7 +463,8 @@ Plug 'junegunn/goyo.vim'
 "Plug 'ron89/thesaurus_query.vim'
 
 " Bookmarks
-Plug 'kshenoy/vim-signature'
+"Plug 'kshenoy/vim-signature'
+Plug 'MattesGroeger/vim-bookmarks'
 
 " Find & Replace
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
@@ -477,7 +477,7 @@ Plug 'osyo-manga/vim-anzu'
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
 "Plug 'jceb/vim-orgmode'
-Plug 'mhinz/vim-startify'
+"Plug 'mhinz/vim-startify'
 Plug 'theniceboy/vim-leader-mapper'
 
 " Vim Applications
@@ -501,7 +501,7 @@ call plug#end()
 
 " experimental
 set lazyredraw
-set regexpengine=1
+"set regexpengine=1
 
 
 " ===
@@ -540,42 +540,11 @@ hi NonText ctermfg=gray guifg=grey10
 
 " ===================== Start of Plugin Settings =====================
 
+
+" ===
+" === eleline.vim
+" ===
 let g:airline_powerline_fonts = 0
-
-
-"" ===
-"" === NERDTree
-"" ===
-"noremap tt :NERDTreeToggle<CR>
-"let NERDTreeMapOpenExpl = ""
-"let NERDTreeMapUpdir = "N"
-"let NERDTreeMapUpdirKeepOpen = "n"
-"let NERDTreeMapOpenSplit = ""
-"let NERDTreeMapOpenVSplit = "I"
-"let NERDTreeMapActivateNode = "i"
-"let NERDTreeMapOpenInTab = "o"
-"let NERDTreeMapOpenInTabSilent = "O"
-"let NERDTreeMapPreview = ""
-"let NERDTreeMapCloseDir = ""
-"let NERDTreeMapChangeRoot = "l"
-"let NERDTreeMapMenu = ","
-"let NERDTreeMapToggleHidden = "zh"
-
-
-"" ==
-"" == NERDTree-git
-"" ==
-"let g:NERDTreeIndicatorMapCustom = {
-			"\ "Modified"	: "✹",
-			"\ "Staged"		: "✚",
-			"\ "Untracked" : "✭",
-			"\ "Renamed"	 : "➜",
-			"\ "Unmerged"	: "═",
-			"\ "Deleted"	 : "✖",
-			"\ "Dirty"		 : "✗",
-			"\ "Clean"		 : "✔︎",
-			"\ "Unknown"	 : "?"
-			"\ }
 
 
 " ==
@@ -597,7 +566,7 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -630,25 +599,8 @@ noremap tD :CocCommand todolist.download<CR>
 noremap tc :CocCommand todolist.clearNotice<CR>
 noremap tc :CocCommand todolist.clearNotice<CR>
 noremap tl :CocList --normal todolist<CR>
-
-
-" ===
-" === some error checking
-" ===
-"let g:ale_virtualtext_cursor = 1
-"let g:ale_linters = {
-			"\ 'cs': ['OmniSharp'],
-			"\ 'go': ['vim-go'],
-			"\ 'c' : ['ccls']
-			"\}
-"let g:ale_cpp_ccls_init_options = {
-			"\   'cache': {
-			"\       'directory': '/tmp/ccls/cache'
-			"\   }
-			"\ }
-"let g:ale_c_gcc_executable = '/usr/bin/gcc'
-"let g:ale_c_gcc_options="-Wall -O2"
-"
+" coc-translator
+nmap ts <Plug>(coc-translator-p)
 
 
 " ===
@@ -764,32 +716,30 @@ command! -bang BTags
 let g:ctrlp_map = ''
 let g:ctrlp_cmd = 'CtrlP'
 
+
+
 " ===
-" === vim-signature
+" === vim-bookmarks
 " ===
-let g:SignatureMap = {
-			\ 'Leader':"m",
-			\ 'PlaceNextMark':"m,",
-			\ 'ToggleMarkAtLine':"m.",
-			\ 'PurgeMarksAtLine':"dm",
-			\ 'DeleteMark':"",
-			\ 'PurgeMarks':"",
-			\ 'PurgeMarkers':"",
-			\ 'GotoNextLineAlpha':"m<LEADER>",
-			\ 'GotoPrevLineAlpha':"",
-			\ 'GotoNextSpotAlpha':"m<LEADER>",
-			\ 'GotoPrevSpotAlpha':"",
-			\ 'GotoNextLineByPos':"",
-			\ 'GotoPrevLineByPos':"",
-			\ 'GotoNextSpotByPos':"",
-			\ 'GotoPrevSpotByPos':"",
-			\ 'GotoNextMarker':"",
-			\ 'GotoPrevMarker':"",
-			\ 'GotoNextMarkerAny':"",
-			\ 'GotoPrevMarkerAny':"",
-			\ 'ListLocalMarks':"m/",
-			\ 'ListLocalMarkers':"m?"
-			\ }
+let g:bookmark_no_default_key_mappings = 1
+nmap mt <Plug>BookmarkToggle
+nmap ma <Plug>BookmarkAnnotate
+nmap ml <Plug>BookmarkShowAll
+nmap mi <Plug>BookmarkNext
+nmap mn <Plug>BookmarkPrev
+nmap mC <Plug>BookmarkClear
+nmap mX <Plug>BookmarkClearAll
+nmap mu <Plug>BookmarkMoveUp
+nmap me <Plug>BookmarkMoveDown
+nmap <Leader>g <Plug>BookmarkMoveToLine
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
+let g:bookmark_highlight_lines = 1
+let g:bookmark_manage_per_buffer = 1
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_center = 1
+let g:bookmark_auto_close = 1
+let g:bookmark_location_list = 1
 
 
 " ===
@@ -813,7 +763,7 @@ endfunc
 " ==
 " == vim-multiple-cursor
 " ==
-let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_use_default_mapping = 0
 let g:multi_cursor_start_word_key = '<c-k>'
 let g:multi_cursor_select_all_word_key = '<a-k>'
 let g:multi_cursor_start_key = 'g<c-k>'
@@ -856,21 +806,19 @@ let g:bullets_enabled_file_types = [
 " === Vista.vim
 " ===
 noremap <silent> T :Vista!!<CR>
-"noremap <silent> <C-t> :Vista finder<CR>
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'ctags'
+let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#enable_icon = 1
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
 function! NearestMethodOrFunction() abort
 	return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
-
 set statusline+=%{NearestMethodOrFunction()}
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-
-" e.g., more compact: ["▸ ", ""]
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-"let g:vista_default_executive = 'ctags'
-" To enable fzf's preview window set g:vista_fzf_preview.
-" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
-" For example:
-"let g:vista_fzf_preview = ['right:50%']
 
 
 " ===
@@ -907,12 +855,6 @@ let g:vimtex_mappings_enabled = 0
 let g:vimtex_text_obj_enabled = 0
 let g:vimtex_motion_enabled = 0
 let maplocalleader=' '
-
-
-" ===
-" === GV
-" ===
-nnoremap gv :GV<CR>
 
 
 " ===
@@ -957,31 +899,32 @@ let g:go_template_autocreate = 0
 let g:go_textobj_enabled = 0
 let g:go_auto_type_info = 1
 let g:go_def_mapping_enabled = 0
-let g:go_highlight_array_whitespace_error    = 1
-let g:go_highlight_build_constraints         = 1
-let g:go_highlight_chan_whitespace_error     = 1
-let g:go_highlight_extra_types               = 1
-let g:go_highlight_fields                    = 1
-let g:go_highlight_format_strings            = 1
-let g:go_highlight_function_calls            = 1
-let g:go_highlight_function_parameters       = 1
-let g:go_highlight_functions                 = 1
-let g:go_highlight_generate_tags             = 1
-let g:go_highlight_methods                   = 1
-let g:go_highlight_operators                 = 1
-let g:go_highlight_space_tab_error           = 1
-let g:go_highlight_string_spellcheck         = 1
-let g:go_highlight_structs                   = 1
+let g:go_highlight_array_whitespace_error = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_chan_whitespace_error = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_space_tab_error = 1
+let g:go_highlight_string_spellcheck = 1
+let g:go_highlight_structs = 1
 let g:go_highlight_trailing_whitespace_error = 1
-let g:go_highlight_types                     = 1
-let g:go_highlight_variable_assignments      = 0
-let g:go_highlight_variable_declarations     = 0
+let g:go_highlight_types = 1
+let g:go_highlight_variable_assignments = 0
+let g:go_highlight_variable_declarations = 0
 
 
 " ===
 " === AutoFormat
 " ===
 nnoremap \f :Autoformat<CR>
+
 
 " ===
 " === OmniSharp
@@ -1061,6 +1004,7 @@ nmap ' <Plug>(easymotion-bd-f)
 "map  'w <Plug>(easymotion-bd-w)
 "nmap 'w <Plug>(easymotion-overwin-w)
 
+
 " ===
 " === goyo
 " ===
@@ -1080,7 +1024,6 @@ nmap zuz <Plug>(FastFoldUpdate)
 let g:fastfold_savehook = 1
 let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
 let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
-
 let g:markdown_folding = 1
 let g:tex_fold_enabled = 1
 let g:vimsyn_folding = 'af'
@@ -1093,12 +1036,6 @@ let g:perl_fold_blocks = 1
 let g:r_syntax_folding = 1
 let g:rust_fold = 1
 let g:php_folding = 1
-
-
-" ===
-" === fzf-quickfix
-" ===
-nnoremap <c-q> :Quickfix!<CR>
 
 
 " ===
@@ -1147,13 +1084,42 @@ let g:leaderMapperWidth = 80
 let g:rainbow_active = 1
 
 
+" ===
+" === xtabline
+" ===
+let g:xtabline_settings = {}
+let g:xtabline_settings.enable_mappings = 0
+let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
+let g:xtabline_settings.enable_persistance = 0
+let g:xtabline_settings.last_open_first = 1
+noremap to :XTabCycleMode<CR>
+noremap \p :XTabInfo<CR>
+
+
+" ===
+" === vim session
+" ===
+let g:session_directory = $HOME."/.config/nvim/tmp/sessions"
+"let g:session_autosave = 'yes'
+"let g:session_autoload = 'no'
+"let g:session_autosave_periodic = 1
+"let g:session_autosave_silent = 1
+set sessionoptions-=buffers
+set sessionoptions-=options
+noremap sl :OpenSession<CR>
+noremap ss :SaveSession<CR>
+noremap sc :CloseSession<CR>
+noremap sD :DeleteSession<CR>
+noremap sA :AppendTabSession<CR>
+
+
 " ===================== End of Plugin Settings =====================
+
 
 " ===
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
-
 
 
 " Open the _machine_specific.vim file if it has just been created
