@@ -350,7 +350,7 @@ endfunc
 " ===
 
 call plug#begin('~/.config/nvim/plugged')
-
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " prettier Vue and javascript
 Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
