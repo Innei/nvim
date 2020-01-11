@@ -38,13 +38,13 @@ set autochdir
 set number
 set relativenumber
 set cursorline
-set noexpandtab
+set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoindent
 set list
-set listchars=tab:\|\ ,trail:▫
+set listchars=tab:▸-,trail:▫
 set scrolloff=4
 set ttimeoutlen=0
 set notimeout
@@ -283,7 +283,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 inoremap <C-u> <ESC>lx$p
 
 " Opening a terminal window
-noremap <LEADER>/ :term<CR>
+noremap <LEADER>. :term<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
@@ -1112,7 +1112,10 @@ noremap sc :CloseSession<CR>
 noremap sD :DeleteSession<CR>
 noremap sA :AppendTabSession<CR>
 
-
+" ===
+" === nerdcommenter
+" ===
+map <Leader>/ <Leader>c<Leader>
 " ===================== End of Plugin Settings =====================
 
 

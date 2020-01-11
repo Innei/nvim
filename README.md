@@ -186,7 +186,7 @@ Use the **Shift + arrow keys** to resize the current window.
 ### 4 Terminal Keyboard Shortcuts
 | Shortcut    | Action                                                      |
 |-------------|-------------------------------------------------------------|
-| `SPACE` `/` | Create a new split with a terminal below the current window |
+| `SPACE` `.` | Create a new split with a terminal below the current window |
 | `Ctrl` `n`  | Escape from terminal input mode                             |
 
 ## Plugins
@@ -325,6 +325,12 @@ Press `\` `f` to format code
 
 #### Goyo - Work without distraction
 Press `g` `y` to toggle Goyo
+
+#### nerdcommenter - Quick comment
+Press `SPACE + /` to toggle comment block
+Press `SPACE + cu` to discomment block
+Press `SPACE + cc` to comment block.
+Press `SPACE + cy` to copy code block and then comment.
 
 ## Custom Snippets
 #### Markdown
