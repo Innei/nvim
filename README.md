@@ -327,10 +327,22 @@ Press `\` `f` to format code
 Press `g` `y` to toggle Goyo
 
 #### nerdcommenter - Quick comment
-Press `SPACE + /` to toggle comment block
-Press `SPACE + cu` to discomment block
-Press `SPACE + cc` to comment block.
+|Shortcut|Action|
+|---|--|
+|`SPACE + /` |toggle comment block.|
+|`SPACE + cu`|discomment block.|
+|`SPACE + cc`|comment block.|
+|`SPACE + cy`|copy code block and then comment.|
+
+
+Press `SPACE + /` to toggle comment block.
+
+Press `SPACE + cu` to discomment block.
+
+Press `SPACE + cc` to discomment block.
+
 Press `SPACE + cy` to copy code block and then comment.
+
 
 ## Custom Snippets
 #### Markdown
