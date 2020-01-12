@@ -147,10 +147,10 @@ Python:
 #### 2.1 Creating Window Through Split Screen
 | Shortcut    | Action                                                                      |
 |-------------|-----------------------------------------------------------------------------|
-| `s` `u`     | Create a new horizontal split screen and place it above the current window  |
-| `s` `e`     | Create a new horizontal split screen and place it below the current window  |
-| `s` `n`     | Create a new vertical split screen and place it left to the current window  |
-| `s` `i`     | Create a new vertical split screen and place it right to the current window |
+| `s` `↑`     | Create a new horizontal split screen and place it above the current window  |
+| `s` `↓`     | Create a new horizontal split screen and place it below the current window  |
+| `s` `←`     | Create a new vertical split screen and place it left to the current window  |
+| `s` `→`     | Create a new vertical split screen and place it right to the current window |
 | `s` `v`     | Set the two splits to be vertical                                           |
 | `s` `h`     | Set the two splits to be horizontal                                         |
 | `s` `r` `v` | Rotate splits and arrange splits vertically                                 |
@@ -177,11 +177,11 @@ Use the **Shift + arrow keys** to resize the current window.
 ### 3 Tab Management
 | Shortcut    | Action           |
 |-------------|------------------|
-| `t` `u`     | Create a new tab |
-| `t` `n`     | Go one tab left  |
-| `t` `i`     | Go One tab right |
-| `t` `m` `n` | Move tab left    |
-| `t` `m` `i` | Move tab right   |
+| `t` `/`     | Create a new tab |
+| `t` `,`     | Go one tab left  |
+| `t` `.`     | Go One tab right |
+| `t` `m` `,` | Move tab left    |
+| `t` `m` `.` | Move tab right   |
 
 ### 4 Terminal Keyboard Shortcuts
 | Shortcut    | Action                                                      |
@@ -329,20 +329,11 @@ Press `g` `y` to toggle Goyo
 #### nerdcommenter - Quick comment
 |Shortcut|Action|
 |---|--|
-|`SPACE + /` |toggle comment block.|
-|`SPACE + cu`|discomment block.|
-|`SPACE + cc`|comment block.|
-|`SPACE + cy`|copy code block and then comment.|
-
-
-Press `SPACE + /` to toggle comment block.
-
-Press `SPACE + cu` to discomment block.
-
-Press `SPACE + cc` to discomment block.
-
-Press `SPACE + cy` to copy code block and then comment.
-
+|`SPACE + /` |toggle comment lines.|
+|`SPACE + cu`|discomment lines.|
+|`SPACE + cc`|comment lines.|
+|`SPACE + cy`|copy code lines and then comment.|
+| `SPACE + cs` | comment in document block.|
 
 ## Custom Snippets
 #### Markdown

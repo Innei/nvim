@@ -36,9 +36,9 @@ set autochdir
 " === Editor behavior
 " ===
 set number
-set relativenumber
+" set relativenumber
 set cursorline
-set expandtab
+set noexpandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -181,9 +181,9 @@ noremap <silent> U 5k
 noremap <silent> E 5j
 
 " N key: go to the start of the line
-noremap <silent> N 0
+"noremap <silent> N 0
 " I key: go to the end of the line
-noremap <silent> I $
+"noremap <silent> I $
 
 " Faster in-line navigation
 noremap W 5w
@@ -230,10 +230,10 @@ noremap <LEADER><Right> <C-w>l
 noremap s <nop>
 
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-noremap su :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-noremap se :set splitbelow<CR>:split<CR>
-noremap sn :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-noremap si :set splitright<CR>:vsplit<CR>
+noremap s<up> :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap s<down> :set splitbelow<CR>:split<CR>
+noremap s<left> :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap s<right> :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
 noremap <S-up> :res +5<CR>
@@ -257,14 +257,14 @@ noremap <LEADER>q <C-w>j:q<CR>
 " ===
 " === Tab management
 " ===
-" Create a new tab with tu
-noremap tu :tabe<CR>
-" Move around tabs with tn and ti
-noremap tn :-tabnext<CR>
-noremap ti :+tabnext<CR>
-" Move the tabs with tmn and tmi
-noremap tmn :-tabmove<CR>
-noremap tmi :+tabmove<CR>
+" Create a new tab with t/
+noremap t/ :tabe<CR>
+" Move around tabs with t, and t.
+noremap t, :-tabnext<CR>
+noremap t. :+tabnext<CR>
+" Move the tabs with tm, and tm.
+noremap tm, :-tabmove<CR>
+noremap tm. :+tabmove<CR>
 
 
 " ===
@@ -283,7 +283,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 inoremap <C-u> <ESC>lx$p
 
 " Opening a terminal window
-noremap <LEADER>. :term<CR>
+noremap <LEADER>. :set splitbelow<CR>:split<CR><C-w>w:terminal<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
@@ -350,7 +350,6 @@ endfunc
 " ===
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' } " prettier Vue and javascript
 Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
@@ -419,6 +418,20 @@ Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', '
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jaxbot/browserlink.vim'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'html' ] }
 
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
@@ -923,7 +936,7 @@ let g:go_highlight_variable_declarations = 0
 " ===
 " === AutoFormat
 " ===
-nnoremap \f :Autoformat<CR>
+nnoremap <silent> \f :retab<CR>:Autoformat<CR>
 
 
 " ===
@@ -1116,6 +1129,12 @@ noremap sA :AppendTabSession<CR>
 " === nerdcommenter
 " ===
 map <Leader>/ <Leader>c<Leader>
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDToggleCheckAllLines = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCommentEmptyLines = 1
 " ===================== End of Plugin Settings =====================
 
 
