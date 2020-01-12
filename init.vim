@@ -292,6 +292,11 @@ noremap t. :+tabnext<CR>
 noremap tm, :-tabmove<CR>
 noremap tm. :+tabmove<CR>
 
+" ===
+" === Buffer manage
+" ===
+noremap <C-[> :bprevious<CR>
+noremap <C-]> :bnext<CR>
 
 " ===
 " === Markdown Settings
@@ -318,7 +323,7 @@ noremap <LEADER>+ <Esc>/<++><CR>:nohlsearch<CR>c4l
 noremap <LEADER>sc :set spell!<CR>
 
 " Press ` to change case (instead of ~)
-noremap ` ~
+" noremap ` ~
 
 noremap <C-c> zz
 
@@ -536,12 +541,20 @@ Plug 'kana/vim-textobj-user'
 Plug 'roxma/nvim-yarp'
 "Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 
+" ColorScheme
+Plug 'kaicataldo/material.vim'
 call plug#end()
 
 " experimental
 set lazyredraw
 "set regexpengine=1
 
+" ===
+" === Set material theme style
+" ===
+let g:material_theme_style = 'palenight'
+let g:material_terminal_italics = 1
+colorscheme material
 
 " ===
 " === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
@@ -567,7 +580,7 @@ set background=dark
 
 "color dracula
 "color one
-color deus
+" color deus
 "color gruvbox
 "let ayucolor="light"
 "color ayu

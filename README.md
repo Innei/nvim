@@ -154,7 +154,14 @@ Use the **Shift + arrow keys** to resize the current window.
 | `t` `m` `,` | Move tab left    |
 | `t` `m` `.` | Move tab right   |
 
-### 4 Terminal Keyboard Shortcuts
+### 4 Buffer Management
+
+| Shortcut   | Action             |
+| ---------- | ------------------ |
+| `Ctrl` `[` | Toggle prev buffer |
+| `Ctrl` `]` | Toggle next buffer |
+
+### 5 Terminal Keyboard Shortcuts
 
 | Shortcut    | Action                                                      |
 | ----------- | ----------------------------------------------------------- |
