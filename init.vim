@@ -38,7 +38,7 @@ set autochdir
 set number
 " set relativenumber
 set cursorline
-set noexpandtab
+set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -107,6 +107,26 @@ let g:terminal_color_12 = '#CAA9FA'
 let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
 
+" NETRW 
+let g:netrw_winsize = 24
+let g:NetrwIsOpen = 0
+
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i 
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Vexplore
+    endif
+endfunction
+noremap <C-B> :call ToggleNetrw()<CR>
 
 " ===
 " === Basic Mappings
@@ -197,7 +217,6 @@ noremap B 5b
 " Ctrl + U or E will move up/down the view port without moving the cursor
 noremap <C-U> 5<C-y>
 noremap <C-E> 5<C-e>
-
 
 " ===
 " === Insert Mode Cursor Movement
@@ -745,10 +764,10 @@ let g:bookmark_no_default_key_mappings = 1
 nmap mt <Plug>BookmarkToggle
 nmap ma <Plug>BookmarkAnnotate
 nmap ml <Plug>BookmarkShowAll
-nmap mi <Plug>BookmarkNext
-nmap mn <Plug>BookmarkPrev
-nmap mC <Plug>BookmarkClear
-nmap mX <Plug>BookmarkClearAll
+nmap m. <Plug>BookmarkNext
+nmap m, <Plug>BookmarkPrev
+nmap mc <Plug>BookmarkClear
+nmap mC <Plug>BookmarkClearAll
 nmap mu <Plug>BookmarkMoveUp
 nmap me <Plug>BookmarkMoveDown
 nmap <Leader>g <Plug>BookmarkMoveToLine

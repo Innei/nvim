@@ -1,7 +1,5 @@
 # My NeoVim Config (A NeoVim Config for Colemak Users)
 
-#### [中文版 README](./README_cn.md) by [@EvanMeek](https://github.com/EvanMeek)
-
 ![demo](./demo.png)
 
 Please **DO NOT** just copy this config without really looking at it! Please, at least, read this README file!
@@ -245,7 +243,12 @@ Press `Space` `s` `t` to openup `startify`
 | Shortcut    | Action                          | Command |
 | ----------- | ------------------------------- | ------- |
 | `m<letter>` | Add/remove mark at current line |         |
-| `m/`        | List all marks                  |         |
+| `ma`        | Add mark at current line        |         |
+| `m.`        | Move to next mark               |         |
+| `m,`        | Move to prev mark               |         |
+| `mc`        | Clear mark                      |         |
+| `mC`        | Clear All mark                  |         |
+| `ml`        | List all marks                  |         |
 | `mSPACE`    | Jump to the next mark in buffer |         |
 
 For more commands, see [here](https://github.com/MattesGroeger/vim-bookmarks#usage)
