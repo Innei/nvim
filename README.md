@@ -1,6 +1,6 @@
 # My NeoVim Config (A NeoVim Config for Colemak Users)
 
-![demo](./demo.png)
+![](https://cdn.jsdelivr.net/gh/innei/img-bed@master/E3C8E18D1C48F1763CAC7C0443B6C5B2.jpg)
 
 Please **DO NOT** just copy this config without really looking at it! Please, at least, read this README file!
 
