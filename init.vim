@@ -79,7 +79,7 @@ if has('persistent_undo')
 	set undofile
 	set undodir=~/.config/nvim/tmp/undo,.
 endif
-set colorcolumn=80
+" set colorcolumn=80
 set updatetime=1000
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -112,22 +112,7 @@ let g:terminal_color_14 = '#9AEDFE'
 let g:netrw_winsize = 24
 let g:NetrwIsOpen = 0
 
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i 
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Vexplore
-    endif
-endfunction
-noremap <C-B> :call ToggleNetrw()<CR>
+noremap <C-b> :NERDTreeToggle<CR>
 
 " ===
 " === Basic Mappings
@@ -141,6 +126,7 @@ noremap : q:i
 noremap Q :q<CR>
 noremap <C-q> :qa<CR>
 noremap S :w<CR>
+inoremap <silent> <C-s> <ESC>:w<CR><ESC>:Prettier<CR>i
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
@@ -296,7 +282,7 @@ noremap tm. :+tabmove<CR>
 " ===
 " === Buffer manage
 " ===
-noremap <C-p> :bprevious<CR>
+" noremap <C-[> :bprevious<CR>
 noremap <C-]> :bnext<CR>
 
 " ===
@@ -404,11 +390,13 @@ Plug 'ajmwagar/vim-deus'
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
+Plug 'luochen1990/rainbow'
 
 " File navigation
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf'
 "Plug 'yuki-ycino/fzf-preview.vim'
 "Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 "Plug 'junegunn/fzf'
@@ -444,6 +432,7 @@ Plug 'airblade/vim-gitgutter'
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json'
+" Plug 'mattn/emmet-vim'
 Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
@@ -523,7 +512,7 @@ Plug 'osyo-manga/vim-anzu'
 "Plug 'voldikss/vim-floaterm'
 "Plug 'liuchengxu/vim-clap'
 "Plug 'jceb/vim-orgmode'
-"Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'
 Plug 'theniceboy/vim-leader-mapper'
 
 " Vim Applications
@@ -547,17 +536,22 @@ Plug 'roxma/nvim-yarp'
 Plug 'kaicataldo/material.vim'
 call plug#end()
 
+" emmet
+
+" let g:user_zen_leader_key = '<C-Z>'
+" autocmd FileType html,xhtml,tt2,tt2html,css imap <buffer> <Tab> <C-Z>, | imap <buffer> <C-N> <C-Z>n
+
 " experimental
 set lazyredraw
-"set regexpengine=1
+set regexpengine=1
 
 " ===
 " === Set material theme style
 " ===
 let g:material_theme_style = 'palenight'
 let g:material_terminal_italics = 1
+let g:rainbow_active = 1
 colorscheme material
-
 " ===
 " === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
 " ===
@@ -620,7 +614,7 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-vetur']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator', 'coc-vetur', 'coc-emmet']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -701,67 +695,67 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 " ===
 " === FZF
 " ===
-" set rtp+=/usr/local/opt/fzf
-" set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
-" noremap <C-p> :FZF<CR>
-" noremap <C-f> :Ag<CR>
-" noremap <C-h> :MRU<CR>
-" noremap <C-t> :BTags<CR>
-" noremap <C-l> :LinesWithPreview<CR>
-" noremap <C-w> :Buffers<CR>
-" "noremap ; :History:<CR>
+ set rtp+=/usr/local/opt/fzf
+ set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+ noremap <C-p> :FZF<CR>
+ noremap <C-f> :Ag<CR>
+ noremap <C-h> :MRU<CR>
+ noremap <C-t> :BTags<CR>
+ noremap <C-l> :LinesWithPreview<CR>
+ noremap <C-w> :Buffers<CR>
+ "noremap ; :History:<CR>
 
-" autocmd! FileType fzf
-" autocmd  FileType fzf set laststatus=0 noruler
-"   \| autocmd BufLeave <buffer> set laststatus=2 ruler
+ autocmd! FileType fzf
+ autocmd  FileType fzf set laststatus=0 noruler
+   \| autocmd BufLeave <buffer> set laststatus=2 ruler
 
-" command! -bang -nargs=* Buffers
-"   \ call fzf#vim#buffers(
-"   \   '',
-"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \           : fzf#vim#with_preview('right:0%', '?'),
-"   \   <bang>0)
-
-
-" command! -bang -nargs=* LinesWithPreview
-"     \ call fzf#vim#grep(
-"     \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
-"     \   fzf#vim#with_preview({}, 'up:50%', '?'),
-"     \   1)
-
-" command! -bang -nargs=* Ag
-"   \ call fzf#vim#ag(
-"   \   '',
-"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \           : fzf#vim#with_preview('right:50%', '?'),
-"   \   <bang>0)
+ command! -bang -nargs=* Buffers
+   \ call fzf#vim#buffers(
+   \   '',
+   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+   \           : fzf#vim#with_preview('right:0%', '?'),
+   \   <bang>0)
 
 
-" command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
+ command! -bang -nargs=* LinesWithPreview
+     \ call fzf#vim#grep(
+     \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
+     \   fzf#vim#with_preview({}, 'up:50%', '?'),
+     \   1)
 
-" command! -bang BTags
-"   \ call fzf#vim#buffer_tags('', {
-"   \     'down': '40%',
-"   \     'options': '--with-nth 1 
-"   \                 --reverse 
-"   \                 --prompt "> " 
-"   \                 --preview-window="70%" 
-"   \                 --preview "
-"   \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
-"   \                     head -n 16"'
-"   \ })
+ command! -bang -nargs=* Ag
+   \ call fzf#vim#ag(
+   \   '',
+   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+   \           : fzf#vim#with_preview('right:50%', '?'),
+   \   <bang>0)
 
 
-"" ===
-"" === fzf-preview.vim
-"" ===
-"noremap <C-w> :BuffersPreview<CR>
-"let g:fzf_preview_default_key_bindings = 'ctrl-e:down,ctrl-u:up'
-"let g:fzf_preview_layout = 'belowright split new'
-"let g:fzf_preview_rate = 0.4
-"let g:fzf_full_preview_toggle_key = '<C-f>'
-"let g:fzf_preview_command = 'ccat --color=always {-1}'
-"let g:fzf_binary_preview_command = 'echo "It is a binary file"'
+ command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
+
+ command! -bang BTags
+   \ call fzf#vim#buffer_tags('', {
+   \     'down': '40%',
+   \     'options': '--with-nth 1 
+   \                 --reverse 
+   \                 --prompt "> " 
+   \                 --preview-window="70%" 
+   \                 --preview "
+   \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
+   \                     head -n 16"'
+   \ })
+
+
+" ===
+" === fzf-preview.vim
+" ===
+noremap <C-w> :BuffersPreview<CR>
+" let g:fzf_preview_default_key_bindings = 'ctrl-e:down,ctrl-u:up'
+let g:fzf_preview_layout = 'belowright split new'
+let g:fzf_preview_rate = 0.4
+let g:fzf_full_preview_toggle_key = '<C-f>'
+let g:fzf_preview_command = 'ccat --color=always {-1}'
+let g:fzf_binary_preview_command = 'echo "It is a binary file"'
 
 
 " ===
@@ -832,7 +826,7 @@ let g:multi_cursor_quit_key = '<Esc>'
 " === Far.vim
 " ===
 noremap <LEADER>f :F  %<left><left>
-
+set wildignore+=*/node_modules/*
 
 " ===
 " === vim-calc
@@ -1154,8 +1148,8 @@ let g:rainbow_active = 1
 " === vim session
 " ===
 let g:session_directory = $HOME."/.config/nvim/tmp/sessions"
-"let g:session_autosave = 'yes'
-"let g:session_autoload = 'no'
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
 "let g:session_autosave_periodic = 1
 "let g:session_autosave_silent = 1
 set sessionoptions-=buffers
