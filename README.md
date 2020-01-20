@@ -1,4 +1,4 @@
-# My NeoVim Config (A NeoVim Config for Colemak Users)
+# My NeoVim Config
 
 ![](https://cdn.jsdelivr.net/gh/innei/img-bed@master/E3C8E18D1C48F1763CAC7C0443B6C5B2.jpg)
 
@@ -7,8 +7,8 @@ Please **DO NOT** just copy this config without really looking at it! Please, at
 ## After Installation, You Need To:
 
 - [ ] Install `pynvim` (pip)
-- [ ] Install `nodejs`, and do `npm install -g neovim`
-- [ ] Install nerd-fonts (actually it's optional but it looks real good)
+  - [ ] Install `nodejs`, and do `npm install -g neovim`
+  - [ ] Install nerd-fonts (actually it's optional but it looks real good)
 
 ## After Installation, You Might Want To:
 
@@ -47,15 +47,9 @@ Python:
 
 #### 1.1 The Most Basics
 
-**`k`** : to switch to **`INSERT`** : mode, equals to key `i`
-
 **`Q`** : quit current vim window, equals to command `:q`
 
 **`S`** : save the current file, equals to command `:w`
-
-**_IMPORTANT_**
-
-Since the `i` key has been mapped to `k`, every command (combination) that involves `i` should use `k` instead (for example, `ciw` should be `ckw`).
 
 #### 1.2 Remapped Cursor Movement
 
@@ -273,99 +267,99 @@ For more commands, see [here](https://github.com/MattesGroeger/vim-bookmarks#usa
 
 To add surround (`string` -> `"string"`):
 
-```
-string
-```
+    ```
+    string
+    ```
 
-press: `yskw'`:
+    press: `ysiw'`:
 
-```
-'string'
-```
+    ```
+    'string'
+    ```
 
-To change surround
+    To change surround
 
-```
-'string'
-```
+    ```
+    'string'
+    ```
 
-press: `cs'"`:
+    press: `cs'"`:
 
-```
-"string"
-```
+    ```
+    "string"
+    ```
 
 #### far.vim - find and replace
 
-| Shortcut        | Action                   |
-| --------------- | ------------------------ |
-| `SPACE` `f` `a` | Find in the current file |
-| `SPACE` `f` `r` | Find and replace         |
+    | Shortcut        | Action                   |
+    | --------------- | ------------------------ |
+    | `SPACE` `f` `a` | Find in the current file |
+    | `SPACE` `f` `r` | Find and replace         |
 
 #### fzf-gitignore
 
-Press `Space` `g` `i` to create a `.gitignore` file
+    Press `Space` `g` `i` to create a `.gitignore` file
 
 #### GV - commit browser
 
-| Shortcut | Action              |
-| -------- | ------------------- |
-| `g` `v`  | Open commit browser |
-| `q`      | Quit GV window      |
+    | Shortcut | Action              |
+    | -------- | ------------------- |
+    | `g` `v`  | Open commit browser |
+    | `q`      | Quit GV window      |
 
 #### vim-calc
 
-Press `Space` + `a` to calculate the equation in the current line
+    Press `Space` + `a` to calculate the equation in the current line
 
 #### vim-calendar
 
-| Shortcut                | Action     |
-| ----------------------- | ---------- |
-| `\` `\`                 | Show clock |
-| `\` `c` | Show calendar |
+    | Shortcut                | Action     |
+    | ----------------------- | ---------- |
+    | `\` `\`                 | Show clock |
+    | `\` `c` | Show calendar |
 
 #### AutoFormat
 
-Press `\` `f` to format code
+    Press `\` `f` to format code
 
 #### Goyo - Work without distraction
 
-Press `g` `y` to toggle Goyo
+    Press `g` `y` to toggle Goyo
 
 #### nerdcommenter - Quick comment
 
-| Shortcut     | Action                            |
-| ------------ | --------------------------------- |
-| `SPACE + /`  | toggle comment lines.             |
-| `SPACE + cu` | discomment lines.                 |
-| `SPACE + cc` | comment lines.                    |
-| `SPACE + cy` | copy code lines and then comment. |
-| `SPACE + cs` | comment in document block.        |
+    | Shortcut     | Action                            |
+    | ------------ | --------------------------------- |
+    | `SPACE + /`  | toggle comment lines.             |
+    | `SPACE + cu` | discomment lines.                 |
+    | `SPACE + cc` | comment lines.                    |
+    | `SPACE + cy` | copy code lines and then comment. |
+    | `SPACE + cs` | comment in document block.        |
 
 #### discord.nvim RPC
 
-Press `SPACE` `d` to update Discord present editing file.
+    Press `SPACE` `d` to update Discord present editing file.
 
 ## Custom Snippets
 
 #### Markdown
 
-| Shortcut | What it creates     |
-| -------- | ------------------- |
-| `,n`     | ---                 |
-| `,b`     | **Bold** text       |
-| `,s`     | ~~sliced~~ text     |
-| `,i`     | _italic_ text       |
-| `,d`     | `code block`        |
-| `,c`     | big `block of code` |
-| `,m`     | - [ ] check mark    |
-| `,p`     | picture             |
-| `,a`     | [link]()            |
-| `,1`     | # H1                |
-| `,2`     | ## H2               |
-| `,3`     | ### H3              |
-| `,4`     | #### H4             |
-| `,l`     | --------            |
+    | Shortcut | What it creates     |
+    | -------- | ------------------- |
+    | `,n`     | ---                 |
+    | `,b`     | **Bold** text       |
+    | `,s`     | ~~sliced~~ text     |
+    | `,i`     | _italic_ text       |
+    | `,d`     | `code block`        |
+    | `,c`     | big `block of code` |
+    | `,m`     | - [ ] check mark    |
+    | `,p`     | picture             |
+    | `,a`     | [link]()            |
+    | `,1`     | # H1                |
+    | `,2`     | ## H2               |
+    | `,3`     | ### H3              |
+    | `,4`     | #### H4             |
+    | `,l`     | --------            |
 
 `,f` to go to the next `<++>` (placeholder)
 
@@ -377,10 +371,11 @@ Press `SPACE` `d` to update Discord present editing file.
 
 `tx Hello<Enter>`
 
-```
- _   _      _ _
+````
+_   _      _ _
 | | | | ___| | | ___
 | |_| |/ _ \ | |/ _ \
-|  _  |  __/ | | (_) |
-|_| |_|\___|_|_|\___/
-```
+  |  _  |  __/ | | (_) |
+  |_| |_|\___|_|_|\___/
+  ```
+````

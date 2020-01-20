@@ -132,7 +132,7 @@ inoremap <silent> <C-s> <ESC>:w<CR><ESC>:Prettier<CR>i
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 " Open Startify
-"noremap <LEADER>st :Startify<CR>
+noremap <LEADER>st :Startify<CR>
 
 " Undo operations
 " noremap l u
@@ -184,7 +184,10 @@ noremap <c-g> :term lazygit<CR>
 "noremap <silent> n h
 "noremap <silent> e j
 "noremap <silent> i l
-
+noremap k <nop>
+noremap l <nop>
+noremap j <nop>
+noremap h <nop>
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> F 5k
 noremap <silent> E 5j
@@ -310,7 +313,7 @@ noremap <LEADER>+ <Esc>/<++><CR>:nohlsearch<CR>c4l
 noremap <LEADER>sc :set spell!<CR>
 
 " Press ` to change case (instead of ~)
-" noremap ` ~
+noremap ` ~<left>
 
 noremap <C-c> zz
 
@@ -390,14 +393,13 @@ Plug 'ajmwagar/vim-deus'
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
-Plug 'luochen1990/rainbow'
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-"Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
-"Plug 'yuki-ycino/fzf-preview.vim'
+Plug 'yuki-ycino/fzf-preview.vim'
 "Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 "Plug 'junegunn/fzf'
 "Plug 'francoiscabrol/ranger.vim'
@@ -422,6 +424,8 @@ Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 "Plug 'mhinz/vim-signify'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 " Tex
 "Plug 'lervag/vimtex'
@@ -550,7 +554,6 @@ set regexpengine=1
 " ===
 let g:material_theme_style = 'palenight'
 let g:material_terminal_italics = 1
-let g:rainbow_active = 1
 colorscheme material
 " ===
 " === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
@@ -568,7 +571,7 @@ let g:wakatime_PythonBinary = '/usr/bin/python3'
 " ===
 set termguicolors	" enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
+" set background=dark
 "let ayucolor="mirage"
 "let g:oceanic_next_terminal_bold = 1
 "let g:oceanic_next_terminal_italic = 1
@@ -592,7 +595,7 @@ hi NonText ctermfg=gray guifg=grey10
 " ===
 " === eleline.vim
 " ===
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 
 
 " ==
