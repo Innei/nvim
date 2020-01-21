@@ -121,7 +121,7 @@ noremap <C-b> :NERDTreeToggle<CR>
 let mapleader=" "
 noremap ; :
 noremap : q:i
-
+noremap U <C-r>
 " Save & quit
 noremap Q :q<CR>
 noremap <C-q> :qa<CR>
@@ -679,6 +679,14 @@ let g:mkdp_highlight_css = ''
 let g:mkdp_port = ''
 let g:mkdp_page_title = '「${name}」'
 
+" === 
+" === vim-surround
+" ===
+nmap kw ysiw
+nmap ks cs
+nmap kcs yss
+
+noremap gv :GV<CR>
 
 " ===
 " === Python-syntax

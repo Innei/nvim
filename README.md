@@ -271,7 +271,7 @@ To add surround (`string` -> `"string"`):
     string
     ```
 
-    press: `ysiw'`:
+    press: `kw'`:
 
     ```
     'string'
@@ -283,7 +283,7 @@ To add surround (`string` -> `"string"`):
     'string'
     ```
 
-    press: `cs'"`:
+    press: `ks'"`:
 
     ```
     "string"
