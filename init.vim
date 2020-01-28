@@ -375,7 +375,7 @@ Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
 Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'wakatime/vim-wakatime'
+" Plug 'wakatime/vim-wakatime'
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
 
@@ -564,7 +564,7 @@ if empty(glob('~/.config/nvim/_machine_specific.vim'))
 	silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
 endif
 source ~/.config/nvim/_machine_specific.vim
-let g:wakatime_PythonBinary = '/usr/bin/python3'
+" let g:wakatime_PythonBinary = '/usr/bin/python3'
 
 " ===
 " === Dress up my vim
