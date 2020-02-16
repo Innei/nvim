@@ -16,9 +16,9 @@
 " === Auto load for first time uses
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " ====================
@@ -76,8 +76,8 @@ silent !mkdir -p ~/.config/nvim/tmp/sessions
 set backupdir=~/.config/nvim/tmp/backup,.
 set directory=~/.config/nvim/tmp/backup,.
 if has('persistent_undo')
-	set undofile
-	set undodir=~/.config/nvim/tmp/undo,.
+  set undofile
+  set undodir=~/.config/nvim/tmp/undo,.
 endif
 " set colorcolumn=80
 set updatetime=1000
@@ -108,7 +108,7 @@ let g:terminal_color_12 = '#CAA9FA'
 let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
 
-" NETRW 
+" NETRW
 let g:netrw_winsize = 24
 let g:NetrwIsOpen = 0
 
@@ -332,37 +332,33 @@ noremap \s :%s//g<left><left>
 " Compile function
 noremap r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
-	exec "w"
-	if &filetype == 'c'
-		exec "!g++ % -o %<"
-		exec "!time ./%<"
-	elseif &filetype == 'cpp'
-		set splitbelow
-		exec "!g++ -std=c++11 % -Wall -o %<"
-		:sp
-		:res -15
-		:term ./%<
-	elseif &filetype == 'java'
-		exec "!javac %"
-		exec "!time java %<"
-	elseif &filetype == 'sh'
-		:!time bash %
-	elseif &filetype == 'python'
-		set splitbelow
-		:sp
-		:term python3 %
-	elseif &filetype == 'html'
-		silent! exec "!chromium % &"
-	elseif &filetype == 'markdown'
-		exec "MarkdownPreview"
-	elseif &filetype == 'tex'
-		silent! exec "VimtexStop"
-		silent! exec "VimtexCompile"
-	elseif &filetype == 'go'
-		set splitbelow
-		:sp
-		:term go run %
-	endif
+  exec "w"
+  if &filetype == 'c'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'cpp'
+    set splitbelow
+    exec "!g++ -std=c++11 % -Wall -o %<"
+    :sp
+    :res -15
+    :term ./%<
+  elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!time java %<"
+  elseif &filetype == 'sh'
+    :!time bash %
+  elseif &filetype == 'python'
+    set splitbelow
+    :sp
+    :term python3 %
+  elseif &filetype == 'tex'
+    silent! exec "VimtexStop"
+    silent! exec "VimtexCompile"
+  elseif &filetype == 'go'
+    set splitbelow
+    :sp
+    :term go run %
+  endif
 endfunc
 
 
@@ -371,7 +367,7 @@ endfunc
 " ===
 
 call plug#begin('~/.config/nvim/plugged')
-Plug 'mg979/vim-xtabline'
+" Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
 Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
@@ -380,8 +376,10 @@ Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'theniceboy/vim-calc'
 
 " Pretty Dress
-Plug 'theniceboy/eleline.vim'
-Plug 'bling/vim-bufferline'
+" Plug 'theniceboy/eleline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'bling/vim-bufferline'
 "Plug 'liuchengxu/space-vim-theme'
 "Plug 'morhetz/gruvbox'
 "Plug 'ayu-theme/ayu-vim'
@@ -393,7 +391,7 @@ Plug 'ajmwagar/vim-deus'
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
-
+Plug 'RRethy/vim-illuminate'
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -481,8 +479,8 @@ Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
 Plug 'junegunn/vim-after-object' " da= to delete what's after =
-Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph, 
-"Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
+Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
+"Plug 'tpope/vim-capslock'  " Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
 Plug 'Konfekt/FastFold'
 Plug 'junegunn/vim-peekaboo'
@@ -545,7 +543,7 @@ call plug#end()
 " experimental
 set lazyredraw
 set regexpengine=1
-
+nnoremap sw :Switch<cr>
 " ===
 " === Set material theme style
 " ===
@@ -557,8 +555,8 @@ colorscheme material
 " ===
 let has_machine_specific_file = 1
 if empty(glob('~/.config/nvim/_machine_specific.vim'))
-	let has_machine_specific_file = 0
-	silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
+  let has_machine_specific_file = 0
+  silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
 endif
 source ~/.config/nvim/_machine_specific.vim
 " let g:wakatime_PythonBinary = '/usr/bin/python3'
@@ -566,7 +564,7 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 " === Dress up my vim
 " ===
-set termguicolors	" enable true colors support
+set termguicolors " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " set background=dark
 "let ayucolor="mirage"
@@ -592,9 +590,9 @@ hi NonText ctermfg=gray guifg=grey10
 " ===
 " === eleline.vim
 " ===
-let g:airline_powerline_fonts = 1
-
-
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline_theme='deus'
 " ==
 " == GitGutter
 " ==
@@ -608,7 +606,14 @@ nnoremap H :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
-
+" ===
+" === vim-illuminate
+" ===
+let g:Illuminate_delay = 750
+hi illuminatedWord cterm=underline gui=underline
+" hi illuminatedWord cterm=inverse gui=inverse
+let g:Illuminate_highlightUnderCursor = 0
+let g:Illuminate_ftblacklist = ['nerdtree']
 " ===
 " === coc
 " ===
@@ -618,18 +623,18 @@ let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]	=~ '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 inoremap <silent><expr> <Tab>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<Tab>" :
-			\ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
 function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 " Useful commands
@@ -663,20 +668,20 @@ let g:mkdp_open_ip = ''
 let g:mkdp_echo_preview_url = 0
 let g:mkdp_browserfunc = ''
 let g:mkdp_preview_options = {
-			\ 'mkit': {},
-			\ 'katex': {},
-			\ 'uml': {},
-			\ 'maid': {},
-			\ 'disable_sync_scroll': 0,
-			\ 'sync_scroll_type': 'middle',
-			\ 'hide_yaml_meta': 1
-			\ }
+      \ 'mkit': {},
+      \ 'katex': {},
+      \ 'uml': {},
+      \ 'maid': {},
+      \ 'disable_sync_scroll': 0,
+      \ 'sync_scroll_type': 'middle',
+      \ 'hide_yaml_meta': 1
+      \ }
 let g:mkdp_markdown_css = ''
 let g:mkdp_highlight_css = ''
 let g:mkdp_port = ''
 let g:mkdp_page_title = '「${name}」'
 
-" === 
+" ===
 " === vim-surround
 " ===
 nmap kw ysiw
@@ -703,55 +708,55 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 " ===
 " === FZF
 " ===
- set rtp+=/usr/local/opt/fzf
- set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
- noremap <C-p> :FZF<CR>
- noremap <C-f> :Ag<CR>
- noremap <C-h> :MRU<CR>
- noremap <C-t> :BTags<CR>
- noremap <C-l> :LinesWithPreview<CR>
- noremap <C-w> :Buffers<CR>
- "noremap ; :History:<CR>
+set rtp+=/usr/local/opt/fzf
+set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+noremap <C-p> :FZF<CR>
+noremap <C-f> :Ag<CR>
+noremap <C-h> :MRU<CR>
+noremap <C-t> :BTags<CR>
+noremap <C-l> :LinesWithPreview<CR>
+noremap <C-w> :Buffers<CR>
+"noremap ; :History:<CR>
 
- autocmd! FileType fzf
- autocmd  FileType fzf set laststatus=0 noruler
-   \| autocmd BufLeave <buffer> set laststatus=2 ruler
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noruler
+      \| autocmd BufLeave <buffer> set laststatus=2 ruler
 
- command! -bang -nargs=* Buffers
-   \ call fzf#vim#buffers(
-   \   '',
-   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-   \           : fzf#vim#with_preview('right:0%', '?'),
-   \   <bang>0)
-
-
- command! -bang -nargs=* LinesWithPreview
-     \ call fzf#vim#grep(
-     \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
-     \   fzf#vim#with_preview({}, 'up:50%', '?'),
-     \   1)
-
- command! -bang -nargs=* Ag
-   \ call fzf#vim#ag(
-   \   '',
-   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-   \           : fzf#vim#with_preview('right:50%', '?'),
-   \   <bang>0)
+command! -bang -nargs=* Buffers
+      \ call fzf#vim#buffers(
+      \   '',
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:0%', '?'),
+      \   <bang>0)
 
 
- command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
+command! -bang -nargs=* LinesWithPreview
+      \ call fzf#vim#grep(
+      \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
+      \   fzf#vim#with_preview({}, 'up:50%', '?'),
+      \   1)
 
- command! -bang BTags
-   \ call fzf#vim#buffer_tags('', {
-   \     'down': '40%',
-   \     'options': '--with-nth 1 
-   \                 --reverse 
-   \                 --prompt "> " 
-   \                 --preview-window="70%" 
-   \                 --preview "
-   \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
-   \                     head -n 16"'
-   \ })
+command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(
+      \   '',
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%', '?'),
+      \   <bang>0)
+
+
+command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
+
+command! -bang BTags
+      \ call fzf#vim#buffer_tags('', {
+      \     'down': '40%',
+      \     'options': '--with-nth 1
+      \                 --reverse
+      \                 --prompt "> "
+      \                 --preview-window="70%"
+      \                 --preview "
+      \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
+      \                     head -n 16"'
+      \ })
 
 
 " ===
@@ -809,10 +814,10 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function g:Undotree_CustomMap()
-	nmap <buffer> u <plug>UndotreeNextState
-	nmap <buffer> e <plug>UndotreePreviousState
-	nmap <buffer> U 5<plug>UndotreeNextState
-	nmap <buffer> E 5<plug>UndotreePreviousState
+  nmap <buffer> u <plug>UndotreeNextState
+  nmap <buffer> e <plug>UndotreePreviousState
+  nmap <buffer> U 5<plug>UndotreeNextState
+  nmap <buffer> E 5<plug>UndotreePreviousState
 endfunc
 
 
@@ -833,9 +838,10 @@ let g:multi_cursor_quit_key = '<Esc>'
 " ===
 " === Far.vim
 " ===
-noremap <LEADER>f :F  %<left><left>
+noremap <LEADER>f :F  **/*<left><left><left><left><left>
 set wildignore+=*/node_modules/*
-
+let g:far#source='ag'
+set ignorecase smartcase
 " ===
 " === vim-calc
 " ===
@@ -851,11 +857,11 @@ noremap <LEADER>a :call Calc()<CR>
 " ===
 "let g:bullets_set_mappings = 0
 let g:bullets_enabled_file_types = [
-			\ 'markdown',
-			\ 'text',
-			\ 'gitcommit',
-			\ 'scratch'
-			\]
+      \ 'markdown',
+      \ 'text',
+      \ 'gitcommit',
+      \ 'scratch'
+      \]
 
 
 " ===
@@ -867,11 +873,11 @@ let g:vista_default_executive = 'ctags'
 let g:vista_fzf_preview = ['right:50%']
 let g:vista#renderer#enable_icon = 1
 let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
+      \   "function": "\uf794",
+      \   "variable": "\uf71b",
+      \  }
 function! NearestMethodOrFunction() abort
-	return get(b:, 'vista_nearest_method_or_function', '')
+  return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 set statusline+=%{NearestMethodOrFunction()}
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
@@ -921,21 +927,21 @@ noremap \\ :Calendar -view=clock -position=here<CR>
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 augroup calendar-mappings
-	autocmd!
-	" diamond cursor
-	autocmd FileType calendar nmap <buffer> u <Plug>(calendar_up)
-	autocmd FileType calendar nmap <buffer> n <Plug>(calendar_left)
-	autocmd FileType calendar nmap <buffer> e <Plug>(calendar_down)
-	autocmd FileType calendar nmap <buffer> i <Plug>(calendar_right)
-	autocmd FileType calendar nmap <buffer> <c-u> <Plug>(calendar_move_up)
-	autocmd FileType calendar nmap <buffer> <c-n> <Plug>(calendar_move_left)
-	autocmd FileType calendar nmap <buffer> <c-e> <Plug>(calendar_move_down)
-	autocmd FileType calendar nmap <buffer> <c-i> <Plug>(calendar_move_right)
-	autocmd FileType calendar nmap <buffer> k <Plug>(calendar_start_insert)
-	autocmd FileType calendar nmap <buffer> K <Plug>(calendar_start_insert_head)
-	" unmap <C-n>, <C-p> for other plugins
-	autocmd FileType calendar nunmap <buffer> <C-n>
-	autocmd FileType calendar nunmap <buffer> <C-p>
+  autocmd!
+  " diamond cursor
+  autocmd FileType calendar nmap <buffer> u <Plug>(calendar_up)
+  autocmd FileType calendar nmap <buffer> n <Plug>(calendar_left)
+  autocmd FileType calendar nmap <buffer> e <Plug>(calendar_down)
+  autocmd FileType calendar nmap <buffer> i <Plug>(calendar_right)
+  autocmd FileType calendar nmap <buffer> <c-u> <Plug>(calendar_move_up)
+  autocmd FileType calendar nmap <buffer> <c-n> <Plug>(calendar_move_left)
+  autocmd FileType calendar nmap <buffer> <c-e> <Plug>(calendar_move_down)
+  autocmd FileType calendar nmap <buffer> <c-i> <Plug>(calendar_move_right)
+  autocmd FileType calendar nmap <buffer> k <Plug>(calendar_start_insert)
+  autocmd FileType calendar nmap <buffer> K <Plug>(calendar_start_insert_head)
+  " unmap <C-n>, <C-p> for other plugins
+  autocmd FileType calendar nunmap <buffer> <C-n>
+  autocmd FileType calendar nunmap <buffer> <C-p>
 augroup END
 
 
@@ -1002,27 +1008,27 @@ autocmd Filetype cs nnoremap <buffer> <LEADER>rn :OmniSharpRename<CR><C-N>:res +
 sign define OmniSharpCodeActions text=💡
 
 augroup OSCountCodeActions
-	autocmd!
-	autocmd FileType cs set signcolumn=yes
-	autocmd CursorHold *.cs call OSCountCodeActions()
+  autocmd!
+  autocmd FileType cs set signcolumn=yes
+  autocmd CursorHold *.cs call OSCountCodeActions()
 augroup END
 
 function! OSCountCodeActions() abort
-	if bufname('%') ==# '' || OmniSharp#FugitiveCheck() | return | endif
-	if !OmniSharp#IsServerRunning() | return | endif
-	let opts = {
-				\ 'CallbackCount': function('s:CBReturnCount'),
-				\ 'CallbackCleanup': {-> execute('sign unplace 99')}
-				\}
-	call OmniSharp#CountCodeActions(opts)
+  if bufname('%') ==# '' || OmniSharp#FugitiveCheck() | return | endif
+  if !OmniSharp#IsServerRunning() | return | endif
+  let opts = {
+        \ 'CallbackCount': function('s:CBReturnCount'),
+        \ 'CallbackCleanup': {-> execute('sign unplace 99')}
+        \}
+  call OmniSharp#CountCodeActions(opts)
 endfunction
 
 function! s:CBReturnCount(count) abort
-	if a:count
-		let l = getpos('.')[1]
-		let f = expand('%:p')
-		execute ':sign place 99 line='.l.' name=OmniSharpCodeActions file='.f
-	endif
+  if a:count
+    let l = getpos('.')[1]
+    let f = expand('%:p')
+    execute ':sign place 99 line='.l.' name=OmniSharpCodeActions file='.f
+  endif
 endfunction
 
 
@@ -1111,25 +1117,25 @@ autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
 " === vim-map-leader
 " ===
 let g:leaderMenu = {'name':  "Shortcut Menu",
-\'SPC f':  ['Advanced find'],
-\'SPC rc': ['Edit nvim config'],
-\'SPC Enter':  ['Clear search'],
-\'SPC dw':  ['Remove adj. dup. words'],
-\'SPC tt':  ['spc to tabs'],
-\'SPC o':  ['Open folds'],
-\'SPC q':  ['Close win below'],
-\'SPC /':  ['Open terminal'],
-\'SPC <SPC>':  ['Find <++>'],
-\'SPC sc':  ['Toggle spell-check'],
-\'SPC gf':  ['Fold unchanged'],
-\'SPC g-':  ['Previous hunk'],
-\'SPC g=':  ['Next Hunk'],
-\'SPC rn':  ['Rename variable'],
-\'SPC tm':  ['Toggle table-mode'],
-\'SPC a':  ['Calculate equation'],
-\'SPC gi':  ['New .gitignore'],
-\'SPC gy':  ['Toggle focus mode'],
-\}
+      \'SPC f':  ['Advanced find'],
+      \'SPC rc': ['Edit nvim config'],
+      \'SPC Enter':  ['Clear search'],
+      \'SPC dw':  ['Remove adj. dup. words'],
+      \'SPC tt':  ['spc to tabs'],
+      \'SPC o':  ['Open folds'],
+      \'SPC q':  ['Close win below'],
+      \'SPC /':  ['Open terminal'],
+      \'SPC <SPC>':  ['Find <++>'],
+      \'SPC sc':  ['Toggle spell-check'],
+      \'SPC gf':  ['Fold unchanged'],
+      \'SPC g-':  ['Previous hunk'],
+      \'SPC g=':  ['Next Hunk'],
+      \'SPC rn':  ['Rename variable'],
+      \'SPC tm':  ['Toggle table-mode'],
+      \'SPC a':  ['Calculate equation'],
+      \'SPC gi':  ['New .gitignore'],
+      \'SPC gy':  ['Toggle focus mode'],
+      \}
 nnoremap <silent> ? :call leaderMapper#start() "<Space>"<CR>
 let g:leaderMapperWidth = 80
 
@@ -1138,7 +1144,28 @@ let g:leaderMapperWidth = 80
 " === rainbow
 " ===
 let g:rainbow_active = 1
-
+let g:rainbow_conf = {
+      \ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+      \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \ 'operators': '_,_',
+      \ 'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+      \ 'separately': {
+      \   '*': {},
+      \   'tex': {
+      \     'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+      \   },
+      \   'lisp': {
+      \     'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+      \   },
+      \   'vim': {
+      \     'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+      \   },
+      \   'html': {
+      \     'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+      \   },
+      \   'css': 0,
+      \ }
+      \}
 
 " ===
 " === xtabline
@@ -1156,10 +1183,10 @@ let g:rainbow_active = 1
 " === vim session
 " ===
 let g:session_directory = $HOME."/.config/nvim/tmp/sessions"
-let g:session_autosave = 'no'
+let g:session_autosave = 'yes'
 let g:session_autoload = 'no'
 "let g:session_autosave_periodic = 1
-"let g:session_autosave_silent = 1
+let g:session_autosave_silent = 1
 set sessionoptions-=buffers
 set sessionoptions-=options
 noremap sl :OpenSession<CR>
@@ -1195,6 +1222,6 @@ exec "nohlsearch"
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
-	exec "e ~/.config/nvim/_machine_specific.vim"
+  exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 
