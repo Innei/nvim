@@ -379,8 +379,10 @@ Plug 'theniceboy/vim-calc'
 " Plug 'theniceboy/eleline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'bling/vim-bufferline'
-"Plug 'liuchengxu/space-vim-theme'
+Plug 'bling/vim-bufferline'
+" Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/promptline.vim'
+" Plug 'liuchengxu/space-vim-theme'
 "Plug 'morhetz/gruvbox'
 "Plug 'ayu-theme/ayu-vim'
 "Plug 'rakr/vim-one'
@@ -424,7 +426,7 @@ Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-
+Plug 'zivyangll/git-blame.vim'
 " Tex
 "Plug 'lervag/vimtex'
 
@@ -593,6 +595,18 @@ hi NonText ctermfg=gray guifg=grey10
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_theme='deus'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_highlighting_cache = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_extensions = ['tabline', 'hunks', 'branch', 'undotree', 'coc', 'netrw', 'tabline', 'vista', 'term']
+let g:airline#extensions#coc#enabled = 1
+" let g:airline#extensions#csv#enabled = 1
+let g:airline#extensions#tabline#show_tab_count = 1
+let g:airline#extensions#term#enabled = 1
+let g:airline#extensions#vista#enabled = 1
+let g:airline#extensions#bookmark#enabled = 1
+
 " ==
 " == GitGutter
 " ==
@@ -605,7 +619,8 @@ nnoremap <LEADER>gf :GitGutterFold<CR>
 nnoremap H :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
-
+" autocmd CursorMoved * :call gitblame#echo()
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 " ===
 " === vim-illuminate
 " ===
