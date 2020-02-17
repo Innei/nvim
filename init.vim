@@ -4,13 +4,7 @@
 "| |  | | | |   | |\  | \ V /  | || |  | |  _ <| |___
 "|_|  |_| |_|   |_| \_|  \_/  |___|_|  |_|_| \_\\____|
 
-" Author: @theniceboy
-
-" Checkout-list
-" vim-esearch
-" fmoralesc/worldslice
-" SidOfc/mkdx
-
+" Author: @theniceboy && @innei
 
 " ===
 " === Auto load for first time uses
@@ -29,7 +23,7 @@ endif
 " ===
 "set clipboard=unnamedplus
 let &t_ut=''
-set autochdir
+" set autochdir
 
 
 " ===
@@ -437,9 +431,9 @@ Plug 'elzr/vim-json'
 " Plug 'mattn/emmet-vim'
 " Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-" Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-" Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-" Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jaxbot/browserlink.vim'
 " Plug 'prettier/vim-prettier', {
@@ -592,7 +586,6 @@ let g:airline#extensions#tabline#show_tab_count = 1
 let g:airline#extensions#term#enabled = 1
 let g:airline#extensions#vista#enabled = 1
 let g:airline#extensions#bookmark#enabled = 1
-
 " ==
 " == GitGutter
 " ==
@@ -1192,7 +1185,7 @@ let g:rainbow_conf = {
 " === vim session
 " ===
 let g:session_directory = $HOME."/.config/nvim/tmp/sessions"
-let g:session_autosave = 'yes'
+let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 "let g:session_autosave_periodic = 1
 let g:session_autosave_silent = 1
