@@ -60,20 +60,22 @@ Python:
 
 #### 1.2 Remapped Cursor Movement
 
-| Shortcut   | Action                                                    | Equivalent |
-| ---------- | --------------------------------------------------------- | ---------- |
-| `↑`        | Cursor up a terminal line                                 | `k`        |
-| `↓`        | Cursor down a terminal line                               | `j`        |
-| `←`        | Cursor left                                               | `h`        |
-| `→`        | Cursor right                                              | `l`        |
-| `F`        | Cursor up 5 terminal lines                                | `5k`       |
-| `E`        | Cursor down 5 terminal lines                              | `5j`       |
-| `N`        | Cursor to the start of the line                           | `0`        |
-| `I`        | Cursor to the end of the line                             | `$`        |
-| `Ctrl` `u` | Move the view port up 5 lines without moving the cursor   | `Ctrl` `y` |
-| `Ctrl` `e` | Move the view port down 5 lines without moving the cursor | `Ctrl` `e` |
-| `W`        | Move cursor five words forward                            | `5w`       |
-| `B`        | Move cursor five words forward                            | `5b`       |
+| Shortcut   | Action                                                    |
+| ---------- | --------------------------------------------------------- |
+| `↑`        | Cursor up a terminal line                                 |
+| `↓`        | Cursor down a terminal line                               |
+| `←`        | Cursor left                                               |
+| `→`        | Cursor right                                              |
+| `F`        | Cursor up 5 terminal lines                                |
+| `E`        | Cursor down 5 terminal lines                              |
+| `N`        | Cursor to the start of the line                           |
+| `I`        | Cursor to the end of the line                             |
+| `Ctrl` `u` | Move the view port up 5 lines without moving the cursor   |
+| `Ctrl` `e` | Move the view port down 5 lines without moving the cursor |
+| `W`        | Move cursor five words forward                            |
+| `B`        | Move cursor five words forward                            |
+| `,`        | Back to prev edited position                              |
+| `.`        | Forward to next edited position                           |
 
 #### 1.3 Remapped Insert Mode Keys
 
@@ -84,30 +86,28 @@ Python:
 
 #### 1.4 Remapped Text Manipulating Commands in Normal Mode
 
-| Shortcut        | Action                                |
-| --------------- | ------------------------------------- |
-| `u`             | **undo**                              |
-| `Ctrl` `r`      | **redo**                              |
-| `<`             | Un-indent                             |
-| `>`             | Indent                                |
-| `Ctrl` `a`      | Increase the number under cursor by 1 |
-| `Ctrl` `x`      | Decrease the number under cursor by 1 |
-| `SPACE` `SPACE` | Goto the next placeholder (`<++>`)    |
+| Shortcut | Action                                |
+| -------- | ------------------------------------- |
+| `u`      | **undo**                              |
+| `r`      | **redo**                              |
+| `<`      | Un-indent                             |
+| `>`      | Indent                                |
+| `=`      | Increase the number under cursor by 1 |
+| `-`      | Decrease the number under cursor by 1 |
 
 #### 1.5 Other Useful Normal Mode Remapping
 
-| Shortcut                                    | Action                                 |
-| ------------------------------------------- | -------------------------------------- |
-| `r`                                         | **Compile/Run the current file**       |
-| `Y`                                         | Copy selected text to system clipboard |
-| `z` `=`                                     | Show spell suggestions                 |
-| `SPACE` `s` `c`                             | Toggle spell suggestion a              |
-| `SPACE` `d` `w`                             | Find adjacent duplicated word          |
-| `SPACE` `t` `t`                             | Convert every 4 Spaces to a tab        |
-| `SPACE` `o`                                 | Fold                                   |
-| `SPACE` `-`                                 | Previous quick-fix position            |
-| `SPACE` `+`                                 | Next quick-fix position                |
-| `\` `p` | Show the path of the current file |
+| Shortcut        | Action                                 |
+| --------------- | -------------------------------------- |
+| `F5`            | **Compile/Run the current file**       |
+| `y`             | Copy selected text to system clipboard |
+| `z` `=`         | Show spell suggestions                 |
+| `SPACE` `s` `c` | Toggle spell suggestion a              |
+| `SPACE` `d` `w` | Find adjacent duplicated word          |
+| `SPACE` `t` `t` | Convert every 4 Spaces to a tab        |
+| `l`             | Fold                                   |
+| `SPACE` `-`     | Previous quick-fix position            |
+| `SPACE` `+`     | Next quick-fix position                |
 
 ### 2 Window Management
 
@@ -140,10 +140,11 @@ Use the **Shift + arrow keys** to resize the current window.
 
 #### 2.4 Closing Windows
 
-| Shortcut    | Action                                                                                                     |
-| ----------- | ---------------------------------------------------------------------------------------------------------- |
-| `Q`         | Close the current window                                                                                   |
-| `SPACE` `q` | Close the window below the current window. (The current window will be closed if there is no window below) |
+| Shortcut     | Action                                                                                                     |
+| ------------ | ---------------------------------------------------------------------------------------------------------- |
+| `Q`          | Close the current window                                                                                   |
+| `SPACE` `q`  | Close the window below the current window. (The current window will be closed if there is no window below) |
+| `Ctrl` + `q` | Exit all windows                                                                                           |
 
 ### 3 Tab Management
 
@@ -157,10 +158,10 @@ Use the **Shift + arrow keys** to resize the current window.
 
 ### 4 Buffer Management
 
-| Shortcut   | Action             |
-| ---------- | ------------------ |
-| `Ctrl` `[` | Toggle prev buffer |
-| `Ctrl` `]` | Toggle next buffer |
+| Shortcut                        | Action             |
+| ------------------------------- | ------------------ |
+| `Ctrl` `\` | Toggle prev buffer |
+| `Ctrl` `]`                      | Toggle next buffer |
 
 ### 5 Terminal Keyboard Shortcuts
 
@@ -173,7 +174,7 @@ Use the **Shift + arrow keys** to resize the current window.
 
 #### CoC (AutoCompletion)
 
-CoC is a modern completion, which had most vscode feature. It config write in `coc-setting.json`
+CoC is a modern completion, which had most vscode feature. It's all configs wrote in `coc-setting.json`
 
 | Shortcut        | Action                    |
 | --------------- | ------------------------- |
@@ -199,7 +200,7 @@ CoC is a modern completion, which had most vscode feature. It config write in `c
 
 | Shortcut        | Action                            |
 | --------------- | --------------------------------- |
-| `H`             | **Show git hunk at current line** |
+| `h`             | **Show git hunk at current line** |
 | `SPACE` `g` `-` | Go to previous git hunk           |
 | `SPACE` `g` `+` | Go to next git hunk               |
 | `SPACE` `g` `f` | Fold everything except hunks      |
@@ -217,7 +218,7 @@ See `:help table-mode.txt` for more.
 
 | Shortcut   | Action                              |
 | ---------- | ----------------------------------- |
-| `T`        | toggle function and variable list   |
+| `T` or `j` | toggle function and variable list   |
 | `Ctrl` `t` | open function/class/variable finder |
 
 #### FZF - the fuzzy file finder
@@ -251,12 +252,12 @@ For more commands, see [here](https://github.com/MattesGroeger/vim-bookmarks#usa
 
 #### vim-multiple-cursors
 
-| Shortcut             | Action                              |
-| -------------------- | ----------------------------------- |
-| `Ctrl`+`d` (or `kn`) | Select next word (multiple cursors) |
-| `Ctrl`+`p` (or `kp`) | Select previous word                |
-| `Ctrl`+`x`           | Skip word                           |
-| `Esc`                | Quit mutiple cursors                |
+| Shortcut   | Action                              |
+| ---------- | ----------------------------------- |
+| `Ctrl`+`d` | Select next word (multiple cursors) |
+| `Ctrl`+`p` | Select previous word                |
+| `Ctrl`+`x` | Skip word                           |
+| `Esc`      | Quit mutiple cursors                |
 
 #### vim-surround
 

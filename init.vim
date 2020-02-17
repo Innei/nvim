@@ -38,6 +38,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoindent
+set signcolumn=yes
 set list
 set listchars=tab:▸-,trail:▫
 set scrolloff=4
@@ -115,12 +116,13 @@ noremap <C-b> :NERDTreeToggle<CR>
 let mapleader=" "
 noremap ; :
 noremap : q:i
-noremap U <C-r>
+noremap r <C-r>
 " Save & quit
 noremap Q :q<CR>
 noremap <C-q> :qa<CR>
 noremap S :w<CR>
-inoremap <silent> <C-s> <ESC>:w<CR><ESC>:Prettier<CR>i
+noremap <silent> <C-S> :wa<CR>
+inoremap <silent> <C-s> <ESC>:w<CR>i
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
@@ -140,7 +142,7 @@ noremap <LEADER>st :Startify<CR>
 nnoremap Y y$
 
 " Copy to system clipboard
-vnoremap Y "+y
+vnoremap y "+y
 
 " Indentation
 nnoremap < <<
@@ -157,7 +159,7 @@ nnoremap <LEADER>tt :%s/    /\t/g
 vnoremap <LEADER>tt :s/    /\t/g
 
 " Folding
-noremap <silent> <LEADER>o za
+noremap <silent> l za
 
 " Open up lazygit
 noremap \g :term lazygit<CR>
@@ -178,9 +180,15 @@ noremap <c-g> :term lazygit<CR>
 "noremap <silent> e j
 "noremap <silent> i l
 noremap k <nop>
-noremap l <nop>
-noremap j <nop>
+noremap j :Vista!!<CR>
+noremap J :BTags<CR>
 noremap h <nop>
+noremap . <C-I>
+noremap , <C-O>
+noremap = <C-a>
+noremap - <C-x>
+noremap <C-a> <nop>
+noremap <C-x> <nop>
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> F 5k
 noremap <silent> E 5j
@@ -278,7 +286,7 @@ noremap tm. :+tabmove<CR>
 " ===
 " === Buffer manage
 " ===
-" noremap <C-[> :bprevious<CR>
+noremap <C-\> :bprevious<CR>
 noremap <C-]> :bnext<CR>
 
 " ===
@@ -323,7 +331,7 @@ noremap <LEADER>= :lne<CR>
 noremap \s :%s//g<left><left>
 
 " Compile function
-noremap r :call CompileRunGcc()<CR>
+noremap <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
   exec "w"
   if &filetype == 'c'
@@ -360,6 +368,17 @@ endfunc
 " ===
 
 call plug#begin('~/.config/nvim/plugged')
+" ===
+" === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
+" ===
+let has_machine_specific_file = 1
+if empty(glob('~/.config/nvim/_machine_specific.vim'))
+  let has_machine_specific_file = 0
+  silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
+endif
+source ~/.config/nvim/_machine_specific.vim
+
+
 " Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
@@ -478,7 +497,7 @@ Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
 Plug 'easymotion/vim-easymotion'
 Plug 'Konfekt/FastFold'
 Plug 'junegunn/vim-peekaboo'
-
+Plug 'jesseleite/vim-noh'
 " Input Method Autoswitch
 "Plug 'rlue/vim-barbaric' " slowing down vim-multiple-cursors
 
@@ -503,7 +522,7 @@ Plug 'osyo-manga/vim-anzu'
 
 " Mini Vim-APP
 "Plug 'voldikss/vim-floaterm'
-"Plug 'liuchengxu/vim-clap'
+" Plug 'liuchengxu/vim-clap'
 "Plug 'jceb/vim-orgmode'
 Plug 'mhinz/vim-startify'
 Plug 'theniceboy/vim-leader-mapper'
@@ -529,10 +548,6 @@ Plug 'roxma/nvim-yarp'
 Plug 'kaicataldo/material.vim'
 call plug#end()
 
-" emmet
-
-" let g:user_zen_leader_key = '<C-Z>'
-" autocmd FileType html,xhtml,tt2,tt2html,css imap <buffer> <Tab> <C-Z>, | imap <buffer> <C-N> <C-Z>n
 
 " experimental
 set lazyredraw
@@ -544,16 +559,6 @@ nnoremap sw :Switch<cr>
 let g:material_theme_style = 'palenight'
 let g:material_terminal_italics = 1
 colorscheme material
-" ===
-" === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
-" ===
-let has_machine_specific_file = 1
-if empty(glob('~/.config/nvim/_machine_specific.vim'))
-  let has_machine_specific_file = 0
-  silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
-endif
-source ~/.config/nvim/_machine_specific.vim
-
 " ===
 " === Dress up my vim
 " ===
@@ -573,8 +578,9 @@ hi NonText ctermfg=gray guifg=grey10
 " === eleline.vim
 " ===
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_theme='deus'
+ let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
+ let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -586,6 +592,10 @@ let g:airline#extensions#tabline#show_tab_count = 1
 let g:airline#extensions#term#enabled = 1
 let g:airline#extensions#vista#enabled = 1
 let g:airline#extensions#bookmark#enabled = 1
+function! AccentDemo()
+  " let g:airline_section_c = airline#section#create(['%f', get(l:, 'coc')])
+  endfunction
+autocmd VimEnter * call AccentDemo()
 " ==
 " == GitGutter
 " ==
@@ -595,7 +605,7 @@ let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
 autocmd BufWritePost * GitGutter
 nnoremap <LEADER>gf :GitGutterFold<CR>
-nnoremap H :GitGutterPreviewHunk<CR>
+nnoremap <silent> h :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 " ===
@@ -611,7 +621,8 @@ let g:Illuminate_ftblacklist = ['nerdtree']
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi']
+
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
 
@@ -652,32 +663,32 @@ noremap tc :CocCommand todolist.clearNotice<CR>
 noremap tl :CocList --normal todolist<CR>
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
-
-
+" coc-zi
+noremap \d :CocList translators<CR>
 " ===
 " === MarkdownPreview
 " ===
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-let g:mkdp_refresh_slow = 0
-let g:mkdp_command_for_global = 0
-let g:mkdp_open_to_the_world = 0
-let g:mkdp_open_ip = ''
-let g:mkdp_echo_preview_url = 0
-let g:mkdp_browserfunc = ''
-let g:mkdp_preview_options = {
-      \ 'mkit': {},
-      \ 'katex': {},
-      \ 'uml': {},
-      \ 'maid': {},
-      \ 'disable_sync_scroll': 0,
-      \ 'sync_scroll_type': 'middle',
-      \ 'hide_yaml_meta': 1
-      \ }
-let g:mkdp_markdown_css = ''
-let g:mkdp_highlight_css = ''
-let g:mkdp_port = ''
-let g:mkdp_page_title = '「${name}」'
+" let g:mkdp_auto_start = 0
+" let g:mkdp_auto_close = 1
+" let g:mkdp_refresh_slow = 0
+" let g:mkdp_command_for_global = 0
+" let g:mkdp_open_to_the_world = 0
+" let g:mkdp_open_ip = ''
+" let g:mkdp_echo_preview_url = 0
+" let g:mkdp_browserfunc = ''
+" let g:mkdp_preview_options = {
+"       \ 'mkit': {},
+"       \ 'katex': {},
+"       \ 'uml': {},
+"       \ 'maid': {},
+"       \ 'disable_sync_scroll': 0,
+"       \ 'sync_scroll_type': 'middle',
+"       \ 'hide_yaml_meta': 1
+"       \ }
+" let g:mkdp_markdown_css = ''
+" let g:mkdp_highlight_css = ''
+" let g:mkdp_port = ''
+" let g:mkdp_page_title = '「${name}」'
 
 " ===
 " === vim-surround
@@ -831,9 +842,8 @@ let g:multi_cursor_next_key = '<c-d>'
 let g:multi_cursor_prev_key = '<c-p>'
 let g:multi_cursor_skip_key = '<C-s>'
 let g:multi_cursor_quit_key = '<Esc>'
-nnoremap kn <c-d>
-nnoremap kp <c-p>
-
+" nmap kn <c-d>
+" nmap kp <c-p>
 " ===
 " === Far.vim
 " ===
@@ -868,8 +878,9 @@ let g:bullets_enabled_file_types = [
 " ===
 noremap <silent> T :Vista!!<CR>
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'ctags'
+let g:vista_default_executive = 'coc'
 let g:vista_fzf_preview = ['right:50%']
+let g:vista_sidebar_width = 70
 let g:vista#renderer#enable_icon = 1
 let g:vista#renderer#icons = {
       \   "function": "\uf794",
@@ -947,11 +958,9 @@ augroup END
 " ===
 " === Anzu
 " ===
-set statusline=%{anzu#search_status()}
-nnoremap = n
-nnoremap - N
-
-
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 " ===
 " === vim-go
 " ===
