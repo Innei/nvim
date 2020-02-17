@@ -127,7 +127,6 @@ noremap Q :q<CR>
 noremap <C-q> :qa<CR>
 noremap S :w<CR>
 inoremap <silent> <C-s> <ESC>:w<CR><ESC>:Prettier<CR>i
-
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
@@ -371,7 +370,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
 Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
-" Plug 'wakatime/vim-wakatime'
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
 
@@ -379,7 +377,7 @@ Plug 'theniceboy/vim-calc'
 " Plug 'theniceboy/eleline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
 " Plug 'liuchengxu/space-vim-theme'
@@ -413,8 +411,8 @@ Plug 'liuchengxu/vista.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 " Undo Tree
 Plug 'mbbill/undotree'
@@ -426,7 +424,7 @@ Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'zivyangll/git-blame.vim'
+" Plug 'zivyangll/git-blame.vim'
 " Tex
 "Plug 'lervag/vimtex'
 
@@ -437,12 +435,12 @@ Plug 'zivyangll/git-blame.vim'
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json'
 " Plug 'mattn/emmet-vim'
-Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
+" Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+" Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jaxbot/browserlink.vim'
 " Plug 'prettier/vim-prettier', {
 "   \ 'do': 'yarn install',
@@ -459,14 +457,14 @@ Plug 'jaxbot/browserlink.vim'
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
-" Python
-Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
-Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
-"Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
-"Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
-Plug 'tweekmonster/braceless.vim'
-
+" " Python
+" " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
+" " Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
+" Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
+" "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
+" "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
+" Plug 'tweekmonster/braceless.vim'
+"
 " Markdown
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
@@ -561,7 +559,6 @@ if empty(glob('~/.config/nvim/_machine_specific.vim'))
   silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
 endif
 source ~/.config/nvim/_machine_specific.vim
-" let g:wakatime_PythonBinary = '/usr/bin/python3'
 
 " ===
 " === Dress up my vim
@@ -569,18 +566,7 @@ source ~/.config/nvim/_machine_specific.vim
 set termguicolors " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " set background=dark
-"let ayucolor="mirage"
-"let g:oceanic_next_terminal_bold = 1
-"let g:oceanic_next_terminal_italic = 1
-"let g:one_allow_italics = 1
 
-"color dracula
-"color one
-" color deus
-"color gruvbox
-"let ayucolor="light"
-"color ayu
-"set background=light
 "color xcodedark
 
 hi NonText ctermfg=gray guifg=grey10
@@ -592,7 +578,7 @@ hi NonText ctermfg=gray guifg=grey10
 " ===
 " === eleline.vim
 " ===
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_theme='deus'
 let g:airline#extensions#tabline#enabled = 1
@@ -619,8 +605,6 @@ nnoremap <LEADER>gf :GitGutterFold<CR>
 nnoremap H :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
-" autocmd CursorMoved * :call gitblame#echo()
-nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 " ===
 " === vim-illuminate
 " ===
@@ -634,23 +618,29 @@ let g:Illuminate_ftblacklist = ['nerdtree']
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-lists', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-sourcekit', 'coc-translator']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint']
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+
+" inoremap <silent><expr> <Tab>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
+
 inoremap <silent><expr> <c-space> coc#refresh()
 " Useful commands
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
@@ -840,15 +830,16 @@ endfunc
 " == vim-multiple-cursor
 " ==
 let g:multi_cursor_use_default_mapping = 0
-let g:multi_cursor_start_word_key = '<c-k>'
+let g:multi_cursor_start_word_key = '<c-d>'
 let g:multi_cursor_select_all_word_key = '<a-k>'
-let g:multi_cursor_start_key = 'g<c-k>'
+let g:multi_cursor_start_key = 'g<c-d>'
 let g:multi_cursor_select_all_key = 'g<a-k>'
-let g:multi_cursor_next_key = '<c-k>'
+let g:multi_cursor_next_key = '<c-d>'
 let g:multi_cursor_prev_key = '<c-p>'
 let g:multi_cursor_skip_key = '<C-s>'
 let g:multi_cursor_quit_key = '<Esc>'
-
+nnoremap kn <c-d>
+nnoremap kp <c-p>
 
 " ===
 " === Far.vim
@@ -914,14 +905,14 @@ noremap <LEADER>gi :FzfGitignore<CR>
 " ===
 " === Ultisnips
 " ===
-let g:tex_flavor = "latex"
-inoremap <c-n> <nop>
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-e>"
-let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
-silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
-
+" let g:tex_flavor = "latex"
+" inoremap <c-n> <nop>
+" let g:UltiSnipsExpandTrigger="<c-e>"
+" let g:UltiSnipsJumpForwardTrigger="<c-e>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+" let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
+" silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
+"
 
 " ===
 " === vimtex
@@ -1004,6 +995,11 @@ nnoremap <silent> \f :retab<CR>:Autoformat<CR>
 
 
 " ===
+" === Prettier
+" ===
+
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+nnoremap <leader>p :Prettier<CR>
 " === OmniSharp
 " ===
 let g:OmniSharp_typeLookupInPreview = 1
@@ -1107,8 +1103,6 @@ let g:vimsyn_folding = 'af'
 let g:xml_syntax_folding = 1
 let g:javaScript_fold = 1
 let g:sh_fold_enabled= 7
-let g:ruby_fold = 1
-let g:perl_fold = 1
 let g:perl_fold_blocks = 1
 let g:r_syntax_folding = 1
 let g:rust_fold = 1
@@ -1209,6 +1203,18 @@ noremap ss :SaveSession<CR>
 noremap sc :CloseSession<CR>
 noremap sD :DeleteSession<CR>
 noremap sA :AppendTabSession<CR>
+" === startify
+let g:startify_session_dir= $HOME."/.config/nvim/tmp/sessions"
+let g:startify_lists = [
+          \ { 'type': 'dir',       'header': ['   Dirs '. getcwd()] },
+          \ { 'type': 'sessions',  'header': ['   Sessions']       },
+          \ { 'type': 'files',     'header': ['   Files']            },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ { 'type': 'commands',  'header': ['   Commands']       },
+          \ ]
+let g:startify_files_number = 5
+let g:startify_change_to_vcs_root = 1
+
 
 " ===
 " === nerdcommenter
