@@ -1,6 +1,15 @@
-# My NeoVim Config
+# NeoVim Config For Front-end Developer
 
-![](https://cdn.jsdelivr.net/gh/innei/img-bed@master/E3C8E18D1C48F1763CAC7C0443B6C5B2.jpg)
+Forked from [theniceboy/nvim](https://github.com/theniceboy/nvim)
+
+Support Language:
+
+- JavaScript (include Vue, JSX, TypeScript, etc.)
+- Golang
+- HTML
+- CSS
+
+![](https://cdn.jsdelivr.net/gh/innei/img-bed@master/20200217150307.png)
 
 Please **DO NOT** just copy this config without really looking at it! Please, at least, read this README file!
 
@@ -31,15 +40,11 @@ Python:
 
 - [ ] Install `ctags` for function/class/variable list
 
-#### For Denite:
-
-- [ ] Install `ripgrep`
-- [ ] Install `fd`
-
 #### And also...
 
 - [ ] Install `figlet` for inputing text ASCII art
 - [ ] Install `xclip` for system clipboard access (`Linux` and `xorg` only)
+- [ ] Install ag tool (For mac user do: `brew install ag`)
 
 ## Keyboard Shortcuts
 
@@ -51,6 +56,8 @@ Python:
 
 **`S`** : save the current file, equals to command `:w`
 
+**`;`** : exec a vim command, equals to key `:`
+
 #### 1.2 Remapped Cursor Movement
 
 | Shortcut   | Action                                                    | Equivalent |
@@ -59,7 +66,7 @@ Python:
 | `↓`        | Cursor down a terminal line                               | `j`        |
 | `←`        | Cursor left                                               | `h`        |
 | `→`        | Cursor right                                              | `l`        |
-| `U`        | Cursor up 5 terminal lines                                | `5k`       |
+| `F`        | Cursor up 5 terminal lines                                | `5k`       |
 | `E`        | Cursor down 5 terminal lines                              | `5j`       |
 | `N`        | Cursor to the start of the line                           | `0`        |
 | `I`        | Cursor to the end of the line                             | `$`        |
@@ -164,7 +171,9 @@ Use the **Shift + arrow keys** to resize the current window.
 
 ## Plugins
 
-#### COC (AutoCompletion)
+#### CoC (AutoCompletion)
+
+CoC is a modern completion, which had most vscode feature. It config write in `coc-setting.json`
 
 | Shortcut        | Action                    |
 | --------------- | ------------------------- |
@@ -175,19 +184,11 @@ Use the **Shift + arrow keys** to resize the current window.
 | `gy`            | Go to type definition     |
 | `Space` `r` `n` | Rename a variable         |
 
-#### Ultisnips
-
-| Shortcut   | Action                                           |
-| ---------- | ------------------------------------------------ |
-| `Ctrl` `e` | Expand a snippet                                 |
-| `Ctrl` `n` | (in snippet) Previous Cursor position in snippet |
-| `Ctrl` `e` | (in snippet) Next Cursor position in snippet     |
-
 #### NERDTree
 
 | Shortcut          | Action              |
 | ----------------- | ------------------- |
-| `tt`              | **Toggle NerdTree** |
+| `<C-b>`           | **Toggle NerdTree** |
 | `I`               | Open in new split   |
 | `O`               | Open in new tab     |
 | `l`               | Change root         |
@@ -221,25 +222,19 @@ See `:help table-mode.txt` for more.
 
 #### FZF - the fuzzy file finder
 
-| Shortcut   | Action           |
-| ---------- | ---------------- |
-| `Ctrl` `p` | **Active FZF**   |
-| `Ctrl` `u` | Move up 1 item   |
-| `Ctrl` `e` | Move down 1 item |
+| Shortcut   | Action              |
+| ---------- | ------------------- |
+| `Ctrl` `f` | **Active FZF (ag)** |
 
 #### Undotree
 
-| Shortcut      | Action          |
-| ------------- | --------------- |
-| `Shift` + `L` | Open Undotree   |
-| `Shift` + `K` | History go up   |
-| `Shift` + `J` | History go down |
+| Shortcut                     | Action          |
+| ---------------------------- | --------------- |
+| `Shift` + `l` (Capital of L) | Open Undotree   |
+| `Shift` + `K`                | History go up   |
+| `Shift` + `J`                | History go down |
 
-#### vim-startify - Startup screen
-
-Press `Space` `s` `t` to openup `startify`
-
-#### vim-signiture - Bookmarks
+#### Vim Bookmarks
 
 | Shortcut    | Action                          | Command |
 | ----------- | ------------------------------- | ------- |
@@ -256,12 +251,12 @@ For more commands, see [here](https://github.com/MattesGroeger/vim-bookmarks#usa
 
 #### vim-multiple-cursors
 
-| Shortcut   | Action                              |
-| ---------- | ----------------------------------- |
-| `Ctrl`+`k` | Select next word (multiple cursors) |
-| `Ctrl`+`p` | Select previous word                |
-| `Ctrl`+`x` | Skip word                           |
-| `Esc`      | Quit mutiple cursors                |
+| Shortcut             | Action                              |
+| -------------------- | ----------------------------------- |
+| `Ctrl`+`d` (or `kn`) | Select next word (multiple cursors) |
+| `Ctrl`+`p` (or `kp`) | Select previous word                |
+| `Ctrl`+`x`           | Skip word                           |
+| `Esc`                | Quit mutiple cursors                |
 
 #### vim-surround
 
@@ -289,11 +284,15 @@ To add surround (`string` -> `"string"`):
     "string"
     ```
 
+    To add surround in Visual Mode
+
+    Select session then press `S` + `your want to add letter`
+
 #### far.vim - find and replace
 
     | Shortcut        | Action                   |
     | --------------- | ------------------------ |
-    | `SPACE` `f` `a` | Find in the current file |
+    | `SPACE` `f` | Find in the current workspace (required ag)|
     | `SPACE` `f` `r` | Find and replace         |
 
 #### fzf-gitignore
