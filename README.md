@@ -306,10 +306,10 @@ To add surround (`string` -> `"string"`):
 
 #### far.vim - find and replace
 
-    | Shortcut        | Action                   |
-    | --------------- | ------------------------ |
-    | `SPACE` `f` | Find in the current workspace (required ag)|
-    | `SPACE` `f` `r` | Find and replace         |
+| Shortcut        | Action                                      |
+| --------------- | ------------------------------------------- |
+| `SPACE` `f`     | Find in the current workspace (required ag) |
+| `SPACE` `f` `r` | Find and replace                            |
 
 #### fzf-gitignore
 
@@ -317,10 +317,10 @@ To add surround (`string` -> `"string"`):
 
 #### GV - commit browser
 
-    | Shortcut | Action              |
-    | -------- | ------------------- |
-    | `g` `v`  | Open commit browser |
-    | `q`      | Quit GV window      |
+| Shortcut | Action              |
+| -------- | ------------------- |
+| `g` `v`  | Open commit browser |
+| `q`      | Quit GV window      |
 
 #### vim-calc
 
@@ -328,10 +328,10 @@ To add surround (`string` -> `"string"`):
 
 #### vim-calendar
 
-    | Shortcut                | Action     |
-    | ----------------------- | ---------- |
-    | `\` `\`                 | Show clock |
-    | `\` `c` | Show calendar |
+| Shortcut                | Action     |
+| ----------------------- | ---------- |
+| `\` `\`                 | Show clock |
+| `\` `c` | Show calendar |
 
 #### AutoFormat
 
@@ -343,13 +343,13 @@ To add surround (`string` -> `"string"`):
 
 #### nerdcommenter - Quick comment
 
-    | Shortcut     | Action                            |
-    | ------------ | --------------------------------- |
-    | `SPACE + /`  | toggle comment lines.             |
-    | `SPACE + cu` | discomment lines.                 |
-    | `SPACE + cc` | comment lines.                    |
-    | `SPACE + cy` | copy code lines and then comment. |
-    | `SPACE + cs` | comment in document block.        |
+| Shortcut     | Action                            |
+| ------------ | --------------------------------- |
+| `SPACE + /`  | toggle comment lines.             |
+| `SPACE + cu` | discomment lines.                 |
+| `SPACE + cc` | comment lines.                    |
+| `SPACE + cy` | copy code lines and then comment. |
+| `SPACE + cs` | comment in document block.        |
 
 #### discord.nvim RPC
 
@@ -359,22 +359,22 @@ To add surround (`string` -> `"string"`):
 
 #### Markdown
 
-    | Shortcut | What it creates     |
-    | -------- | ------------------- |
-    | `,n`     | ---                 |
-    | `,b`     | **Bold** text       |
-    | `,s`     | ~~sliced~~ text     |
-    | `,i`     | _italic_ text       |
-    | `,d`     | `code block`        |
-    | `,c`     | big `block of code` |
-    | `,m`     | - [ ] check mark    |
-    | `,p`     | picture             |
-    | `,a`     | [link]()            |
-    | `,1`     | # H1                |
-    | `,2`     | ## H2               |
-    | `,3`     | ### H3              |
-    | `,4`     | #### H4             |
-    | `,l`     | --------            |
+| Shortcut | What it creates     |
+| -------- | ------------------- |
+| `,n`     | ---                 |
+| `,b`     | **Bold** text       |
+| `,s`     | ~~sliced~~ text     |
+| `,i`     | _italic_ text       |
+| `,d`     | `code block`        |
+| `,c`     | big `block of code` |
+| `,m`     | - [ ] check mark    |
+| `,p`     | picture             |
+| `,a`     | [link]()            |
+| `,1`     | # H1                |
+| `,2`     | ## H2               |
+| `,3`     | ### H3              |
+| `,4`     | #### H4             |
+| `,l`     | --------            |
 
 `,f` to go to the next `<++>` (placeholder)
 
