@@ -10,8 +10,8 @@
 " === Auto load for first time uses
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !mkdir -p ~/.config/nvim/autoload
+  silent !cp '~/.config/nvim/plug.vim' '~/.config/nvim/autoload/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -51,7 +51,7 @@ set indentexpr=
 set foldmethod=indent
 set foldlevel=99
 set foldenable
-set formatoptions-=tc
+set formatoptions-=cro
 set splitright
 set splitbelow
 set noshowmode
@@ -120,7 +120,7 @@ noremap r <C-r>
 " Save & quit
 noremap Q :q<CR>
 noremap <C-q> :qa<CR>
-noremap S :w<CR>
+nnoremap S :w<CR>
 noremap <silent> <C-S> :wa<CR>
 inoremap <silent> <C-s> <ESC>:w<CR>i
 " Open the vimrc file anytime
@@ -189,6 +189,8 @@ noremap = <C-a>
 noremap - <C-x>
 noremap <C-a> <nop>
 noremap <C-x> <nop>
+noremap <Home> ^
+inoremap <Home> <esc>^i
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> F 5k
 noremap <silent> E 5j
@@ -305,7 +307,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 inoremap <C-u> <ESC>lx$p
 
 " Opening a terminal window
-noremap <LEADER>. :set splitbelow<CR>:split<CR><C-w>w:terminal<CR>
+noremap <LEADER>. :set nosplitbelow<CR>:split<CR><C-w>w:terminal<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER>+ <Esc>/<++><CR>:nohlsearch<CR>c4l
@@ -405,6 +407,7 @@ Plug 'ajmwagar/vim-deus'
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 Plug 'RRethy/vim-illuminate'
+Plug 'sakshamgupta05/vim-todo-highlight'
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -425,7 +428,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
 " Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 " Undo Tree
 Plug 'mbbill/undotree'
@@ -487,6 +490,7 @@ Plug 'theniceboy/bullets.vim'
 "Plug 'Raimondi/delimitMate'
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
+" Plug 'mg979/vim-visual-multi'
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
@@ -579,8 +583,8 @@ hi NonText ctermfg=gray guifg=grey10
 " ===
 let g:airline_powerline_fonts = 1
 let g:airline_theme='deus'
- let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
- let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
+let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -592,10 +596,7 @@ let g:airline#extensions#tabline#show_tab_count = 1
 let g:airline#extensions#term#enabled = 1
 let g:airline#extensions#vista#enabled = 1
 let g:airline#extensions#bookmark#enabled = 1
-function! AccentDemo()
-  " let g:airline_section_c = airline#section#create(['%f', get(l:, 'coc')])
-  endfunction
-autocmd VimEnter * call AccentDemo()
+let g:airline_section_c = airline#section#create(['%f','%{get(b:,''coc_current_function'','''')}'])
 " ==
 " == GitGutter
 " ==
@@ -621,7 +622,7 @@ let g:Illuminate_ftblacklist = ['nerdtree']
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users']
 
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
@@ -644,6 +645,15 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
 " Useful commands
@@ -719,13 +729,9 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 " ===
 set rtp+=/usr/local/opt/fzf
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
-noremap <C-p> :FZF<CR>
+
 noremap <C-f> :Ag<CR>
-noremap <C-h> :MRU<CR>
-noremap <C-t> :BTags<CR>
-noremap <C-l> :LinesWithPreview<CR>
-noremap <C-w> :Buffers<CR>
-"noremap ; :History:<CR>
+
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler
@@ -783,8 +789,8 @@ let g:fzf_binary_preview_command = 'echo "It is a binary file"'
 " ===
 " === CTRLP (Dependency for omnisharp)
 " ===
-let g:ctrlp_map = ''
-let g:ctrlp_cmd = 'CtrlP'
+" let g:ctrlp_map = ''
+" let g:ctrlp_cmd = 'CtrlP'
 
 
 
@@ -842,8 +848,6 @@ let g:multi_cursor_next_key = '<c-d>'
 let g:multi_cursor_prev_key = '<c-p>'
 let g:multi_cursor_skip_key = '<C-s>'
 let g:multi_cursor_quit_key = '<Esc>'
-" nmap kn <c-d>
-" nmap kp <c-p>
 " ===
 " === Far.vim
 " ===
@@ -1002,48 +1006,6 @@ nnoremap <silent> \f :retab<CR>:Autoformat<CR>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nnoremap <leader>p :Prettier<CR>
-" === OmniSharp
-" ===
-let g:OmniSharp_typeLookupInPreview = 1
-let g:omnicomplete_fetch_full_documentation = 1
-
-let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_highlight_types = 2
-let g:OmniSharp_selector_ui = 'ctrlp'
-
-autocmd Filetype cs nnoremap <buffer> gd :OmniSharpPreviewDefinition<CR>
-autocmd Filetype cs nnoremap <buffer> gr :OmniSharpFindUsages<CR>
-autocmd Filetype cs nnoremap <buffer> gy :OmniSharpTypeLookup<CR>
-autocmd Filetype cs nnoremap <buffer> ga :OmniSharpGetCodeActions<CR>
-autocmd Filetype cs nnoremap <buffer> <LEADER>rn :OmniSharpRename<CR><C-N>:res +5<CR>
-
-sign define OmniSharpCodeActions text=💡
-
-augroup OSCountCodeActions
-  autocmd!
-  autocmd FileType cs set signcolumn=yes
-  autocmd CursorHold *.cs call OSCountCodeActions()
-augroup END
-
-function! OSCountCodeActions() abort
-  if bufname('%') ==# '' || OmniSharp#FugitiveCheck() | return | endif
-  if !OmniSharp#IsServerRunning() | return | endif
-  let opts = {
-        \ 'CallbackCount': function('s:CBReturnCount'),
-        \ 'CallbackCleanup': {-> execute('sign unplace 99')}
-        \}
-  call OmniSharp#CountCodeActions(opts)
-endfunction
-
-function! s:CBReturnCount(count) abort
-  if a:count
-    let l = getpos('.')[1]
-    let f = expand('%:p')
-    execute ':sign place 99 line='.l.' name=OmniSharpCodeActions file='.f
-  endif
-endfunction
-
 
 " ===
 " === Colorizer
@@ -1159,6 +1121,8 @@ let g:rainbow_conf = {
       \ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
       \ 'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
       \ 'operators': '_,_',
+      \ 'guis': [''],
+      \ 'cterms': [''],
       \ 'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
       \ 'separately': {
       \   '*': {},
@@ -1208,12 +1172,12 @@ noremap sA :AppendTabSession<CR>
 " === startify
 let g:startify_session_dir= $HOME."/.config/nvim/tmp/sessions"
 let g:startify_lists = [
-          \ { 'type': 'dir',       'header': ['   Dirs '. getcwd()] },
-          \ { 'type': 'sessions',  'header': ['   Sessions']       },
-          \ { 'type': 'files',     'header': ['   Files']            },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \ { 'type': 'commands',  'header': ['   Commands']       },
-          \ ]
+      \ { 'type': 'dir',       'header': ['   Dirs '. getcwd()] },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'files',     'header': ['   Files']            },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
 let g:startify_files_number = 5
 let g:startify_change_to_vcs_root = 1
 
@@ -1248,3 +1212,15 @@ if has_machine_specific_file == 0
   exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 
+if has("autocmd")
+  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[7 q"' | redraw!
+  au InsertEnter,InsertChange *
+\ if v:insertmode == 'i' | 
+\   silent execute '!echo -ne "\e[5 q"' | redraw! |
+\ elseif v:insertmode == 'r' |
+\   silent execute '!echo -ne "\e[4 q"' | redraw! |
+\ endif
+au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+endif
+set guicursor=i:ver100-iCursor-blinkwait700-blinkon400-blinkoff250
+set guicursor=n:ver300-iCursor

@@ -185,6 +185,14 @@ CoC is a modern completion, which had most vscode feature. It's all configs wrot
 | `gy`            | Go to type definition     |
 | `Space` `r` `n` | Rename a variable         |
 
+- CoC Plugins
+
+| Shortcut | Action                                |
+| -------- | ------------------------------------- |
+| `tt`     | Open coc-explorer                     |
+| `ts`     | Translate word which under the cursor |
+| `\d`     | Open dictatory                        |
+
 #### NERDTree
 
 | Shortcut          | Action              |
@@ -204,6 +212,13 @@ CoC is a modern completion, which had most vscode feature. It's all configs wrot
 | `SPACE` `g` `-` | Go to previous git hunk           |
 | `SPACE` `g` `+` | Go to next git hunk               |
 | `SPACE` `g` `f` | Fold everything except hunks      |
+
+#### Auto Pairs
+
+| Shortcut       | Action                        |
+| -------------- | ----------------------------- |
+| `<Meta>` `<e>` | Fast wrap the word or a pairs |
+| `<Meta>` `<p>` | Toggle auto pairs mode        |
 
 #### vim-table-mode
 

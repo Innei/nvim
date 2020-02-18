@@ -1,9 +1,11 @@
 {
-  "coc.preferences.hoverTarget": "preview",
+  "coc.preferences.hoverTarget": "echo",
+  "coc.preferences.formatOnInsertLeave": true,
   "coc.preferences.enableFloatHighlight": true,
   "coc.preferences.snippetStatusText": "Ⓢ ",
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "suggest.detailMaxLength": 20,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "suggest.detailMaxLength": 100,
   "suggest.noselect": true,
   "suggest.enablePreselect": false,
   "suggest.triggerAfterInsertEnter": false,
@@ -164,6 +166,8 @@
   "javascript.showUnused": true,
   "javascript.suggest.names": true,
   "javascript.suggestionActions.enabled": true,
+  "javascript.format.enabled": true,
+  "snippets.autoTrigger": true,
   "json.format.enable": true,
   "zi.enable": true,
   "zi.patterns": {
@@ -208,5 +212,7 @@
         }
       }
     }
-  }
+  },
+  "snippets.textmateSnippetsRoots": [],
+  "coc.githubUsers.githubAccessToken": "c6b281f8f5507d2bb036872f378bac6aa998a091"
 }
