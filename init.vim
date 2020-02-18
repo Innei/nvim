@@ -31,7 +31,7 @@ let &t_ut=''
 " ===
 set number
 " set relativenumber
-set mouse=a
+set mouse=niv
 set cursorline
 set expandtab
 set tabstop=2
@@ -596,7 +596,8 @@ let g:airline#extensions#tabline#show_tab_count = 1
 let g:airline#extensions#term#enabled = 1
 let g:airline#extensions#vista#enabled = 1
 let g:airline#extensions#bookmark#enabled = 1
-let g:airline_section_c = airline#section#create(['%f','%{get(b:,''coc_current_function'','''')}'])
+let g:airline_section_c = airline#section#create(['%f','   ','%{get(b:,''coc_current_function'','''')}'])
+let g:airline_section_b = airline#section#create(['%{get(b:,''coc_git_status'','''')}','%{get(g:,''coc_git_status'','''')}'])
 " ==
 " == GitGutter
 " ==
@@ -1215,12 +1216,13 @@ endif
 if has("autocmd")
   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[7 q"' | redraw!
   au InsertEnter,InsertChange *
-\ if v:insertmode == 'i' | 
-\   silent execute '!echo -ne "\e[5 q"' | redraw! |
-\ elseif v:insertmode == 'r' |
-\   silent execute '!echo -ne "\e[4 q"' | redraw! |
-\ endif
-au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+        \ if v:insertmode == 'i' |
+        \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+        \ elseif v:insertmode == 'r' |
+        \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+        \ endif
+  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
-set guicursor=i:ver100-iCursor-blinkwait700-blinkon400-blinkoff250
-set guicursor=n:ver300-iCursor
+set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
+set guicursor=v:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
+set guicursor=n:block
