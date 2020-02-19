@@ -134,9 +134,7 @@ noremap <LEADER>st :Startify<CR>
 " Redi operations
 " noremap R <C-r>
 
-" Insert Key
-" noremap k i
-" noremap K I
+vnoremap <BS> xi
 
 " make Y to copy till the end of the line
 nnoremap Y y$
@@ -321,7 +319,7 @@ noremap ` ~<left>
 noremap <C-c> zz
 
 " Auto change directory to current dir
-autocmd BufEnter * silent! lcd %:p:h
+" autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
 noremap tx :r !figlet
@@ -458,18 +456,6 @@ Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', '
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jaxbot/browserlink.vim'
-" Plug 'prettier/vim-prettier', {
-"   \ 'do': 'yarn install',
-"   \ 'branch': 'release/1.x',
-"   \ 'for': [
-"     \ 'javascript',
-"     \ 'typescript',
-"     \ 'css',
-"     \ 'scss',
-"     \ 'json',
-"     \ 'vue',
-"     \ 'html' ] }
-
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
@@ -562,21 +548,21 @@ nnoremap sw :Switch<cr>
 " ===
 let g:material_theme_style = 'palenight'
 let g:material_terminal_italics = 1
-colorscheme material
+" colorscheme material
 " ===
 " === Dress up my vim
 " ===
 set termguicolors " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" set background=dark
+"set background=dark
 
-"color xcodedark
+color xcodedark
+hi Normal guibg=NONE ctermbg=NONE
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
 
 " ===================== Start of Plugin Settings =====================
-
 
 " ===
 " === eleline.vim
@@ -584,7 +570,7 @@ hi NonText ctermfg=gray guifg=grey10
 let g:airline_powerline_fonts = 1
 let g:airline_theme='deus'
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
-let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#formatter = 'jsformatter'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#left_sep = ' '
