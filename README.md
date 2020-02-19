@@ -278,6 +278,10 @@ For more commands, see [here](https://github.com/MattesGroeger/vim-bookmarks#usa
 | `Ctrl`+`x` | Skip word                           |
 | `Esc`      | Quit mutiple cursors                |
 
+#### vim-rest-console
+
+
+
 #### vim-surround
 
 To add surround (`string` -> `"string"`):

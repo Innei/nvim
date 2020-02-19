@@ -462,7 +462,7 @@ Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascrip
 Plug 'jaxbot/browserlink.vim'
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
-
+Plug 'diepm/vim-rest-console'
 " " Python
 " " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 " " Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
