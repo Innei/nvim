@@ -1,4 +1,5 @@
 {
+  "npm.binPath": "yarn",
   "coc.preferences.hoverTarget": "echo",
   "coc.preferences.formatOnInsertLeave": true,
   "coc.preferences.enableFloatHighlight": true,

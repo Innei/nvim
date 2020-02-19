@@ -38,6 +38,8 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoindent
+set smartindent
+set smarttab
 set signcolumn=yes
 set list
 set listchars=tab:▸-,trail:▫
@@ -459,7 +461,7 @@ Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript
 Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'jaxbot/browserlink.vim'
+" Plug 'jaxbot/browserlink.vim'
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 Plug 'diepm/vim-rest-console'
@@ -613,7 +615,7 @@ let g:Illuminate_ftblacklist = ['nerdtree']
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions']
 
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
@@ -666,6 +668,8 @@ noremap tl :CocList --normal todolist<CR>
 nmap ts <Plug>(coc-translator-p)
 " coc-zi
 noremap \d :CocList translators<CR>
+
+nnoremap <silent> <leader>b :CocCommand actions.open<cr>
 " ===
 " === MarkdownPreview
 " ===
