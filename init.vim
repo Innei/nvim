@@ -11,7 +11,7 @@
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !mkdir -p ~/.config/nvim/autoload
-  silent !cp '~/.config/nvim/plug.vim' '~/.config/nvim/autoload/plug.vim'
+  silent !cp ~/.config/nvim/plug.vim ~/.config/nvim/autoload/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
