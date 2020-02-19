@@ -16,8 +16,8 @@ Please **DO NOT** just copy this config without really looking at it! Please, at
 ## After Installation, You Need To:
 
 - [ ] Install `pynvim` (pip)
-  - [ ] Install `nodejs`, and do `npm install -g neovim`
-  - [ ] Install nerd-fonts (actually it's optional but it looks real good)
+- [ ] Install `nodejs`, and do `npm install -g neovim`
+- [ ] Install nerd-fonts (actually it's optional but it looks real good, recommended `Operator Mono` which patched font on (Fonts)[https://github.com/Innei/zshrc/tree/master/fonts])
 
 ## After Installation, You Might Want To:
 
@@ -56,6 +56,8 @@ Python:
 
 **`S`** : save the current file, equals to command `:w`
 
+**`<Ctrl> <s>`** : save all tabs file, equals to command `:wa`
+
 **`;`** : exec a vim command, equals to key `:`
 
 #### 1.2 Remapped Cursor Movement
@@ -86,14 +88,16 @@ Python:
 
 #### 1.4 Remapped Text Manipulating Commands in Normal Mode
 
-| Shortcut | Action                                |
-| -------- | ------------------------------------- |
-| `u`      | **undo**                              |
-| `r`      | **redo**                              |
-| `<`      | Un-indent                             |
-| `>`      | Indent                                |
-| `=`      | Increase the number under cursor by 1 |
-| `-`      | Decrease the number under cursor by 1 |
+| Shortcut    | Action                                      |
+| ----------- | ------------------------------------------- |
+| `u`         | **undo**                                    |
+| `r`         | **redo**                                    |
+| `<`         | Un-indent                                   |
+| `>`         | Indent                                      |
+| `=`         | Increase the number under cursor by 1       |
+| `-`         | Decrease the number under cursor by 1       |
+| `x`         | replace a letter into another. Equal to `r` |
+| `Backspace` | equal to `X`                                |
 
 #### 1.5 Other Useful Normal Mode Remapping
 
@@ -197,7 +201,7 @@ CoC is a modern completion, which had most vscode feature. It's all configs wrot
 
 | Shortcut          | Action              |
 | ----------------- | ------------------- |
-| `<C-b>`           | **Toggle NerdTree** |
+| `<Ctrl-b>`        | **Toggle NerdTree** |
 | `I`               | Open in new split   |
 | `O`               | Open in new tab     |
 | `l`               | Change root         |
@@ -325,13 +329,6 @@ To add surround (`string` -> `"string"`):
 #### vim-calc
 
     Press `Space` + `a` to calculate the equation in the current line
-
-#### vim-calendar
-
-| Shortcut                | Action     |
-| ----------------------- | ---------- |
-| `\` `\`                 | Show clock |
-| `\` `c` | Show calendar |
 
 #### AutoFormat
 

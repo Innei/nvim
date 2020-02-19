@@ -117,12 +117,16 @@ let mapleader=" "
 noremap ; :
 noremap : q:i
 noremap r <C-r>
+nnoremap x r
+nnoremap <BS> X
 " Save & quit
 noremap Q :q<CR>
 noremap <C-q> :qa<CR>
 nnoremap S :w<CR>
 noremap <silent> <C-S> :wa<CR>
 inoremap <silent> <C-s> <ESC>:w<CR>i
+vnoremap <BS> x
+inoremap <S-CR> <ESC>o
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
@@ -1211,4 +1215,4 @@ if has("autocmd")
 endif
 set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
 set guicursor=v:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
-set guicursor=n:block
+set guicursor=n:block-blinkon400
