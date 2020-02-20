@@ -96,7 +96,7 @@ Python:
 | `>`         | Indent                                      |
 | `=`         | Increase the number under cursor by 1       |
 | `-`         | Decrease the number under cursor by 1       |
-| `x`         | replace a letter into another. Equal to `r` |
+| `X`         | replace a letter into another. Equal to `r` |
 | `Backspace` | equal to `X`                                |
 
 #### 1.5 Other Useful Normal Mode Remapping
@@ -187,6 +187,7 @@ CoC is a modern completion, which had most vscode feature. It's all configs wrot
 | `gr`            | List references           |
 | `gi`            | List implementation       |
 | `gy`            | Go to type definition     |
+| `gu`            | Undo current git chunk    |
 | `Space` `r` `n` | Rename a variable         |
 
 - CoC Plugins

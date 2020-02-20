@@ -34,7 +34,7 @@ set number
 set mouse=niv
 set cursorline
 set expandtab
-set tabstop=2
+set tabstop=4
 set shiftwidth=2
 set softtabstop=2
 set autoindent
@@ -48,6 +48,8 @@ set ttimeoutlen=0
 set notimeout
 set viewoptions=cursor,folds,slash,unix
 set wrap
+set linebreak
+set wrapmargin=8
 set tw=0
 set indentexpr=
 set foldmethod=indent
@@ -119,15 +121,15 @@ let mapleader=" "
 noremap ; :
 noremap : q:i
 noremap r <C-r>
-nnoremap x r
+nnoremap X r
 nnoremap <BS> X
 " Save & quit
 noremap Q :q<CR>
 noremap <C-q> :qa<CR>
-nnoremap S :w<CR>
+nnoremap <silent> S :w<CR>
 noremap <silent> <C-S> :wa<CR>
 inoremap <silent> <C-s> <ESC>:w<CR>i
-vnoremap <BS> x
+" vnoremap <BS> x
 inoremap <S-CR> <ESC>o
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
@@ -139,8 +141,6 @@ noremap <LEADER>st :Startify<CR>
 " noremap l u
 " Redi operations
 " noremap R <C-r>
-
-vnoremap <BS> xi
 
 " make Y to copy till the end of the line
 nnoremap Y y$
@@ -565,8 +565,8 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 color xcodedark
 hi Normal guibg=NONE ctermbg=NONE
 
-hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
+hi NonText guibg=NONE ctermbg=NONE ctermfg=NONE guifg=NONE
 
 " ===================== Start of Plugin Settings =====================
 
@@ -655,7 +655,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gu :CocCommand git.chunkUndo<CR>
 nmap <leader>rn <Plug>(coc-rename)
+
 nmap tt :CocCommand explorer<CR>
 " coc-todolist
 noremap ta :CocCommand todolist.create<CR>
