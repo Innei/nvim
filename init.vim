@@ -388,7 +388,9 @@ source ~/.config/nvim/_machine_specific.vim
 " Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
-Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
+" Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'ObserverOfTime/discord.nvim', {'do': ':UpdateRemotePlugins', 'branch': 'refactored'}
+" Plug 'Innei/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
 
@@ -450,8 +452,7 @@ Plug 'junegunn/gv.vim'
 
 " CSharp
 "Plug 'OmniSharp/omnisharp-vim'
-"Plug 'ctrlpvim/ctrlp.vim' , { 'for': ['cs', 'vim-plug'] } " omnisharp-vim dependency
-
+Plug 'ctrlpvim/ctrlp.vim'
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json'
 " Plug 'mattn/emmet-vim'
@@ -786,8 +787,8 @@ let g:fzf_binary_preview_command = 'echo "It is a binary file"'
 " ===
 " === CTRLP (Dependency for omnisharp)
 " ===
-" let g:ctrlp_map = ''
-" let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 
 
@@ -805,7 +806,6 @@ nmap mC <Plug>BookmarkClearAll
 nmap mu <Plug>BookmarkMoveUp
 nmap me <Plug>BookmarkMoveDown
 nmap <Leader>g <Plug>BookmarkMoveToLine
-let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 let g:bookmark_highlight_lines = 1
 let g:bookmark_manage_per_buffer = 1
@@ -1170,11 +1170,18 @@ let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'files',     'header': ['   Files']            },
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'files',     'header': ['   Files']            },
       \ { 'type': 'commands',  'header': ['   Commands']       },
       \ ]
-let g:startify_files_number = 5
-let g:startify_change_to_vcs_root = 1
 
+let g:startify_files_number = 10
+let g:startify_change_to_vcs_root = 1
+let g:startify_session_sort = 1
+let g:startify_relative_path = 1
+let g:startify_bookmarks = [
+            \ { 'vim': '~/.config/nvim' },
+            \ { 'zshrc': '~/.zshrc' },
+            \ ]
 
 " ===
 " === nerdcommenter
