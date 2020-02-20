@@ -1087,24 +1087,21 @@ autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
 " === vim-map-leader
 " ===
 let g:leaderMenu = {'name':  "Shortcut Menu",
-      \'SPC f':  ['Advanced find'],
-      \'SPC rc': ['Edit nvim config'],
       \'SPC Enter':  ['Clear search'],
       \'SPC dw':  ['Remove adj. dup. words'],
       \'SPC tt':  ['spc to tabs'],
       \'SPC o':  ['Open folds'],
       \'SPC q':  ['Close win below'],
-      \'SPC /':  ['Open terminal'],
       \'SPC <SPC>':  ['Find <++>'],
       \'SPC sc':  ['Toggle spell-check'],
       \'SPC gf':  ['Fold unchanged'],
-      \'SPC g-':  ['Previous hunk'],
-      \'SPC g=':  ['Next Hunk'],
       \'SPC rn':  ['Rename variable'],
       \'SPC tm':  ['Toggle table-mode'],
-      \'SPC a':  ['Calculate equation'],
-      \'SPC gi':  ['New .gitignore'],
       \'SPC gy':  ['Toggle focus mode'],
+      \'Ctrl V':  ['Open in vsplit fzf'],
+      \'Ctrl T':  ['Open in tab fzf'],
+      \'Meta P':  ['Toggle autopair'],
+      \'Meta e':  ['Move pairs after sections']
       \}
 nnoremap <silent> ? :call leaderMapper#start() "<Space>"<CR>
 let g:leaderMapperWidth = 80
