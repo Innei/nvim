@@ -389,8 +389,10 @@ source ~/.config/nvim/_machine_specific.vim
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
 " Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
+" Plug 'innei/discord.nvim', { 'do': ':UpdateRemotePlugins'}
+
 Plug 'ObserverOfTime/discord.nvim', {'do': ':UpdateRemotePlugins', 'branch': 'refactored'}
-" Plug 'Innei/discord.nvim', { 'do': ':UpdateRemotePlugins'}
+" Plug 'ObserverOfTime/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
 
@@ -1166,8 +1168,8 @@ noremap sA :AppendTabSession<CR>
 " === startify
 let g:startify_session_dir= $HOME."/.config/nvim/tmp/sessions"
 let g:startify_lists = [
-      \ { 'type': 'dir',       'header': ['   Dirs '. getcwd()] },
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'dir',       'header': ['   Dirs '. getcwd()] },
       \ { 'type': 'files',     'header': ['   Files']            },
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
       \ { 'type': 'files',     'header': ['   Files']            },
