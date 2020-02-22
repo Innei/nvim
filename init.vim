@@ -24,8 +24,8 @@ endif
 "set clipboard=unnamedplus
 let &t_ut=''
 " set autochdir
-
-
+let g:python_host_skip_check = 1
+let g:python3_host_skip_check = 1
 " ===
 " === Editor behavior
 " ===
@@ -60,7 +60,8 @@ set splitright
 autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set splitbelow
 set noshowmode
-set showcmd
+set noshowcmd
+autocmd CursorHold * :echo
 set wildmenu
 set ignorecase
 set smartcase
@@ -606,9 +607,9 @@ tnoremap <silent> R <C-\><C-n>:RnvimrResize<CR>
 " Customize multiple preset layouts
 " '{}' represents the initial layout
 let g:rnvimr_presets = [
-            \ {'width': 1.0, 'height': 1.0},
-            \ {'width': 0.500, 'height': 1.000, 'col': 0, 'row': 0},
-            \ ]
+      \ {'width': 1.0, 'height': 1.0},
+      \ {'width': 0.500, 'height': 1.000, 'col': 0, 'row': 0},
+      \ ]
 
 
 " ===
@@ -1228,9 +1229,9 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_session_sort = 1
 let g:startify_relative_path = 1
 let g:startify_bookmarks = [
-            \ { 'v': '~/.config/nvim' },
-            \ { 'z': '~/.zshrc' },
-            \ ]
+      \ { 'v': '~/.config/nvim' },
+      \ { 'z': '~/.zshrc' },
+      \ ]
 
 " ===
 " === nerdcommenter
