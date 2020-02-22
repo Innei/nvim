@@ -187,7 +187,6 @@ CoC is a modern completion, which had most vscode feature. It's all configs wrot
 | `gr`            | List references           |
 | `gi`            | List implementation       |
 | `gy`            | Go to type definition     |
-| `gu`            | Undo current git chunk    |
 | `Space` `r` `n` | Rename a variable         |
 
 - CoC Plugins
@@ -213,10 +212,11 @@ CoC is a modern completion, which had most vscode feature. It's all configs wrot
 
 | Shortcut        | Action                            |
 | --------------- | --------------------------------- |
-| `h`             | **Show git hunk at current line** |
-| `SPACE` `g` `-` | Go to previous git hunk           |
-| `SPACE` `g` `+` | Go to next git hunk               |
-| `SPACE` `g` `f` | Fold everything except hunks      |
+|  `g` `h`        | **Show git hunk at current line** |
+|  `g` `-`        | Go to previous git hunk           |
+|  `g` `+`        | Go to next git hunk               |
+|  `g` `f`        | Fold everything except hunks      |
+|  `g` `u`        | Undo git hunk under cursor        |
 
 #### Auto Pairs
 

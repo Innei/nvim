@@ -366,6 +366,10 @@ func! CompileRunGcc()
     set splitbelow
     :sp
     :term go run %
+  elseif &filetype == 'javascript'
+    set splitbelow
+    :sp
+    :term node %
   endif
 endfunc
 
@@ -385,6 +389,10 @@ if empty(glob('~/.config/nvim/_machine_specific.vim'))
 endif
 source ~/.config/nvim/_machine_specific.vim
 
+" Open the _machine_specific.vim file if it has just been created
+if has_machine_specific_file == 0
+  exec "e ~/.config/nvim/_machine_specific.vim"
+endif
 
 " Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
@@ -551,7 +559,13 @@ call plug#end()
 " experimental
 set lazyredraw
 set regexpengine=1
+
+"
+" === Switch
+"
 nnoremap sw :Switch<cr>
+let g:switch_mapping = ""
+
 " ===
 " === Set material theme style
 " ===
@@ -625,11 +639,13 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
 autocmd BufWritePost * GitGutter
-nnoremap <LEADER>gf :GitGutterFold<CR>
-nnoremap <silent> h :GitGutterPreviewHunk<CR>
+nnoremap gf :GitGutterFold<CR>
+nnoremap <silent> gh :GitGutterPreviewHunk<CR>
 nnoremap g- :GitGutterPrevHunk<CR>
 nnoremap g= :GitGutterNextHunk<CR>
 nnoremap gu :GitGutterUndoHunk<CR>
+nnoremap gs :GitGutterStageHunk<CR>
+
 " ===
 " === vim-illuminate
 " ===
@@ -1241,10 +1257,6 @@ noremap <Leader>d :DiscordUpdatePresence<CR>
 exec "nohlsearch"
 
 
-" Open the _machine_specific.vim file if it has just been created
-if has_machine_specific_file == 0
-  exec "e ~/.config/nvim/_machine_specific.vim"
-endif
 
 if has("autocmd")
   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[7 q"' | redraw!
