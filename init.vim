@@ -57,6 +57,7 @@ set foldlevel=99
 set foldenable
 set formatoptions-=cro
 set splitright
+autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set splitbelow
 set noshowmode
 set showcmd
@@ -389,9 +390,9 @@ source ~/.config/nvim/_machine_specific.vim
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
 " Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
-" Plug 'innei/discord.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'innei/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 
-Plug 'ObserverOfTime/discord.nvim', {'do': ':UpdateRemotePlugins', 'branch': 'refactored'}
+" Plug 'ObserverOfTime/discord.nvim', {'do': ':UpdateRemotePlugins', 'branch': 'refactored'}
 " Plug 'ObserverOfTime/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 " Testing my own plugin
 Plug 'theniceboy/vim-calc'
@@ -422,9 +423,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'yuki-ycino/fzf-preview.vim'
-"Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-"Plug 'junegunn/fzf'
-"Plug 'francoiscabrol/ranger.vim'
+" Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync', 'branch': 'compatible-with-mac'}
 
 " Taglist
 Plug 'liuchengxu/vista.vim'
@@ -572,6 +572,30 @@ hi Normal guibg=NONE ctermbg=NONE
 hi NonText guibg=NONE ctermbg=NONE ctermfg=NONE guifg=NONE
 
 " ===================== Start of Plugin Settings =====================
+" ===
+" === rnvimr
+" ===
+" Make Ranger replace netrw and be the file explorer
+let g:rnvimr_ex_enable = 1
+let g:rnvimr_pick_enable = 1
+nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+" Resize floating window by all preset layouts
+tnoremap <silent> R <C-\><C-n>:RnvimrResize<CR>
+
+" Customize the initial layout
+" let g:rnvimr_layout = {
+"             \ 'width': 1,
+"             \ 'height': 1,
+"             \ 'col': 0,
+"             \ 'row': 0,
+"             \ }
+" Customize multiple preset layouts
+" '{}' represents the initial layout
+let g:rnvimr_presets = [
+            \ {'width': 1.0, 'height': 1.0},
+            \ {'width': 0.500, 'height': 1.000, 'col': 0, 'row': 0},
+            \ ]
+
 
 " ===
 " === eleline.vim
@@ -603,8 +627,9 @@ let g:gitgutter_preview_win_floating = 1
 autocmd BufWritePost * GitGutter
 nnoremap <LEADER>gf :GitGutterFold<CR>
 nnoremap <silent> h :GitGutterPreviewHunk<CR>
-nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
-nnoremap <LEADER>g= :GitGutterNextHunk<CR>
+nnoremap g- :GitGutterPrevHunk<CR>
+nnoremap g= :GitGutterNextHunk<CR>
+nnoremap gu :GitGutterUndoHunk<CR>
 " ===
 " === vim-illuminate
 " ===
@@ -617,7 +642,7 @@ let g:Illuminate_ftblacklist = ['nerdtree']
 " === coc
 " ===
 " fix the most annoying bug that coc has
-silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
+" silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions']
 
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
@@ -652,13 +677,19 @@ function! s:show_documentation()
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
+" Open up coc-commands
+nnoremap <c-c> :CocCommand<CR>
+" Text Objects
+xmap kf <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap kf <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
 " Useful commands
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gu :CocCommand git.chunkUndo<CR>
 nmap <leader>rn <Plug>(coc-rename)
 
 nmap tt :CocCommand explorer<CR>
@@ -1181,8 +1212,8 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_session_sort = 1
 let g:startify_relative_path = 1
 let g:startify_bookmarks = [
-            \ { 'vim': '~/.config/nvim' },
-            \ { 'zshrc': '~/.zshrc' },
+            \ { 'v': '~/.config/nvim' },
+            \ { 'z': '~/.zshrc' },
             \ ]
 
 " ===
