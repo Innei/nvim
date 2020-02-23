@@ -68,6 +68,7 @@
     "vue"
   ],
   "prettier.eslintIntegration": true,
+  "prettier.disableLanguages": [],
   "signature.target": "echo",
   "signature.enable": true,
   "yank.enableCompletion": false,

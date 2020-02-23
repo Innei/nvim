@@ -210,8 +210,9 @@ noremap <silent> E 5j
 noremap W 5w
 noremap B 5b
 
-" set h (same as n, cursor left) to 'end of word'
-" noremap h e
+" Go next or forward word under cursor
+nnoremap \\ *
+nnoremap \| #
 
 " Ctrl + U or E will move up/down the view port without moving the cursor
 noremap <C-U> 5<C-y>
@@ -399,8 +400,13 @@ endif
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
 " Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'innei/discord.nvim', { 'do': ':UpdateRemotePlugins'}
-
+" Plug 'innei/discord.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'ananagame/vimsence', { 'on': [] }
+augroup discord
+  au!
+  au InsertEnter * call plug#load('vimsence') | au! discord
+  au InsertEnter * :call UpdatePresence()
+augroup END
 " Plug 'ObserverOfTime/discord.nvim', {'do': ':UpdateRemotePlugins', 'branch': 'refactored'}
 " Plug 'ObserverOfTime/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 " Testing my own plugin
@@ -416,14 +422,13 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'liuchengxu/space-vim-theme'
 "Plug 'morhetz/gruvbox'
 "Plug 'ayu-theme/ayu-vim'
-"Plug 'rakr/vim-one'
+" Plug 'rakr/vim-one'
 "Plug 'mhartington/oceanic-next'
 "Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'ajmwagar/vim-deus'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
-Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 Plug 'RRethy/vim-illuminate'
 Plug 'sakshamgupta05/vim-todo-highlight'
 " File navigation
@@ -444,7 +449,6 @@ Plug 'liuchengxu/vista.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
-" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " Undo Tree
@@ -464,9 +468,9 @@ Plug 'junegunn/gv.vim'
 " CSharp
 "Plug 'OmniSharp/omnisharp-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+
 " HTML, CSS, JavaScript, PHP, JSON, etc.
-Plug 'elzr/vim-json'
-" Plug 'mattn/emmet-vim'
+Plug 'elzr/vim-json', { 'for': ['vim-plug', 'json'] }
 " Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
@@ -476,7 +480,7 @@ Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascrip
 " Plug 'jaxbot/browserlink.vim'
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
-Plug 'diepm/vim-rest-console'
+Plug 'diepm/vim-rest-console', { 'for': ['vim-plug', 'rest'] }
 " " Python
 " " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 " " Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
@@ -486,12 +490,11 @@ Plug 'diepm/vim-rest-console'
 " Plug 'tweekmonster/braceless.vim'
 "
 " Markdown
-" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
-Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'theniceboy/bullets.vim'
 
 " Editor Enhancement
-"Plug 'Raimondi/delimitMate'
+Plug 'airblade/vim-rooter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
 " Plug 'mg979/vim-visual-multi'
@@ -506,19 +509,18 @@ Plug 'easymotion/vim-easymotion'
 Plug 'Konfekt/FastFold'
 Plug 'junegunn/vim-peekaboo'
 Plug 'jesseleite/vim-noh'
+Plug 'skywind3000/asyncrun.vim'
 " Input Method Autoswitch
-"Plug 'rlue/vim-barbaric' " slowing down vim-multiple-cursors
 
 " Formatter
 Plug 'Chiel92/vim-autoformat'
 
 " For general writing
-Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim', { 'for': ['vim-plug', 'markdown'] }
 "Plug 'reedes/vim-wordy'
 "Plug 'ron89/thesaurus_query.vim'
 
 " Bookmarks
-"Plug 'kshenoy/vim-signature'
 Plug 'MattesGroeger/vim-bookmarks'
 
 " Find & Replace
@@ -529,14 +531,8 @@ Plug 'osyo-manga/vim-anzu'
 "Plug 'KabbAmine/zeavim.vim' " <LEADER>z to find doc
 
 " Mini Vim-APP
-"Plug 'voldikss/vim-floaterm'
-" Plug 'liuchengxu/vim-clap'
-"Plug 'jceb/vim-orgmode'
 Plug 'mhinz/vim-startify'
 Plug 'theniceboy/vim-leader-mapper'
-
-" Vim Applications
-Plug 'itchyny/calendar.vim'
 
 " Other visual enhancement
 Plug 'ryanoasis/vim-devicons'
@@ -550,12 +546,10 @@ Plug 'makerj/vim-pdf'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'kana/vim-textobj-user'
 Plug 'roxma/nvim-yarp'
-"Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 
 " ColorScheme
 Plug 'kaicataldo/material.vim'
 call plug#end()
-
 
 " experimental
 set lazyredraw
@@ -572,15 +566,24 @@ let g:switch_mapping = ""
 " ===
 let g:material_theme_style = 'palenight'
 let g:material_terminal_italics = 1
-" colorscheme material
+colorscheme material
+" colorscheme one
+" let g:one_allow_italics = 1
 " ===
 " === Dress up my vim
 " ===
 set termguicolors " enable true colors support
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-"set background=dark
+if (empty($TMUX))
+  if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+set background=dark
 
-color xcodedark
+" color xcodedark
 hi Normal guibg=NONE ctermbg=NONE
 
 "hi SpecialKey ctermfg=blue guifg=grey70
@@ -623,7 +626,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_extensions = ['tabline', 'hunks', 'branch', 'undotree', 'coc', 'netrw', 'tabline', 'vista', 'term']
+let g:airline_extensions = ['tabline', 'hunks', 'branch', 'undotree', 'coc', 'netrw', 'vista', 'term']
 let g:airline#extensions#coc#enabled = 1
 " let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#tabline#show_tab_count = 1
@@ -646,6 +649,18 @@ nnoremap g- :GitGutterPrevHunk<CR>
 nnoremap g= :GitGutterNextHunk<CR>
 nnoremap gu :GitGutterUndoHunk<CR>
 nnoremap gs :GitGutterStageHunk<CR>
+
+" ===
+" === Git-fugitive (code review)
+" ===
+nnoremap <leader>gs :Gdiffsplit<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gm :Gmerge<CR>
+nnoremap <leader>gr :Grebase<CR>
+nnoremap <leader>gp :Gpush<CR>
+nnoremap <leader>gf :Gfetch<CR>
+nnoremap <leader>gl :Gpull<CR>
+nnoremap <leader>ga :Gwrite<CR>
 
 " ===
 " === vim-illuminate
@@ -906,10 +921,6 @@ set ignorecase smartcase
 " === vim-calc
 " ===
 noremap <LEADER>a :call Calc()<CR>
-" Testing
-"if !empty(glob('~/Github/vim-calc/vim-calc.vim'))
-"source ~/Github/vim-calc/vim-calc.vim
-"endif
 
 
 " ===
@@ -978,32 +989,6 @@ let g:vimtex_mappings_enabled = 0
 let g:vimtex_text_obj_enabled = 0
 let g:vimtex_motion_enabled = 0
 let maplocalleader=' '
-
-
-" ===
-" === vim-calendar
-" ===
-"noremap \c :Calendar -position=here<CR>
-noremap \\ :Calendar -view=clock -position=here<CR>
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-augroup calendar-mappings
-  autocmd!
-  " diamond cursor
-  autocmd FileType calendar nmap <buffer> u <Plug>(calendar_up)
-  autocmd FileType calendar nmap <buffer> n <Plug>(calendar_left)
-  autocmd FileType calendar nmap <buffer> e <Plug>(calendar_down)
-  autocmd FileType calendar nmap <buffer> i <Plug>(calendar_right)
-  autocmd FileType calendar nmap <buffer> <c-u> <Plug>(calendar_move_up)
-  autocmd FileType calendar nmap <buffer> <c-n> <Plug>(calendar_move_left)
-  autocmd FileType calendar nmap <buffer> <c-e> <Plug>(calendar_move_down)
-  autocmd FileType calendar nmap <buffer> <c-i> <Plug>(calendar_move_right)
-  autocmd FileType calendar nmap <buffer> k <Plug>(calendar_start_insert)
-  autocmd FileType calendar nmap <buffer> K <Plug>(calendar_start_insert_head)
-  " unmap <C-n>, <C-p> for other plugins
-  autocmd FileType calendar nunmap <buffer> <C-n>
-  autocmd FileType calendar nunmap <buffer> <C-p>
-augroup END
 
 
 " ===
@@ -1270,5 +1255,4 @@ if has("autocmd")
   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 endif
 set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
-set guicursor=v:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
 set guicursor=n:block-blinkon400
