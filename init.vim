@@ -213,6 +213,8 @@ noremap B 5b
 " Go next or forward word under cursor
 nnoremap \\ *
 nnoremap \| #
+inoremap <M-d> <ESC>*i
+nnoremap <M-d> *ve
 
 " Ctrl + U or E will move up/down the view port without moving the cursor
 noremap <C-U> 5<C-y>
@@ -419,13 +421,8 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'bling/vim-bufferline'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
-" Plug 'liuchengxu/space-vim-theme'
-"Plug 'morhetz/gruvbox'
-"Plug 'ayu-theme/ayu-vim'
-" Plug 'rakr/vim-one'
-"Plug 'mhartington/oceanic-next'
-"Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'ajmwagar/vim-deus'
+Plug 'joshdick/onedark.vim'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
@@ -437,8 +434,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'yuki-ycino/fzf-preview.vim'
-" Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync', 'branch': 'compatible-with-mac'}
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " Taglist
 Plug 'liuchengxu/vista.vim'
@@ -462,6 +458,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 " Plug 'zivyangll/git-blame.vim'
+Plug 'tveskag/nvim-blame-line'
 " Tex
 "Plug 'lervag/vimtex'
 
@@ -566,9 +563,9 @@ let g:switch_mapping = ""
 " ===
 let g:material_theme_style = 'palenight'
 let g:material_terminal_italics = 1
-colorscheme material
-" colorscheme one
-" let g:one_allow_italics = 1
+" colorscheme material
+let g:onedark_terminal_italics = 1
+colorscheme onedark
 " ===
 " === Dress up my vim
 " ===
@@ -588,8 +585,30 @@ hi Normal guibg=NONE ctermbg=NONE
 
 "hi SpecialKey ctermfg=blue guifg=grey70
 hi NonText guibg=NONE ctermbg=NONE ctermfg=NONE guifg=NONE
-
 " ===================== Start of Plugin Settings =====================
+
+" ===
+" === AsyncRun
+" ===
+let g:asyncrun_open = 8
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.bzr', '_darcs', 'build.xml']
+let g:asyncrun_shell = 'zsh -c'
+let g:asyncrun_status = ''
+nnoremap <leader><leader> :AsyncRun -cwd=<root> 
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+function! QuickFix_toggle()
+    for i in range(1, winnr('$'))
+        let bnum = winbufnr(i)
+        if getbufvar(bnum, '&buftype') == 'quickfix'
+            cclose
+            return
+        endif
+    endfor
+    copen
+endfunction
+
+nnoremap <silent> cc :call QuickFix_toggle()<cr>
 " ===
 " === rnvimr
 " ===
@@ -601,12 +620,13 @@ nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR
 tnoremap <silent> R <C-\><C-n>:RnvimrResize<CR>
 
 " Customize the initial layout
-" let g:rnvimr_layout = {
-"             \ 'width': 1,
-"             \ 'height': 1,
-"             \ 'col': 0,
-"             \ 'row': 0,
-"             \ }
+let g:rnvimr_layout = {
+            \'relative': 'editor',
+            \ 'width': 100,
+            \ 'height': 100,
+            \ 'col': 0,
+            \ 'row': 0
+            \ }
 " Customize multiple preset layouts
 " '{}' represents the initial layout
 let g:rnvimr_presets = [
@@ -635,6 +655,8 @@ let g:airline#extensions#vista#enabled = 1
 let g:airline#extensions#bookmark#enabled = 1
 let g:airline_section_c = airline#section#create(['%f','   ','%{get(b:,''coc_current_function'','''')}'])
 let g:airline_section_b = airline#section#create(['%{get(b:,''coc_git_status'','''')}','%{get(g:,''coc_git_status'','''')}'])
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+
 " ==
 " == GitGutter
 " ==
@@ -661,7 +683,10 @@ nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gf :Gfetch<CR>
 nnoremap <leader>gl :Gpull<CR>
 nnoremap <leader>ga :Gwrite<CR>
+nnoremap <leader>gg :G<CR>
 
+" autocmd BufEnter * EnableBlameLine
+let g:blameLineVirtualTextPrefix = '     ~ '
 " ===
 " === vim-illuminate
 " ===
@@ -1256,3 +1281,4 @@ if has("autocmd")
 endif
 set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
 set guicursor=n:block-blinkon400
+set guicursor=v:block
