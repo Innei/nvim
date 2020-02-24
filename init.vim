@@ -423,7 +423,7 @@ augroup END
 " Plug 'ObserverOfTime/discord.nvim', {'do': ':UpdateRemotePlugins', 'branch': 'refactored'}
 " Plug 'ObserverOfTime/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 " Testing my own plugin
-Plug 'theniceboy/vim-calc'
+" Plug 'theniceboy/vim-calc'
 
 " Pretty Dress
 " Plug 'theniceboy/eleline.vim'
@@ -486,6 +486,7 @@ Plug 'ludovicchabant/vim-gutentags', { 'for': ['javascript', 'vue', 'typescript'
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'yarn', 'for': ['javascript', 'vue', 'typescript', 'javascriptreact', 'typescriptreact']}
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags 
 Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'yardnsm/vim-import-cost', { 'do': 'yarn', 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'] }
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 Plug 'diepm/vim-rest-console', { 'for': ['vim-plug', 'rest'] }
@@ -713,7 +714,7 @@ let g:Illuminate_ftblacklist = ['nerdtree']
 " ===
 " fix the most annoying bug that coc has
 " silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions', 'coc-spell-checker', 'coc-post', 'coc-go', 'coc-template', 'coc-marketplace', 'coc-calc']
 
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
@@ -776,6 +777,17 @@ nmap ts <Plug>(coc-translator-p)
 noremap \d :CocList translators<CR>
 
 nnoremap <silent> <leader>b :CocCommand actions.open<cr>
+
+" ===
+" === import cost
+" ===
+augroup import_cost_auto_run
+  autocmd!
+  " autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
+  " autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
+  autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCostSingle
+augroup END
+
 " ===
 " === MarkdownPreview
 " ===
@@ -956,7 +968,7 @@ let g:far#source='ag'
 " ===
 " === vim-calc
 " ===
-noremap <LEADER>a :call Calc()<CR>
+" noremap <LEADER>a :call Calc()<CR>
 
 
 " ===
