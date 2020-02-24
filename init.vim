@@ -144,6 +144,7 @@ nnoremap X r
 nnoremap <BS> X
 " Save & quit
 noremap Q :q<CR>
+command! -nargs=0 Q :q!
 noremap <C-q> :qa<CR>
 nnoremap <silent> S :w<CR>
 noremap <silent> <C-S> :wa<CR>
@@ -437,7 +438,7 @@ Plug 'joshdick/onedark.vim'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
-Plug 'RRethy/vim-illuminate'
+" Plug 'RRethy/vim-illuminate'
 Plug 'sakshamgupta05/vim-todo-highlight'
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -703,25 +704,17 @@ let g:blameLineVirtualTextPrefix = '     ~ '
 " ===
 " === vim-illuminate
 " ===
-let g:Illuminate_delay = 750
-hi illuminatedWord cterm=underline gui=underline
-" hi illuminatedWord cterm=inverse gui=inverse
-let g:Illuminate_highlightUnderCursor = 0
-let g:Illuminate_ftblacklist = ['nerdtree']
-" ===
+" let g:Illuminate_delay = 750
+" hi illuminatedWord cterm=underline gui=underline
+" let g:Illuminate_highlightUnderCursor = 0
+" let g:Illuminate_ftblacklist = ['nerdtree']
+" " ===
 " === coc
 " ===
 " fix the most annoying bug that coc has
 " silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions']
 
-"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" use <tab> for trigger completion and navigate to the next complete item
-
-" inoremap <silent><expr> <Tab>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 inoremap <silent><expr> <TAB>
@@ -776,6 +769,21 @@ nmap ts <Plug>(coc-translator-p)
 noremap \d :CocList translators<CR>
 
 nnoremap <silent> <leader>b :CocCommand actions.open<cr>
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+xmap <leader>f  <Plug>(coc-format-selected)
 " ===
 " === MarkdownPreview
 " ===
@@ -951,7 +959,7 @@ let g:multi_cursor_quit_key = '<Esc>'
 " ===
 " === Far.vim
 " ===
-noremap <LEADER>f :F  %<left>
+nnoremap <LEADER>f :F  %<left><left>
 let g:far#source='ag'
 " ===
 " === vim-calc
@@ -1073,7 +1081,7 @@ nnoremap <silent> \f :retab<CR>:Autoformat<CR>
 " ===
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nnoremap <leader>p :Prettier<CR>
+nnoremap <leader>p :Format<CR>
 
 " ===
 " === Colorizer
