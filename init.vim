@@ -489,7 +489,7 @@ Plug 'AndrewRadev/tagalong.vim' " auto rename tags
 Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'yardnsm/vim-import-cost', { 'do': 'yarn', 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'] }
 Plug 'nicwest/vim-http', { 'for': 'http' }
-
+Plug 'posva/vim-vue', { 'for': 'vue' }
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
@@ -711,7 +711,7 @@ let g:blameLineVirtualTextPrefix = '     ~ '
 " hi illuminatedWord cterm=underline gui=underline
 " let g:Illuminate_highlightUnderCursor = 0
 " let g:Illuminate_ftblacklist = ['nerdtree']
-" " ===
+" ===
 " === coc
 " ===
 " fix the most annoying bug that coc has
@@ -793,13 +793,17 @@ xmap <leader>f  <Plug>(coc-format-selected)
 " ===
 " === import cost
 " ===
-augroup import_cost_auto_run
-  autocmd!
+" augroup import_cost_auto_run
+  " autocmd!
   " autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
   " autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
-  autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCostSingle
-augroup END
+  " autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCostSingle
+" augroup END
 
+" ===
+" === Vue
+" ===
+let g:vue_pre_processors = ['typescript', 'scss']
 
 " ===
 " === MarkdownPreview
@@ -1175,7 +1179,7 @@ let g:r_syntax_folding = 1
 let g:rust_fold = 1
 let g:php_folding = 1
 
-let g:tagalong_additional_filetypes = ['vue', 'javascript']
+let g:tagalong_additional_filetypes = ['vue', 'javascript', 'javascriptreact', 'typescriptreact']
 
 " ===
 " === vim-easy-align

@@ -216,5 +216,10 @@
     }
   },
   "snippets.textmateSnippetsRoots": [],
-  "coc.githubUsers.githubAccessToken": "c6b281f8f5507d2bb036872f378bac6aa998a091"
+  "coc.githubUsers.githubAccessToken": "c6b281f8f5507d2bb036872f378bac6aa998a091",
+  "vetur.useWorkspaceDependencies": true,
+  "vetur.format.enable": false,
+  "emmet.includeLanguages": {"vue": "html", "javascript": "javascriptreact", "typescript": "typescriptreact"},
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.optimizeStylesheetParsing": true
 }
