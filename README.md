@@ -70,8 +70,6 @@ Python:
 | `→`        | Cursor right                                              |
 | `F`        | Cursor up 5 terminal lines                                |
 | `E`        | Cursor down 5 terminal lines                              |
-| `N`        | Cursor to the start of the line                           |
-| `I`        | Cursor to the end of the line                             |
 | `Ctrl` `u` | Move the view port up 5 lines without moving the cursor   |
 | `Ctrl` `e` | Move the view port down 5 lines without moving the cursor |
 | `W`        | Move cursor five words forward                            |
@@ -81,6 +79,8 @@ Python:
 | `<M-d>`    | Select current under cursor word                          |
 | `\` `\`    | Go next word which equal with current cursor under word   |
 | `\` `*`    | Same as above, but go forward                             |
+| `0`        | Equal to  `^`                                             |
+| `)`        | Equal to  `$`                                             |
 
 #### 1.3 Remapped Insert Mode Keys
 
@@ -88,8 +88,10 @@ Python:
 | ---------- | -------------------------------------------------------------------- |
 | `Ctrl` `a` | Move cursor to the end of the line                                   |
 | `Ctrl` `u` | Move the character on the right of the cursor to the end of the line |
-| `<M-d>`    | Select current (next) under cursor word                              |
-| `<M-D>`    | Select prev some word which like under cursor word                   |
+| `Meta` `d` | Select current (next) under cursor word                              |
+| `Meta` `D` | Select prev some word which like under cursor word                   |
+| `Meta` `z` | Move cursor to beginning of non-whitespace characters                |
+| `Meta` `x` | Move cursor to ending of characters                                  |
 
 #### 1.4 Remapped Text Manipulating Commands in Normal Mode
 

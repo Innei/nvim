@@ -128,7 +128,6 @@ let g:terminal_color_14 = '#9AEDFE'
 
 " NETRW
 let g:netrw_winsize = 24
-let g:NetrwIsOpen = 0
 
 noremap <C-b> :NERDTreeToggle<CR>
 
@@ -141,6 +140,9 @@ noremap ; :
 noremap : q:i
 noremap r <C-r>
 nnoremap X r
+" map 0 To the first non-blank character of the line.
+nnoremap 0 ^
+nnoremap ) $
 nnoremap <BS> X
 " Save & quit
 noremap Q :q<CR>
@@ -149,6 +151,8 @@ noremap <C-q> :qa<CR>
 nnoremap <silent> S :w<CR>
 noremap <silent> <C-S> :wa<CR>
 inoremap <silent> <C-s> <ESC>:w<CR>i
+inoremap <M-z> <ESC>^i
+inoremap <M-x> <ESC>$a
 " vnoremap <BS> x
 inoremap <S-CR> <ESC>o
 " Open the vimrc file anytime
@@ -509,8 +513,8 @@ Plug 'theniceboy/bullets.vim'
 " Plug 'liuchengxu/vim-clap'
 Plug 'airblade/vim-rooter'
 Plug 'jiangmiao/auto-pairs'
-Plug 'terryma/vim-multiple-cursors'
-" Plug 'mg979/vim-visual-multi'
+" Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
@@ -968,15 +972,23 @@ endfunc
 " ==
 " == vim-multiple-cursor
 " ==
-let g:multi_cursor_use_default_mapping = 0
-let g:multi_cursor_start_word_key = '<c-d>'
-let g:multi_cursor_select_all_word_key = '<a-k>'
-let g:multi_cursor_start_key = 'g<c-d>'
-let g:multi_cursor_select_all_key = 'g<a-k>'
-let g:multi_cursor_next_key = '<c-d>'
-let g:multi_cursor_prev_key = '<c-p>'
-let g:multi_cursor_skip_key = '<C-s>'
-let g:multi_cursor_quit_key = '<Esc>'
+" let g:multi_cursor_use_default_mapping = 0
+" let g:multi_cursor_start_word_key = '<c-d>'
+" let g:multi_cursor_select_all_word_key = '<a-k>'
+" let g:multi_cursor_start_key = 'g<c-d>'
+" let g:multi_cursor_select_all_key = 'g<a-k>'
+" let g:multi_cursor_next_key = '<c-d>'
+" let g:multi_cursor_prev_key = '<c-p>'
+" let g:multi_cursor_skip_key = '<C-s>'
+" let g:multi_cursor_quit_key = '<Esc>'
+" ===
+" === vim-visual-multi
+" ===
+let g:VM_default_mappings = 0
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+
 " ===
 " === Far.vim
 " ===
