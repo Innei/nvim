@@ -85,6 +85,23 @@ set updatetime=1000
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+" ===
+" === Ignore File
+" ===
+set wildignore+=*node_modules/**
+set wildignore=*.o,*.obj,*~
+set wildignore+=*.git*
+set wildignore+=*.meteor*
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*cache*
+set wildignore+=*logs*
+set wildignore+=*node_modules/**
+set wildignore+=*DS_Store*
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
 
 " ===
 " === Terminal Behaviors
@@ -138,11 +155,6 @@ noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 " Open Startify
 noremap <LEADER>st :Startify<CR>
-
-" Undo operations
-" noremap l u
-" Redi operations
-" noremap R <C-r>
 
 " make Y to copy till the end of the line
 nnoremap Y y$
@@ -199,10 +211,8 @@ inoremap <Home> <esc>^i
 noremap <silent> F 5k
 noremap <silent> E 5j
 
-" N key: go to the start of the line
-"noremap <silent> N 0
-" I key: go to the end of the line
-"noremap <silent> I $
+xnoremap <silent> , 0
+xnoremap <silent> . $
 
 " Faster in-line navigation
 noremap W 5w
@@ -469,13 +479,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json', { 'for': ['vim-plug', 'json'] }
-" Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-" Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
-Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-" Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-" Plug 'jaxbot/browserlink.vim'
+Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'ludovicchabant/vim-gutentags', { 'for': ['javascript', 'vue', 'typescript'] }
+Plug 'kristijanhusak/vim-js-file-import', {'do': 'yarn', 'for': ['javascript', 'vue', 'typescript', 'javascriptreact', 'typescriptreact']}
+Plug 'AndrewRadev/tagalong.vim' " auto rename tags 
+Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 Plug 'diepm/vim-rest-console', { 'for': ['vim-plug', 'rest'] }
@@ -492,6 +502,7 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' 
 Plug 'theniceboy/bullets.vim'
 
 " Editor Enhancement
+" Plug 'liuchengxu/vim-clap'
 Plug 'airblade/vim-rooter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
@@ -501,6 +512,7 @@ Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
 Plug 'junegunn/vim-after-object' " da= to delete what's after =
+Plug 'wellle/targets.vim'
 Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
 "Plug 'tpope/vim-capslock'  " Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
@@ -939,10 +951,8 @@ let g:multi_cursor_quit_key = '<Esc>'
 " ===
 " === Far.vim
 " ===
-noremap <LEADER>f :F  **/*<left><left><left><left><left>
-set wildignore+=*/node_modules/*
+noremap <LEADER>f :F  %<left>
 let g:far#source='ag'
-set ignorecase smartcase
 " ===
 " === vim-calc
 " ===
@@ -1130,6 +1140,7 @@ let g:r_syntax_folding = 1
 let g:rust_fold = 1
 let g:php_folding = 1
 
+let g:tagalong_additional_filetypes = ['vue', 'javascript']
 
 " ===
 " === vim-easy-align
