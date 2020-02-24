@@ -78,6 +78,9 @@ Python:
 | `B`        | Move cursor five words forward                            |
 | `,`        | Back to prev edited position                              |
 | `.`        | Forward to next edited position                           |
+| `<M-d>`    | Select current under cursor word                          |
+| `\` `\`    | Go next word which equal with current cursor under word   |
+| `\` `*`    | Same as above, but go forward                             |
 
 #### 1.3 Remapped Insert Mode Keys
 
@@ -85,6 +88,8 @@ Python:
 | ---------- | -------------------------------------------------------------------- |
 | `Ctrl` `a` | Move cursor to the end of the line                                   |
 | `Ctrl` `u` | Move the character on the right of the cursor to the end of the line |
+| `<M-d>`    | Select current (next) under cursor word                              |
+| `<M-D>`    | Select prev some word which like under cursor word                   |
 
 #### 1.4 Remapped Text Manipulating Commands in Normal Mode
 
@@ -164,7 +169,7 @@ Use the **Shift + arrow keys** to resize the current window.
 
 | Shortcut                        | Action             |
 | ------------------------------- | ------------------ |
-| `Ctrl` `\` | Toggle prev buffer |
+| `Ctrl` `\`                      | Toggle prev buffer |
 | `Ctrl` `]`                      | Toggle next buffer |
 
 ### 5 Terminal Keyboard Shortcuts
@@ -173,6 +178,19 @@ Use the **Shift + arrow keys** to resize the current window.
 | ----------- | ----------------------------------------------------------- |
 | `SPACE` `.` | Create a new split with a terminal below the current window |
 | `Ctrl` `n`  | Escape from terminal input mode                             |
+
+### 6 Vim Object Action
+
+**pairs**: `[` `]` `(` `)` `{` `}` etc.
+
+| Shortcuts       | Action                                                      |
+|-----------------|-------------------------------------------------------------|
+| `c` `i` + pairs | Remove section and re-edit section in next section in pairs |
+| `c` `I` + pairs | Same as above, but ignore surrounding space                 |
+| `v` `i` + pairs | Select section which in pairs                               |
+| `v` `I` + pairs | Same as above, but ignore surrounding space                 |
+
+Other: See [targets.vim](https://github.com/wellle/targets.vim)
 
 ## Plugins
 
@@ -208,15 +226,24 @@ CoC is a modern completion, which had most vscode feature. It's all configs wrot
 | `z` `h`           | Toggle hidden       |
 | `,` (in NERDTREE) | Toggle menu         |
 
-#### GitGutter
+#### rnvimr
+
+| Shortcuts | Action      |
+|-----------|-------------|
+| `R`       | Open Ranger |
+
+#### Git Action
 
 | Shortcut        | Action                            |
 | --------------- | --------------------------------- |
-|  `g` `h`        | **Show git hunk at current line** |
-|  `g` `-`        | Go to previous git hunk           |
-|  `g` `+`        | Go to next git hunk               |
-|  `g` `f`        | Fold everything except hunks      |
-|  `g` `u`        | Undo git hunk under cursor        |
+| `g` `h`         | **Show git hunk at current line** |
+| `g` `-`         | Go to previous git hunk           |
+| `g` `+`         | Go to next git hunk               |
+| `g` `f`         | Fold everything except hunks      |
+| `g` `u`         | Undo git hunk under cursor        |
+| `g` `s`         | Stage this git hunk               |
+| `<Space>` `gg`  | Open git stash and commit         |
+| `<Space>` `gp`  | Do git push                       |
 
 #### Auto Pairs
 
@@ -241,11 +268,13 @@ See `:help table-mode.txt` for more.
 | `T` or `j` | toggle function and variable list   |
 | `Ctrl` `t` | open function/class/variable finder |
 
-#### FZF - the fuzzy file finder
+#### Fuzzy find
 
-| Shortcut   | Action              |
-| ---------- | ------------------- |
-| `Ctrl` `f` | **Active FZF (ag)** |
+| Shortcut   | Action                     |
+| ---------- | -------------------        |
+| `Ctrl` `f` | **Active FZF (ag)**        |
+| `z` `/`    | Fuzzy find in current file |
+| `z` `'`    | Fuzzy find with easymotion |
 
 #### Undotree
 
@@ -259,7 +288,6 @@ See `:help table-mode.txt` for more.
 
 | Shortcut    | Action                          | Command |
 | ----------- | ------------------------------- | ------- |
-| `m<letter>` | Add/remove mark at current line |         |
 | `ma`        | Add mark at current line        |         |
 | `m.`        | Move to next mark               |         |
 | `m,`        | Move to prev mark               |         |
@@ -278,9 +306,6 @@ For more commands, see [here](https://github.com/MattesGroeger/vim-bookmarks#usa
 | `Ctrl`+`p` | Select previous word                |
 | `Ctrl`+`x` | Skip word                           |
 | `Esc`      | Quit mutiple cursors                |
-
-#### vim-rest-console
-
 
 
 #### vim-surround
@@ -317,7 +342,7 @@ To add surround (`string` -> `"string"`):
 
 | Shortcut        | Action                                      |
 | --------------- | ------------------------------------------- |
-| `SPACE` `f`     | Find in the current workspace (required ag) |
+| `SPACE` `f`     | Find in the current file (required ag)          |
 | `SPACE` `f` `r` | Find and replace                            |
 
 #### fzf-gitignore
@@ -341,7 +366,7 @@ To add surround (`string` -> `"string"`):
 
 #### Goyo - Work without distraction
 
-    Press `g` `y` to toggle Goyo
+    Press `g` `y` to toggle Goyo. (For markdown)
 
 #### nerdcommenter - Quick comment
 
@@ -352,10 +377,6 @@ To add surround (`string` -> `"string"`):
 | `SPACE + cc` | comment lines.                    |
 | `SPACE + cy` | copy code lines and then comment. |
 | `SPACE + cs` | comment in document block.        |
-
-#### discord.nvim RPC
-
-    Press `SPACE` `d` to update Discord present editing file.
 
 ## Custom Snippets
 

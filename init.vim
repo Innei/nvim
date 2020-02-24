@@ -447,7 +447,9 @@ Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
 " Taglist
 Plug 'liuchengxu/vista.vim'
 
@@ -690,7 +692,7 @@ nnoremap gs :GitGutterStageHunk<CR>
 " ===
 " === Git-fugitive (code review)
 " ===
-nnoremap <leader>gs :Gdiffsplit<CR>
+nnoremap <leader>gs :Gdiffsplit<CR><C-w>b<C-w>H
 nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gm :Gmerge<CR>
 nnoremap <leader>gr :Grebase<CR>
@@ -1131,8 +1133,18 @@ nnoremap U <Plug>(easymotion-k)
 "nmap 'l <Plug>(easymotion-overwin-line)
 "map  'w <Plug>(easymotion-bd-w)
 "nmap 'w <Plug>(easymotion-overwin-w)
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
 
-
+noremap <silent><expr> z' incsearch#go(<SID>config_easyfuzzymotion())
+map  z/ <Plug>(incsearch-fuzzy-/)
 " ===
 " === goyo
 " ===
