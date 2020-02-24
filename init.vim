@@ -474,8 +474,6 @@ Plug 'tveskag/nvim-blame-line'
 " Tex
 "Plug 'lervag/vimtex'
 
-" CSharp
-"Plug 'OmniSharp/omnisharp-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
@@ -488,9 +486,11 @@ Plug 'kristijanhusak/vim-js-file-import', {'do': 'yarn', 'for': ['javascript', '
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags 
 Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'yardnsm/vim-import-cost', { 'do': 'yarn', 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'] }
+Plug 'nicwest/vim-http', { 'for': 'http' }
+
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
-Plug 'diepm/vim-rest-console', { 'for': ['vim-plug', 'rest'] }
+
 " " Python
 " " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 " " Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
@@ -498,7 +498,7 @@ Plug 'diepm/vim-rest-console', { 'for': ['vim-plug', 'rest'] }
 " "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 " "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 " Plug 'tweekmonster/braceless.vim'
-"
+
 " Markdown
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'theniceboy/bullets.vim'
@@ -1123,7 +1123,7 @@ let g:EasyMotion_smartcase = 1
 map ' <Plug>(easymotion-bd-f)
 nmap ' <Plug>(easymotion-bd-f)
 "map E <Plug>(easymotion-j)
-"map U <Plug>(easymotion-k)
+nnoremap U <Plug>(easymotion-k)
 "nmap f <Plug>(easymotion-overwin-f)
 "map \; <Plug>(easymotion-prefix)
 "nmap ' <Plug>(easymotion-overwin-f2)
