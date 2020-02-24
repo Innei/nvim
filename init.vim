@@ -169,8 +169,6 @@ noremap <silent> l za
 
 " Open up lazygit
 noremap \g :term lazygit<CR>
-noremap <c-g> :term lazygit<CR>
-
 
 " ===
 " === Cursor Movement
@@ -213,9 +211,12 @@ noremap B 5b
 " Go next or forward word under cursor
 nnoremap \\ *
 nnoremap \| #
-inoremap <M-d> <ESC>*i
-nnoremap <M-d> *ve
-
+" select word
+inoremap <M-d> <ESC>viw<C-g>
+nnoremap <M-d> viw<C-g>
+snoremap <M-d> <ESC>*ve<C-g>
+snoremap <M-D> <ESC>#ve<C-g>
+snoremap <ESC> <ESC>:noh<CR>
 " Ctrl + U or E will move up/down the view port without moving the cursor
 noremap <C-U> 5<C-y>
 noremap <C-E> 5<C-e>
