@@ -37,6 +37,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=2
 set softtabstop=2
+set backspace=2
 set autoindent
 set smartindent
 set smarttab
@@ -60,8 +61,8 @@ set splitright
 autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set splitbelow
 set noshowmode
-set noshowcmd
-autocmd CursorHold * :echo
+set showcmd
+" autocmd CursorHold * :echo
 set wildmenu
 set ignorecase
 set smartcase
@@ -81,7 +82,7 @@ if has('persistent_undo')
   set undodir=~/.config/nvim/tmp/undo,.
 endif
 " set colorcolumn=80
-set updatetime=1000
+set updatetime=600
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
@@ -145,7 +146,7 @@ nnoremap 0 ^
 nnoremap ) $
 nnoremap <BS> X
 " Save & quit
-noremap Q :q<CR>
+nnoremap Q :q<CR>
 command! -nargs=0 Q :q!
 noremap <C-q> :qa<CR>
 nnoremap <silent> S :w<CR>
@@ -491,7 +492,7 @@ Plug 'ludovicchabant/vim-gutentags', { 'for': ['javascript', 'vue', 'typescript'
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'yarn', 'for': ['javascript', 'vue', 'typescript', 'javascriptreact', 'typescriptreact']}
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags 
 Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-Plug 'yardnsm/vim-import-cost', { 'do': 'yarn', 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'] }
+" Plug 'yardnsm/vim-import-cost', { 'do': 'yarn', 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'] }
 Plug 'nicwest/vim-http', { 'for': 'http' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 " Go
@@ -667,17 +668,37 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_extensions = ['tabline', 'hunks', 'branch', 'undotree', 'coc', 'netrw', 'vista', 'term']
-let g:airline#extensions#coc#enabled = 1
+let g:airline_extensions = ['tabline', 'netrw', 'vista', 'coc']
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+
+
 " let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#tabline#show_tab_count = 1
-let g:airline#extensions#term#enabled = 1
 let g:airline#extensions#vista#enabled = 1
-let g:airline#extensions#bookmark#enabled = 1
-let g:airline_section_c = airline#section#create(['%f','   ','%{get(b:,''coc_current_function'','''')}'])
+let g:airline_section_c = airline#section#create(['%f  ' , '%{get(b:,''coc_current_function'','''')}'])
 let g:airline_section_b = airline#section#create(['%{get(b:,''coc_git_status'','''')}','%{get(g:,''coc_git_status'','''')}'])
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  if get(info, 'information', 0)
+    call add(msgs, 'I' . info['information'])
+  endif
+  if get(info, 'hint', 0) 
+    call add(msgs, 'H' . info['hint'])
+  endif
+  return join(msgs, ' ')
+endfunction
+let g:airline_section_warning = airline#section#create_right(['%{StatusDiagnostic()}'])
+" let g:airline_section_warning = airline#section#create_right(['%{coc#status()}'])
 " ==
 " == GitGutter
 " ==
@@ -723,7 +744,11 @@ let g:blameLineVirtualTextPrefix = '     ~ '
 let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions', 'coc-spell-checker', 'coc-post', 'coc-go', 'coc-template', 'coc-marketplace', 'coc-calc']
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
+" make esc to exit compl mode if in compl mode
+inoremap <expr> <ESC> pumvisible() ? "\<C-g>u" : "\<ESC>"
+" inoremap <CR> <C-g>u<CR><ESC>:call coc#on_enter()<ESC>a
+imap <expr> <silent> <CR>  "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+nnoremap <expr> <silent> o "o\<c-r>=coc#on_enter()\<cr>"
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -778,6 +803,7 @@ noremap \d :CocList translators<CR>
 nnoremap <silent> <leader>b :CocCommand actions.open<cr>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -793,7 +819,8 @@ xmap <silent> <TAB> <Plug>(coc-range-select)
 
 xmap <leader>f  <Plug>(coc-format-selected)
 
-
+nmap <leader>o <Plug>(coc-openlink)
+nmap <leader>a <Plug>(coc-refactor)
 " ===
 " === import cost
 " ===
@@ -988,7 +1015,11 @@ let g:VM_default_mappings = 0
 let g:VM_maps = {}
 let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
 let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
-
+let g:VM_mouse_mappings = 1
+" let g:VM_leader = { 'default': '\', 'visual': '''', 'buffer': '\'}
+let g:VM_maps["Case Conversion Menu"]                = '<leader>cc'
+let g:VM_maps["Switch Mode"]                 = '<Tab>'
+let g:VM_maps["Tools Menu"]                  = '<leader>`'
 " ===
 " === Far.vim
 " ===
@@ -1138,7 +1169,6 @@ let g:colorizer_syntax = 1
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_smartcase = 1
-map ' <Plug>(easymotion-bd-f)
 nmap ' <Plug>(easymotion-bd-f)
 "map E <Plug>(easymotion-j)
 nnoremap U <Plug>(easymotion-k)
@@ -1309,14 +1339,14 @@ let g:startify_bookmarks = [
 " ===
 " === nerdcommenter
 " ===
-map <Leader>/ <Leader>c<Leader>
+map <Leader>/ <plug>NERDCommenterToggle
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDToggleCheckAllLines = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDCommentEmptyLines = 1
-
+let g:NERDCreateDefaultMappings = 0
 " ===
 " === discord RPC
 "
