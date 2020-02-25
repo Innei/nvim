@@ -6,6 +6,7 @@
   "coc.preferences.snippetStatusText": "Ⓢ ",
   "coc.preferences.extensionUpdateCheck": "weekly",
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.rootPatterns": [".git", ".hg", ".projections.json"],
   "suggest.detailMaxLength": 100,
   "suggest.noselect": true,
   "suggest.enablePreselect": false,
@@ -68,7 +69,9 @@
     "vue"
   ],
   "prettier.eslintIntegration": true,
-  "prettier.disableLanguages": [],
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+
   "signature.target": "echo",
   "signature.enable": true,
   "yank.enableCompletion": false,
@@ -137,15 +140,15 @@
     "b": "gotoSource:buffer",
 
     "[[": "sourcePrev",
-      "]]": "sourceNext",
+    "]]": "sourceNext",
 
-      "[d": "diagnosticPrev",
-        "]d": "diagnosticNext",
+    "[d": "diagnosticPrev",
+    "]d": "diagnosticNext",
 
-        "[c": "gitPrev",
-          "]c": "gitNext",
-          "<<": "gitStage",
-          ">>": "gitUnstage"
+    "[c": "gitPrev",
+    "]c": "gitNext",
+    "<<": "gitStage",
+    ">>": "gitUnstage"
   },
   "git.enableGutters": true,
   "git.branchCharacter": "\uf408",
@@ -234,6 +237,6 @@
     "*.dll",
     "**/*.dll",
     "init.vim"
-  ]
-
+  ],
+  "yaml.format.enable": true
 }

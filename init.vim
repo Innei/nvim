@@ -43,7 +43,7 @@ set smartindent
 set smarttab
 set signcolumn=yes
 set list
-set listchars=tab:→ ,trail:·
+set listchars=tab:→\ ,trail:·
 set scrolloff=4
 set ttimeoutlen=0
 set notimeout
@@ -72,6 +72,7 @@ set completeopt=longest,noinsert,menuone,noselect,preview
 set ttyfast "should make scrolling faster
 set lazyredraw "same as above
 set visualbell
+set autoread
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
 silent !mkdir -p ~/.config/nvim/tmp/sessions
@@ -128,9 +129,9 @@ let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
 
 " NETRW
-let g:netrw_winsize = 24
+" let g:netrw_winsize = 24
 
-noremap <C-b> :NERDTreeToggle<CR>
+" noremap <C-b> :NERDTreeToggle<CR>
 
 " ===
 " === Basic Mappings
@@ -454,8 +455,9 @@ Plug 'jaxbot/semantic-highlight.vim'
 " Plug 'RRethy/vim-illuminate'
 Plug 'sakshamgupta05/vim-todo-highlight'
 " File navigation
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'Shougo/vimfiler.vim'
 Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'yuki-ycino/fzf-preview.vim'
@@ -697,16 +699,16 @@ function! StatusDiagnostic() abort
   if empty(info) | return '' | endif
   let msgs = []
   if get(info, 'error', 0)
-    call add(msgs, 'E' . info['error'])
+    call add(msgs, ' ' . info['error'])
   endif
   if get(info, 'warning', 0)
-    call add(msgs, 'W' . info['warning'])
+    call add(msgs, ' ' . info['warning'])
   endif
   if get(info, 'information', 0)
-    call add(msgs, 'I' . info['information'])
+    call add(msgs, ' ' . info['information'])
   endif
   if get(info, 'hint', 0) 
-    call add(msgs, 'H' . info['hint'])
+    call add(msgs, ' ' . info['hint'])
   endif
   return join(msgs, ' ')
 endfunction
@@ -1029,7 +1031,7 @@ let g:VM_maps = {}
 let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
 let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
 let g:VM_mouse_mappings = 1
-" let g:VM_leader = { 'default': '\', 'visual': '''', 'buffer': '\'}
+let g:VM_leader = { 'default': '\', 'visual': '''', 'buffer': '\'}
 let g:VM_maps["Case Conversion Menu"]                = '<leader>cc'
 let g:VM_maps["Switch Mode"]                 = '<Tab>'
 let g:VM_maps["Tools Menu"]                  = '<leader>`'
