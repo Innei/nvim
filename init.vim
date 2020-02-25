@@ -255,12 +255,14 @@ cnoremap <C-f> <Right>
 cnoremap <M-b> <S-Left>
 cnoremap <M-w> <S-Right>
 
-"
-inoremap <S-up> <ESC>:m .-2<CR>i
-inoremap <S-down> <ESC>:m .+1<CR>i
+" use shift + arrow keys to move line up/down
+inoremap <S-up> <ESC>:m .-2<CR>==gi
+inoremap <S-down> <ESC>:m .+1<CR>==gi
 inoremap <S-left> <ESC>bi
 inoremap <S-right> <Esc>ea
-
+" multi-lines move up/down in visual mode
+vnoremap <S-up> :m '<-2<CR>gv=gv
+vnoremap <S-down> :m '>+1<CR>gv=gv
 " ===
 " === Window management
 " ===
@@ -281,10 +283,10 @@ noremap s<left> :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap s<right> :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
-noremap <S-up> :res +5<CR>
-noremap <S-down> :res -5<CR>
-noremap <S-left> :vertical resize-5<CR>
-noremap <S-right> :vertical resize+5<CR>
+nnoremap <S-up> :res +5<CR>
+nnoremap <S-down> :res -5<CR>
+nnoremap <S-left> :vertical resize-5<CR>
+nnoremap <S-right> :vertical resize+5<CR>
 
 " Place the two screens up and down
 noremap sh <C-w>t<C-w>K
