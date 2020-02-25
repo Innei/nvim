@@ -93,6 +93,17 @@ Python:
 | `Meta` `z` | Move cursor to beginning of non-whitespace characters                |
 | `Meta` `x` | Move cursor to ending of characters                                  |
 
+#### 1.4 Remap Visual Mode Keys
+
+| Shortcut        | Action                          |
+|-----------------|---------------------------------|
+| `Shift` `Left`  | Select to previous word         |
+| `Shift` `Right` | Select to next word             |
+| `Shift` `Up`    | Move selection up               |
+| `Shift` `Down`  | Move selection down             |
+| `,`             | Select to the ending of line    |
+| `.`             | Select to the beginning of line |
+
 #### 1.4 Remapped Text Manipulating Commands in Normal Mode
 
 | Shortcut    | Action                                      |
@@ -344,7 +355,7 @@ To add surround (`string` -> `"string"`):
 
 | Shortcut        | Action                                      |
 | --------------- | ------------------------------------------- |
-| `SPACE` `f`     | Find in the current file (required ag)          |
+| `SPACE` `f`     | Find in the current file (required ag)      |
 | `SPACE` `f` `r` | Find and replace                            |
 
 #### fzf-gitignore
@@ -357,10 +368,6 @@ To add surround (`string` -> `"string"`):
 | -------- | ------------------- |
 | `g` `v`  | Open commit browser |
 | `q`      | Quit GV window      |
-
-#### vim-calc
-
-    Press `Space` + `a` to calculate the equation in the current line
 
 #### AutoFormat
 
@@ -375,10 +382,6 @@ To add surround (`string` -> `"string"`):
 | Shortcut     | Action                            |
 | ------------ | --------------------------------- |
 | `SPACE + /`  | toggle comment lines.             |
-| `SPACE + cu` | discomment lines.                 |
-| `SPACE + cc` | comment lines.                    |
-| `SPACE + cy` | copy code lines and then comment. |
-| `SPACE + cs` | comment in document block.        |
 
 ## Custom Snippets
 
@@ -404,6 +407,10 @@ To add surround (`string` -> `"string"`):
 `,f` to go to the next `<++>` (placeholder)
 
 `,w` to go to the next `<++>` (placeholder) and then press `Enter` for you
+
+#### Other Languages
+
+See `Ultisnips` folder.
 
 ## Other Weird Stuff
 

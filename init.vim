@@ -43,7 +43,7 @@ set smartindent
 set smarttab
 set signcolumn=yes
 set list
-set listchars=tab:▸-,trail:▫
+set listchars=tab:→ ,trail:·
 set scrolloff=4
 set ttimeoutlen=0
 set notimeout
@@ -326,7 +326,13 @@ noremap <C-]> :bnext<CR>
 source ~/.config/nvim/md-snippets.vim
 " auto spell
 autocmd BufRead,BufNewFile *.md setlocal spell
-
+let g:auto_save = 0
+augroup ft_markdown
+  au!
+  au FileType markdown let b:auto_save = 1
+augroup END
+" let g:auto_save_write_all_buffers = 1  " write all open buffers as if you would use :wa
+" let g:auto_save_silent = 1  " do not display the auto-save notification
 
 " ===
 " === Other useful stuff
@@ -430,8 +436,6 @@ augroup discord
 augroup END
 " Plug 'ObserverOfTime/discord.nvim', {'do': ':UpdateRemotePlugins', 'branch': 'refactored'}
 " Plug 'ObserverOfTime/discord.nvim', { 'do': ':UpdateRemotePlugins'}
-" Testing my own plugin
-" Plug 'theniceboy/vim-calc'
 
 " Pretty Dress
 " Plug 'theniceboy/eleline.vim'
@@ -442,6 +446,8 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/promptline.vim'
 Plug 'ajmwagar/vim-deus'
 Plug 'joshdick/onedark.vim'
+" Plug 'camspiers/animate.vim'
+" Plug 'camspiers/lens.vim'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
@@ -511,7 +517,7 @@ Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 " Markdown
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'theniceboy/bullets.vim'
-
+Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle', 'for': ['text', 'markdown', 'tex'] }
 " Editor Enhancement
 " Plug 'liuchengxu/vim-clap'
 Plug 'airblade/vim-rooter'
@@ -534,10 +540,12 @@ Plug 'skywind3000/asyncrun.vim'
 " Input Method Autoswitch
 
 " Formatter
-Plug 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
 " For general writing
-Plug 'junegunn/goyo.vim', { 'for': ['vim-plug', 'markdown'] }
+Plug 'junegunn/goyo.vim', { 'for': ['vim-plug', 'markdown', 'text', 'tex'], 'on': 'Goyo' }
+Plug 'amix/vim-zenroom2', { 'for': ['vim-plug', 'markdown', 'text', 'tex'], 'on': 'Goyo' }
+
 "Plug 'reedes/vim-wordy'
 "Plug 'ron89/thesaurus_query.vim'
 
@@ -658,6 +666,10 @@ let g:rnvimr_presets = [
       \ {'width': 0.500, 'height': 1.000, 'col': 0, 'row': 0},
       \ ]
 
+" === 
+" === lens.vim
+" === 
+" let g:lens#width_resize_max = 40
 
 " ===
 " === eleline.vim
@@ -670,10 +682,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_extensions = ['tabline', 'netrw', 'vista', 'coc']
-let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-
+let g:airline_extensions = ['tabline', 'vista']
+" let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+" let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
 " let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#tabline#show_tab_count = 1
@@ -789,7 +800,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 
-nmap tt :CocCommand explorer<CR>
+nnoremap tt :CocCommand explorer<CR>
 " coc-todolist
 noremap ta :CocCommand todolist.create<CR>
 noremap td :CocCommand todolist.upload<CR>

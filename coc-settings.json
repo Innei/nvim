@@ -137,15 +137,15 @@
     "b": "gotoSource:buffer",
 
     "[[": "sourcePrev",
-    "]]": "sourceNext",
+      "]]": "sourceNext",
 
-    "[d": "diagnosticPrev",
-    "]d": "diagnosticNext",
+      "[d": "diagnosticPrev",
+        "]d": "diagnosticNext",
 
-    "[c": "gitPrev",
-    "]c": "gitNext",
-    "<<": "gitStage",
-    ">>": "gitUnstage"
+        "[c": "gitPrev",
+          "]c": "gitNext",
+          "<<": "gitStage",
+          ">>": "gitUnstage"
   },
   "git.enableGutters": true,
   "git.branchCharacter": "\uf408",
@@ -170,6 +170,7 @@
   "javascript.suggestionActions.enabled": true,
   "javascript.format.enabled": true,
   "snippets.autoTrigger": true,
+  "snippets.userSnippetsDirectory": "~/.config/nvim/Ultisnips",
   "json.format.enable": true,
   "zi.enable": true,
   "zi.patterns": {
@@ -219,7 +220,20 @@
   "coc.githubUsers.githubAccessToken": "c6b281f8f5507d2bb036872f378bac6aa998a091",
   "vetur.useWorkspaceDependencies": true,
   "vetur.format.enable": false,
-  "emmet.includeLanguages": {"vue": "html", "javascript": "javascriptreact", "typescript": "typescriptreact"},
+  // "emmet.includeLanguages": {"vue": "html", "javascript": "javascriptreact", "typescript": "typescriptreact"},
   "emmet.showSuggestionsAsSnippets": true,
-  "emmet.optimizeStylesheetParsing": true
+  "emmet.optimizeStylesheetParsing": true,
+  "cSpell.maxNumberOfProblems": 10,
+  "cSpell.ignorePaths": [
+    "node_modules",
+    "**/node_modules",
+    "**/node_modules/**",
+    "node_modules/**",
+    "vscode-extension",
+    ".git",
+    "*.dll",
+    "**/*.dll",
+    "init.vim"
+  ]
+
 }
