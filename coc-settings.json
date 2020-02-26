@@ -54,7 +54,7 @@
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.refreshAfterSave": false,
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.virtualTextPrefix": "                        => ",
+  "diagnostic.virtualTextPrefix": "           => ",
   "diagnostic.virtualText": true,
   "codeLens.enable": true,
   "list.previewHighlightGroup": "Statement",
@@ -65,6 +65,8 @@
     "python",
     "css",
     "javascript",
+    "javascriptreact",
+    "typescriptreact",
     "typescript",
     "vue"
   ],
@@ -77,6 +79,11 @@
   "yank.enableCompletion": false,
   "explorer.width": 38,
   "explorer.quitOnOpen": true,
+  "explorer.activeMode": true,
+  "explorer.icon.enableVimDevicons": true,
+  "explorer.file.tabCD": true,
+  "explorer.autoExpandSingleNode": true,
+  "explorer.openAction.changeDirectory": true,
   "explorer.sources": [
     {
       "name": "buffer",

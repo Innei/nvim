@@ -219,7 +219,7 @@ noremap <silent> F 5k
 noremap <silent> E 5j
 
 xnoremap <silent> , 0
-xnoremap <silent> . $
+xnoremap <silent> . g_
 
 " Faster in-line navigation
 noremap W 5w
@@ -488,20 +488,21 @@ Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 " Plug 'zivyangll/git-blame.vim'
 Plug 'tveskag/nvim-blame-line'
+Plug 'rhysd/git-messenger.vim'
 " Tex
 "Plug 'lervag/vimtex'
 
 Plug 'ctrlpvim/ctrlp.vim'
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
-Plug 'elzr/vim-json', { 'for': ['vim-plug', 'json'] }
-Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'elzr/vim-json', { 'for': ['json'] }
+Plug 'pangloss/vim-javascript', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'ludovicchabant/vim-gutentags', { 'for': ['javascript', 'vue', 'typescript'] }
 Plug 'kristijanhusak/vim-js-file-import', {'do': 'yarn', 'for': ['javascript', 'vue', 'typescript', 'javascriptreact', 'typescriptreact']}
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags 
-Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 " Plug 'yardnsm/vim-import-cost', { 'do': 'yarn', 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'] }
 Plug 'nicwest/vim-http', { 'for': 'http' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
@@ -515,7 +516,7 @@ Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 " "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 " "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 " Plug 'tweekmonster/braceless.vim'
-
+Plug 'Yggdroot/indentLine'
 " Markdown
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'theniceboy/bullets.vim'
@@ -530,7 +531,7 @@ Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
-Plug 'junegunn/vim-after-object' " da= to delete what's after =
+" Plug 'junegunn/vim-after-object' " da= to delete what's after =
 Plug 'wellle/targets.vim'
 Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
 "Plug 'tpope/vim-capslock'  " Ctrl+L (insert) to toggle capslock
@@ -545,11 +546,8 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
 " For general writing
-Plug 'junegunn/goyo.vim', { 'for': ['vim-plug', 'markdown', 'text', 'tex'], 'on': 'Goyo' }
-Plug 'amix/vim-zenroom2', { 'for': ['vim-plug', 'markdown', 'text', 'tex'], 'on': 'Goyo' }
-
-"Plug 'reedes/vim-wordy'
-"Plug 'ron89/thesaurus_query.vim'
+Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
+Plug 'amix/vim-zenroom2', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
 
 " Bookmarks
 Plug 'MattesGroeger/vim-bookmarks'
@@ -619,6 +617,10 @@ hi Normal guibg=NONE ctermbg=NONE
 
 "hi SpecialKey ctermfg=blue guifg=grey70
 hi NonText guibg=NONE ctermbg=NONE ctermfg=NONE guifg=NONE
+
+
+" let g:indentLine_setColors = 0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " ===================== Start of Plugin Settings =====================
 
 " ===
@@ -710,6 +712,7 @@ function! StatusDiagnostic() abort
   if get(info, 'hint', 0) 
     call add(msgs, ' ' . info['hint'])
   endif
+  " echo get(g:, 'coc_status', '')
   return join(msgs, ' ')
 endfunction
 let g:airline_section_warning = airline#section#create_right(['%{StatusDiagnostic()}'])
@@ -734,14 +737,14 @@ nnoremap gs :GitGutterStageHunk<CR>
 " ===
 nnoremap <leader>gs :Gdiffsplit<CR><C-w>b<C-w>H
 nnoremap <leader>gc :Gcommit<CR>
-nnoremap <leader>gm :Gmerge<CR>
-nnoremap <leader>gr :Grebase<CR>
+" nnoremap <leader>gm :Gmerge<CR>
+" nnoremap <leader>gr :Grebase<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gf :Gfetch<CR>
 nnoremap <leader>gl :Gpull<CR>
-nnoremap <leader>ga :Gwrite<CR>
+" nnoremap <leader>ga :Gwrite<CR>
 nnoremap <leader>gg :G<CR>
-
+" let g:git_messenger_include_diff = 'all'
 " autocmd BufEnter * EnableBlameLine
 let g:blameLineVirtualTextPrefix = '     ~ '
 " ===
@@ -1040,11 +1043,6 @@ let g:VM_maps["Tools Menu"]                  = '<leader>`'
 " ===
 nnoremap <LEADER>f :F  %<left><left>
 let g:far#source='ag'
-" ===
-" === vim-calc
-" ===
-" noremap <LEADER>a :call Calc()<CR>
-
 
 " ===
 " === Bullets.vim
@@ -1248,7 +1246,7 @@ nmap ga <Plug>(EasyAlign)
 " ===
 " === vim-after-object
 " ===
-autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
+" autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
 
 
 " ===
@@ -1377,16 +1375,25 @@ exec "nohlsearch"
 
 
 
-if has("autocmd")
-  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[7 q"' | redraw!
-  au InsertEnter,InsertChange *
-        \ if v:insertmode == 'i' |
-        \   silent execute '!echo -ne "\e[5 q"' | redraw! |
-        \ elseif v:insertmode == 'r' |
-        \   silent execute '!echo -ne "\e[4 q"' | redraw! |
-        \ endif
-  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
-endif
-set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
-set guicursor=n:block-blinkon400
-set guicursor=v:block
+" if has("autocmd")
+"   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[7 q"' | redraw!
+"   au InsertEnter,InsertChange *
+"         \ if v:insertmode == 'i' |
+"         \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+"         \ elseif v:insertmode == 'r' |
+"         \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+"         \ endif
+"   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+" endif
+
+fun! SetCursor()
+    " Don't strip on these filetypes
+    if &ft =~ 'list'
+        return
+    endif
+
+    set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
+    set guicursor=n:block-blinkon400
+    set guicursor=v:block
+endfun
+au BufEnter * call SetCursor()
