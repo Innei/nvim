@@ -95,16 +95,16 @@ Python:
 
 #### 1.4 Remap Visual Mode Keys
 
-| Shortcut        | Action                          |
-|-----------------|---------------------------------|
-| `Shift` `Left`  | Select to previous word         |
-| `Shift` `Right` | Select to next word             |
-| `Shift` `Up`    | Move selection up               |
-| `Shift` `Down`  | Move selection down             |
-| `,`             | Select to the ending of line    |
-| `.`             | Select to the beginning of line |
+| Shortcut        | Action                                |
+|-----------------|---------------------------------------|
+| `Shift` `Left`  | Select to previous word               |
+| `Shift` `Right` | Select to next word                   |
+| `Shift` `Up`    | Move selection up                     |
+| `Shift` `Down`  | Move selection down                   |
+| `,`             | Select to the end of line (without $) |
+| `.`             | Select to the beginning of line       |
 
-#### 1.4 Remapped Text Manipulating Commands in Normal Mode
+#### 1.5 Remapped Text Manipulating Commands in Normal Mode
 
 | Shortcut    | Action                                      |
 | ----------- | ------------------------------------------- |
@@ -117,7 +117,7 @@ Python:
 | `X`         | replace a letter into another. Equal to `r` |
 | `Backspace` | equal to `X`                                |
 
-#### 1.5 Other Useful Normal Mode Remapping
+#### 1.6 Other Useful Normal Mode Remapping
 
 | Shortcut        | Action                                 |
 | --------------- | -------------------------------------- |

@@ -144,8 +144,8 @@ noremap r <C-r>
 nnoremap X r
 " map 0 To the first non-blank character of the line.
 nnoremap 0 ^
-nnoremap ) $
-nnoremap <BS> X
+nnoremap ) g_
+" nnoremap <BS> X
 " Save & quit
 nnoremap Q :q<CR>
 command! -nargs=0 Q :q!
@@ -165,7 +165,7 @@ noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 noremap <LEADER>st :Startify<CR>
 
 " make Y to copy till the end of the line
-nnoremap Y y$
+nnoremap Y yg_
 
 " Copy to system clipboard
 vnoremap y "+y
@@ -222,7 +222,8 @@ inoremap <Home> <esc>^i
 noremap <silent> F 5k
 noremap <silent> E 5j
 
-xnoremap <silent> , 0
+
+xnoremap <silent> , ^
 xnoremap <silent> . g_
 
 " Faster in-line navigation
