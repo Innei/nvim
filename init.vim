@@ -225,7 +225,8 @@ noremap <silent> E 5j
 
 xnoremap <silent> , ^
 xnoremap <silent> . g_
-
+xnoremap <silent> <End> g_
+xnoremap <silent> <Home> ^
 " Faster in-line navigation
 noremap W 5w
 noremap B 5b
@@ -501,25 +502,24 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json', { 'for': ['json'] }
-Plug 'pangloss/vim-javascript', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+" Plug 'pangloss/vim-javascript', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-" Plug 'ludovicchabant/vim-gutentags', { 'for': ['javascript', 'vue', 'typescript'] }
-" Plug 'kristijanhusak/vim-js-file-import', {'do': 'yarn', 'for': ['javascript', 'vue', 'typescript', 'javascriptreact', 'typescriptreact']}
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact', 'typescriptreact'] }
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags 
 Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-" Plug 'yardnsm/vim-import-cost', { 'do': 'yarn', 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'] }
 Plug 'nicwest/vim-http', { 'for': 'http' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
+Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
+Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescriptreact' ] }
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
-" " Python
-" " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
-" " Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
+" Python
+" Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
+" Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
 " Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
-" "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
-" "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
+" Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
+" Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 " Plug 'tweekmonster/braceless.vim'
 Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml', 'bash'], 'on': ['IndentLinesToggle']}
 " Markdown
@@ -1356,6 +1356,26 @@ let g:startify_bookmarks = [
 " ===
 " === nerdcommenter
 " ===
+" Vue comment hook
+let g:ft = ''
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
 map <Leader>/ <plug>NERDCommenterToggle
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
