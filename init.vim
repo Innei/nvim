@@ -153,10 +153,11 @@ noremap <C-q> :qa<CR>
 nnoremap <silent> S :w<CR>
 noremap <silent> <C-S> :wa<CR>
 inoremap <silent> <C-s> <ESC>:w<CR>i
-inoremap <M-z> <ESC>^i
-inoremap <M-x> <ESC>$a
-" vnoremap <BS> x
 inoremap <S-CR> <ESC>o
+" Meta key remap
+vnoremap <M-c> "+y
+inoremap <M-v> <C-o>"+]p
+
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
@@ -170,8 +171,10 @@ nnoremap Y y$
 vnoremap y "+y
 
 " Indentation
-nnoremap < <<
-nnoremap > >>
+noremap < <<
+noremap > >>
+xnoremap < <gv
+xnoremap > >gv
 
 " Search
 noremap <LEADER><CR> :nohlsearch<CR>
@@ -181,8 +184,9 @@ noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
 
 " Space to Tab
 nnoremap <LEADER>tt :%s/    /\t/g
-vnoremap <LEADER>tt :s/    /\t/g
-
+xnoremap <LEADER>tt :s/    /\t/g
+nnoremap <LEADER>ss :%s/\t/    /g
+xnoremap <leader>ss :s/\t/    /g
 " Folding
 noremap <silent> l za
 
@@ -530,7 +534,7 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
-Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
+Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
 " Plug 'junegunn/vim-after-object' " da= to delete what's after =
 Plug 'wellle/targets.vim'
 Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
@@ -822,7 +826,6 @@ nnoremap <silent> <leader>b :CocCommand actions.open<cr>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
