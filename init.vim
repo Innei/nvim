@@ -91,7 +91,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " === Ignore File
 " ===
 set wildignore+=*node_modules/**
-set wildignore=*.o,*.obj,*~
+set wildignore+=*.o,*.obj,*~
 set wildignore+=*.git*
 set wildignore+=*.meteor*
 set wildignore+=*vim/backups*
@@ -492,7 +492,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 " Plug 'zivyangll/git-blame.vim'
-Plug 'tveskag/nvim-blame-line'
+" Plug 'tveskag/nvim-blame-line'
 Plug 'rhysd/git-messenger.vim'
 " Tex
 "Plug 'lervag/vimtex'
@@ -504,8 +504,8 @@ Plug 'elzr/vim-json', { 'for': ['json'] }
 Plug 'pangloss/vim-javascript', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-Plug 'ludovicchabant/vim-gutentags', { 'for': ['javascript', 'vue', 'typescript'] }
-Plug 'kristijanhusak/vim-js-file-import', {'do': 'yarn', 'for': ['javascript', 'vue', 'typescript', 'javascriptreact', 'typescriptreact']}
+" Plug 'ludovicchabant/vim-gutentags', { 'for': ['javascript', 'vue', 'typescript'] }
+" Plug 'kristijanhusak/vim-js-file-import', {'do': 'yarn', 'for': ['javascript', 'vue', 'typescript', 'javascriptreact', 'typescriptreact']}
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags 
 Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 " Plug 'yardnsm/vim-import-cost', { 'do': 'yarn', 'for': ['javascript', 'typescript', 'javascriptreact', 'typescriptreact'] }
@@ -521,7 +521,7 @@ Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 " "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 " "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
 " Plug 'tweekmonster/braceless.vim'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml', 'bash'], 'on': ['IndentLinesToggle']}
 " Markdown
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'theniceboy/bullets.vim'
@@ -751,7 +751,7 @@ nnoremap <leader>gl :Gpull<CR>
 nnoremap <leader>gg :G<CR>
 " let g:git_messenger_include_diff = 'all'
 " autocmd BufEnter * EnableBlameLine
-let g:blameLineVirtualTextPrefix = '     ~ '
+" let g:blameLineVirtualTextPrefix = '     ~ '
 " ===
 " === vim-illuminate
 " ===

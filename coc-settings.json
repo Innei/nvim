@@ -99,6 +99,7 @@
   "explorer.file.column.git.showIgnored": true,
   "explorer.keyMappingMode": "none",
   "explorer.keyMappings": {
+  	
     "u": "nodePrev",
     "e": "nodeNext",
 
@@ -112,8 +113,8 @@
     "gh": "collapseRecursive",
     "i": "expand",
     "<cr>": "open",
-    "s": "openInVsplit",
-    "o": "openInTab",
+    "s": "open:vsplit",
+    "o": "open:tab",
     "<bs>": "gotoParent",
     "l": "gotoParent",
 
@@ -159,7 +160,7 @@
   "git.enableGutters": true,
   "git.branchCharacter": "\uf408",
   "git.addGBlameToBufferVar": false,
-  "git.addGBlameToVirtualText": false,
+  "git.addGBlameToVirtualText": true,
   "git.virtualTextPrefix": "                 ~ ",
   "git.addedSign.hlGroup": "GitGutterAdd",
   "git.changedSign.hlGroup": "GitGutterChange",
