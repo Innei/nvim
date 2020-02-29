@@ -513,7 +513,7 @@ Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescriptreact' ] }
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
-
+Plug 'mattn/emmet-vim', { 'for': ['html', 'vue', 'javascript', 'javascriptreact', 'typescriptreact'] }
 " Python
 " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 " Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
@@ -858,6 +858,13 @@ nmap <leader>a <Plug>(coc-refactor)
 " ===
 let g:vue_pre_processors = ['typescript', 'scss']
 
+" ===
+" === emmet
+" ===
+let g:user_emmet_install_global = 0
+autocmd FileType html,vue,javascript,javascriptreact,typescriptreact EmmetInstall
+let g:user_emmet_leader_key='<M-e>'
+au FileType html,vue,javascript,javascriptreact,typescriptreact imap <silent><buffer> ,, <plug>(emmet-expand-abbr)
 " ===
 " === MarkdownPreview
 " ===

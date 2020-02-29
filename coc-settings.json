@@ -99,7 +99,6 @@
   "explorer.file.column.git.showIgnored": true,
   "explorer.keyMappingMode": "none",
   "explorer.keyMappings": {
-  	
     "u": "nodePrev",
     "e": "nodeNext",
 
@@ -185,7 +184,7 @@
   "zi.enable": true,
   "zi.patterns": {
     "": [],
-    "javascript": ["^\\s*\\/\\/", "^\\s*\\/\\*", "^\\s*\\*"],
+    "javascript": ["^\\s*\\/\\/", "^\\s*\\/\\*", "^\\s*\\*", "const \\s*"],
     "typescript": ["^\\s*\\/\\/", "^\\s*\\/\\*", "^\\s*\\*"],
     "markdown": [],
     "vim": ["^\\s*\\\""],
@@ -228,6 +227,12 @@
   },
   "snippets.textmateSnippetsRoots": [],
   "coc.githubUsers.githubAccessToken": "c6b281f8f5507d2bb036872f378bac6aa998a091",
+  "html.filetypes": [
+    "html",
+    "handlebars",
+    "htmldjango",
+    "vue"
+  ],
   "vetur.useWorkspaceDependencies": true,
   "vetur.format.enable": true,
   "vetur.format.defaultFormatter.js": "prettier-eslint",
@@ -235,7 +240,8 @@
   "vetur.format.defaultFormatter.scss": "prettier",
   "vetur.format.defaultFormatter.css": "prettier",
   "vetur.format.defaultFormatter.html": "prettier",
-  // "emmet.includeLanguages": {"vue": "html", "javascript": "javascriptreact", "typescript": "typescriptreact"},
+  "vetur.completion.useScaffoldSnippets": true,
+  // "emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact", "typescript": "typescriptreact"},
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.optimizeStylesheetParsing": true,
   "cSpell.maxNumberOfProblems": 10,
