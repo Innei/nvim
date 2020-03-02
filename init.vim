@@ -73,6 +73,7 @@ set ttyfast "should make scrolling faster
 set lazyredraw "same as above
 set visualbell
 set autoread
+set hidden
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
 silent !mkdir -p ~/.config/nvim/tmp/sessions
@@ -168,7 +169,7 @@ noremap <LEADER>st :Startify<CR>
 nnoremap Y yg_
 
 " Copy to system clipboard
-vnoremap y "+y
+xnoremap y "+y
 
 " Indentation
 noremap < <<
@@ -545,6 +546,7 @@ Plug 'Konfekt/FastFold'
 Plug 'junegunn/vim-peekaboo'
 Plug 'jesseleite/vim-noh'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'ConradIrwin/vim-bracketed-paste'
 " Input Method Autoswitch
 
 " Formatter
@@ -897,7 +899,7 @@ nmap kw ysiw
 nmap ks cs
 nmap kcs yss
 
-noremap gv :GV<CR>
+" noremap gv :GV<CR>
 
 " ===
 " === Python-syntax
