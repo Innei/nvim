@@ -148,7 +148,7 @@ nnoremap 0 ^
 nnoremap ) g_
 " nnoremap <BS> X
 " Save & quit
-nnoremap Q :q<CR>
+nnoremap Q :bd<CR>
 command! -nargs=0 Q :q!
 noremap <C-q> :qa<CR>
 nnoremap <silent> S :w<CR>
@@ -430,7 +430,6 @@ source ~/.config/nvim/_machine_specific.vim
 if has_machine_specific_file == 0
   exec "e ~/.config/nvim/_machine_specific.vim"
 endif
-
 " Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
@@ -452,7 +451,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'bling/vim-bufferline'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
-Plug 'ajmwagar/vim-deus'
+" Plug 'ajmwagar/vim-deus'
 Plug 'joshdick/onedark.vim'
 " Plug 'camspiers/animate.vim'
 " Plug 'camspiers/lens.vim'
@@ -506,7 +505,7 @@ Plug 'elzr/vim-json', { 'for': ['json'] }
 " Plug 'pangloss/vim-javascript', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact', 'typescriptreact'] }
-Plug 'AndrewRadev/tagalong.vim' " auto rename tags 
+Plug 'AndrewRadev/tagalong.vim' " auto rename tags
 Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
 Plug 'nicwest/vim-http', { 'for': 'http' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
@@ -611,7 +610,7 @@ colorscheme onedark
 set termguicolors " enable true colors support
 if (empty($TMUX))
   if (has("nvim"))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   endif
   if (has("termguicolors"))
     set termguicolors
@@ -637,18 +636,18 @@ let g:asyncrun_open = 8
 let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.bzr', '_darcs', 'build.xml']
 let g:asyncrun_shell = 'zsh -c'
 let g:asyncrun_status = ''
-nnoremap <leader><leader> :AsyncRun -cwd=<root> 
+nnoremap <leader><leader> :AsyncRun -cwd=<root>
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 function! QuickFix_toggle()
-    for i in range(1, winnr('$'))
-        let bnum = winbufnr(i)
-        if getbufvar(bnum, '&buftype') == 'quickfix'
-            cclose
-            return
-        endif
-    endfor
-    copen
+  for i in range(1, winnr('$'))
+    let bnum = winbufnr(i)
+    if getbufvar(bnum, '&buftype') == 'quickfix'
+      cclose
+      return
+    endif
+  endfor
+  copen
 endfunction
 
 nnoremap <silent> cc :call QuickFix_toggle()<cr>
@@ -664,12 +663,12 @@ tnoremap <silent> R <C-\><C-n>:RnvimrResize<CR>
 
 " Customize the initial layout
 let g:rnvimr_layout = {
-            \'relative': 'editor',
-            \ 'width': 100,
-            \ 'height': 100,
-            \ 'col': 0,
-            \ 'row': 0
-            \ }
+      \'relative': 'editor',
+      \ 'width': 100,
+      \ 'height': 100,
+      \ 'col': 0,
+      \ 'row': 0
+      \ }
 " Customize multiple preset layouts
 " '{}' represents the initial layout
 let g:rnvimr_presets = [
@@ -677,9 +676,9 @@ let g:rnvimr_presets = [
       \ {'width': 0.500, 'height': 1.000, 'col': 0, 'row': 0},
       \ ]
 
-" === 
+" ===
 " === lens.vim
-" === 
+" ===
 " let g:lens#width_resize_max = 40
 
 " ===
@@ -689,17 +688,18 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='deus'
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_extensions = ['tabline', 'vista']
+let g:airline_extensions = ['tabline']
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#exclude_preview = 1
 " let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
 " let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
-" let g:airline#extensions#csv#enabled = 1
-let g:airline#extensions#tabline#show_tab_count = 1
-let g:airline#extensions#vista#enabled = 1
 let g:airline_section_c = airline#section#create(['%f  ' , '%{get(b:,''coc_current_function'','''')}'])
 let g:airline_section_b = airline#section#create(['%{get(b:,''coc_git_status'','''')}','%{get(g:,''coc_git_status'','''')}'])
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
@@ -716,7 +716,7 @@ function! StatusDiagnostic() abort
   if get(info, 'information', 0)
     call add(msgs, ' ' . info['information'])
   endif
-  if get(info, 'hint', 0) 
+  if get(info, 'hint', 0)
     call add(msgs, ' ' . info['hint'])
   endif
   " echo get(g:, 'coc_status', '')
@@ -849,10 +849,10 @@ nmap <leader>a <Plug>(coc-refactor)
 " === import cost
 " ===
 " augroup import_cost_auto_run
-  " autocmd!
-  " autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
-  " autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
-  " autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCostSingle
+" autocmd!
+" autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
+" autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
+" autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCostSingle
 " augroup END
 
 " ===
@@ -1207,12 +1207,12 @@ nnoremap U <Plug>(easymotion-k)
 "nmap 'w <Plug>(easymotion-overwin-w)
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
+        \   'converters': [incsearch#config#fuzzyword#converter()],
+        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+        \   'is_expr': 0,
+        \   'is_stay': 1
+        \ }), get(a:, 1, {}))
 endfunction
 
 noremap <silent><expr> z' incsearch#go(<SID>config_easyfuzzymotion())
@@ -1320,13 +1320,21 @@ let g:rainbow_conf = {
 " ===
 " let g:xtabline_settings = {}
 " let g:xtabline_settings.enable_mappings = 0
-" let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
+" " let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
+" let g:xtabline_settings = {
+"       \ 'relative_paths':           0,
+"       \ 'tabline_modes':            ['buffers', 'tabs', 'arglist'],
+"       \ 'buffer_filtering':         1,
+"       \}
 " let g:xtabline_settings.enable_persistance = 0
 " let g:xtabline_settings.last_open_first = 1
 " noremap to :XTabCycleMode<CR>
 " noremap \p :XTabInfo<CR>
-
-
+"
+" let g:xtabline_settings.buffers_paths = 0
+" let g:xtabline_settings.current_tab_paths = 0
+" let g:xtabline_settings.other_tabs_paths = 0
+"
 " ===
 " === vim session
 " ===
@@ -1420,13 +1428,13 @@ exec "nohlsearch"
 " endif
 
 fun! SetCursor()
-    " Don't strip on these filetypes
-    if &ft =~ 'list'
-        return
-    endif
+  " Don't strip on these filetypes
+  if &ft =~ 'list'
+    return
+  endif
 
-    set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
-    set guicursor=n:block-blinkon400
-    set guicursor=v:block
+  set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
+  set guicursor=n:block-blinkon400
+  set guicursor=v:block
 endfun
 au BufEnter * call SetCursor()
