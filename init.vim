@@ -452,7 +452,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'edkolev/tmuxline.vim'
 " Plug 'edkolev/promptline.vim'
 " Plug 'ajmwagar/vim-deus'
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
 " Plug 'camspiers/animate.vim'
 " Plug 'camspiers/lens.vim'
 
@@ -507,7 +507,7 @@ Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'java
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact', 'typescriptreact'] }
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags
 Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-Plug 'nicwest/vim-http', { 'for': 'http' }
+" Plug 'nicwest/vim-http', { 'for': 'http' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescriptreact' ] }
@@ -602,8 +602,9 @@ let g:switch_mapping = ""
 let g:material_theme_style = 'palenight'
 let g:material_terminal_italics = 1
 " colorscheme material
-let g:onedark_terminal_italics = 1
-colorscheme onedark
+" let g:onedark_terminal_italics = 1
+" colorscheme onedark
+colorscheme material
 " ===
 " === Dress up my vim
 " ===
