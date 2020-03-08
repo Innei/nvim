@@ -219,6 +219,7 @@ noremap <C-a> <nop>
 noremap <C-x> <nop>
 noremap <Home> ^
 inoremap <Home> <esc>^i
+inoremap <Del> <ESC>lxi
 " U/E keys for 5 times u/e (faster navigation)
 noremap <silent> F 5k
 noremap <silent> E 5j
@@ -526,6 +527,8 @@ Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml', 'bash'], 'on': ['IndentL
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'theniceboy/bullets.vim'
 Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle', 'for': ['text', 'markdown', 'tex'] }
+" swift 
+Plug 'keith/swift.vim'
 " Editor Enhancement
 " Plug 'liuchengxu/vim-clap'
 Plug 'airblade/vim-rooter'
@@ -690,12 +693,10 @@ let g:airline_theme='deus'
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 let g:airline_highlighting_cache = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_extensions = ['tabline']
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
-let g:airline#extensions#tabline#tabs_label = 't'
-let g:airline#extensions#tabline#buffers_label = 'b'
+let g:airline#extensions#tabline#tabs_label = ' '
+let g:airline#extensions#tabline#buffers_label = '﬘'
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#exclude_preview = 1
 " let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
@@ -725,6 +726,20 @@ function! StatusDiagnostic() abort
 endfunction
 let g:airline_section_warning = airline#section#create_right(['%{StatusDiagnostic()}'])
 " let g:airline_section_warning = airline#section#create_right(['%{coc#status()}'])
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+
 " ==
 " == GitGutter
 " ==
@@ -922,9 +937,14 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 " ===
 set rtp+=/usr/local/opt/fzf
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
-
+let g:fzf_history_dir = '~/.config/nvim/tmp/fzf-history'
 noremap <C-f> :Ag<CR>
 
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler
@@ -970,7 +990,6 @@ command! -bang BTags
 " ===
 " === fzf-preview.vim
 " ===
-noremap <C-w> :BuffersPreview<CR>
 " let g:fzf_preview_default_key_bindings = 'ctrl-e:down,ctrl-u:up'
 let g:fzf_preview_layout = 'belowright split new'
 let g:fzf_preview_rate = 0.4
@@ -1028,18 +1047,6 @@ function g:Undotree_CustomMap()
 endfunc
 
 
-" ==
-" == vim-multiple-cursor
-" ==
-" let g:multi_cursor_use_default_mapping = 0
-" let g:multi_cursor_start_word_key = '<c-d>'
-" let g:multi_cursor_select_all_word_key = '<a-k>'
-" let g:multi_cursor_start_key = 'g<c-d>'
-" let g:multi_cursor_select_all_key = 'g<a-k>'
-" let g:multi_cursor_next_key = '<c-d>'
-" let g:multi_cursor_prev_key = '<c-p>'
-" let g:multi_cursor_skip_key = '<C-s>'
-" let g:multi_cursor_quit_key = '<Esc>'
 " ===
 " === vim-visual-multi
 " ===
@@ -1089,31 +1096,11 @@ endfunction
 set statusline+=%{NearestMethodOrFunction()}
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
-
-" ===
-" === Ranger.vim
-" ===
-" nnoremap R :Ranger<CR>
-" let g:ranger_map_keys = 0
-
-
 " ===
 " === fzf-gitignore
 " ===
 noremap <LEADER>gi :FzfGitignore<CR>
 
-
-" ===
-" === Ultisnips
-" ===
-" let g:tex_flavor = "latex"
-" inoremap <c-n> <nop>
-" let g:UltiSnipsExpandTrigger="<c-e>"
-" let g:UltiSnipsJumpForwardTrigger="<c-e>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-" let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
-" silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
-"
 
 " ===
 " === vimtex
@@ -1408,7 +1395,6 @@ let g:NERDCreateDefaultMappings = 0
 noremap <Leader>d :DiscordUpdatePresence<CR>
 
 " ===================== End of Plugin Settings =====================
-
 
 " ===
 " === Necessary Commands to Execute
