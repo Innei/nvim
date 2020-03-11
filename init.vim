@@ -329,6 +329,7 @@ nnoremap <C-\> :bprevious<CR>
 nnoremap <C-]> :bnext<CR>
 nnoremap gB :bprevious<CR>
 noremap gb :bnext<CR>
+nnoremap tb :enew<CR>
 " ===
 " === Markdown Settings
 " ===
