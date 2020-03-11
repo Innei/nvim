@@ -140,7 +140,7 @@ let g:terminal_color_14 = '#9AEDFE'
 " Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
 noremap ; :
-noremap : q:i
+" noremap : q:i
 noremap r <C-r>
 nnoremap X r
 " map 0 To the first non-blank character of the line.
@@ -325,9 +325,10 @@ noremap tm. :+tabmove<CR>
 " ===
 " === Buffer manage
 " ===
-noremap <C-\> :bprevious<CR>
-noremap <C-]> :bnext<CR>
-
+nnoremap <C-\> :bprevious<CR>
+nnoremap <C-]> :bnext<CR>
+nnoremap gB :bprevious<CR>
+noremap gb :bnext<CR>
 " ===
 " === Markdown Settings
 " ===
@@ -434,17 +435,12 @@ endif
 " Plug 'mg979/vim-xtabline'
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc' " vim-session dep
-" Plug 'aurieh/discord.nvim', { 'do': ':UpdateRemotePlugins'}
-" Plug 'innei/discord.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'ananagame/vimsence', { 'on': [] }
 augroup discord
   au!
   au InsertEnter * call plug#load('vimsence') | au! discord
   au InsertEnter * :call UpdatePresence()
 augroup END
-" Plug 'ObserverOfTime/discord.nvim', {'do': ':UpdateRemotePlugins', 'branch': 'refactored'}
-" Plug 'ObserverOfTime/discord.nvim', { 'do': ':UpdateRemotePlugins'}
-
 " Pretty Dress
 " Plug 'theniceboy/eleline.vim'
 Plug 'vim-airline/vim-airline'
@@ -461,6 +457,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'jaxbot/semantic-highlight.vim'
 " Plug 'RRethy/vim-illuminate'
 Plug 'sakshamgupta05/vim-todo-highlight'
+
 " File navigation
 " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -528,7 +525,7 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' 
 Plug 'theniceboy/bullets.vim'
 Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle', 'for': ['text', 'markdown', 'tex'] }
 " swift 
-Plug 'keith/swift.vim'
+Plug 'keith/swift.vim', { 'for': ['swift'] }
 " Editor Enhancement
 " Plug 'liuchengxu/vim-clap'
 Plug 'airblade/vim-rooter'
@@ -559,7 +556,7 @@ Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
 Plug 'amix/vim-zenroom2', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
 
 " Bookmarks
-Plug 'MattesGroeger/vim-bookmarks'
+" Plug 'MattesGroeger/vim-bookmarks'
 
 " Find & Replace
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
@@ -782,7 +779,7 @@ nnoremap <leader>gg :G<CR>
 " ===
 " fix the most annoying bug that coc has
 " silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions', 'coc-spell-checker', 'coc-post', 'coc-go', 'coc-template', 'coc-marketplace', 'coc-calc']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions', 'coc-spell-checker', 'coc-post', 'coc-go', 'coc-template', 'coc-marketplace', 'coc-calc', 'coc-bookmark', 'coc-todolist']
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " make esc to exit compl mode if in compl mode
@@ -836,6 +833,11 @@ noremap tD :CocCommand todolist.download<CR>
 noremap tc :CocCommand todolist.clearNotice<CR>
 noremap tc :CocCommand todolist.clearNotice<CR>
 noremap tl :CocList --normal todolist<CR>
+" coc-bookmark
+nmap ma <Plug>(coc-bookmark-annotate)
+nmap mt <Plug>(coc-bookmark-toggle)
+nmap m, <Plug>(coc-bookmark-prev)
+nmap m. <Plug>(coc-bookmark-next)
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
 " coc-zi
@@ -1009,25 +1011,25 @@ let g:ctrlp_cmd = 'CtrlP'
 " ===
 " === vim-bookmarks
 " ===
-let g:bookmark_no_default_key_mappings = 1
-nmap mt <Plug>BookmarkToggle
-nmap ma <Plug>BookmarkAnnotate
-nmap ml <Plug>BookmarkShowAll
-nmap m. <Plug>BookmarkNext
-nmap m, <Plug>BookmarkPrev
-nmap mc <Plug>BookmarkClear
-nmap mC <Plug>BookmarkClearAll
-nmap mu <Plug>BookmarkMoveUp
-nmap me <Plug>BookmarkMoveDown
-nmap <Leader>g <Plug>BookmarkMoveToLine
-let g:bookmark_auto_save = 1
-let g:bookmark_highlight_lines = 1
-let g:bookmark_manage_per_buffer = 1
-let g:bookmark_save_per_working_dir = 1
-let g:bookmark_center = 1
-let g:bookmark_auto_close = 1
-let g:bookmark_location_list = 1
-
+" let g:bookmark_no_default_key_mappings = 1
+" nmap mt <Plug>BookmarkToggle
+" nmap ma <Plug>BookmarkAnnotate
+" nmap ml <Plug>BookmarkShowAll
+" nmap m. <Plug>BookmarkNext
+" nmap m, <Plug>BookmarkPrev
+" nmap mc <Plug>BookmarkClear
+" nmap mC <Plug>BookmarkClearAll
+" nmap mu <Plug>BookmarkMoveUp
+" nmap me <Plug>BookmarkMoveDown
+" nmap <Leader>g <Plug>BookmarkMoveToLine
+" let g:bookmark_auto_save = 1
+" let g:bookmark_highlight_lines = 1
+" let g:bookmark_manage_per_buffer = 1
+" let g:bookmark_save_per_working_dir = 1
+" let g:bookmark_center = 1
+" let g:bookmark_auto_close = 1
+" let g:bookmark_location_list = 1
+"
 
 " ===
 " === Undotree
