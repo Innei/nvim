@@ -160,10 +160,10 @@ vnoremap <M-c> "+y
 inoremap <M-v> <C-o>"+]p
 
 " Open the vimrc file anytime
-noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
+nnoremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 " Open Startify
-noremap <LEADER>st :Startify<CR>
+nnoremap <LEADER>st :Startify<CR>
 
 " make Y to copy till the end of the line
 nnoremap Y yg_
@@ -172,13 +172,13 @@ nnoremap Y yg_
 xnoremap y "+y
 
 " Indentation
-noremap < <<
-noremap > >>
+nnoremap < <<
+nnoremap > >>
 xnoremap < <gv
 xnoremap > >gv
 
 " Search
-noremap <LEADER><CR> :nohlsearch<CR>
+nnoremap <LEADER><CR> :nohlsearch<CR>
 
 " Adjacent duplicate words
 noremap <LEADER>dw /\(\<\w\+\>\)\_s*\1
@@ -192,7 +192,7 @@ xnoremap <leader>ss :s/\t/    /g
 noremap <silent> l za
 
 " Open up lazygit
-noremap \g :term lazygit<CR>
+nnoremap \g :term lazygit<CR>
 
 " ===
 " === Cursor Movement
@@ -208,30 +208,33 @@ noremap \g :term lazygit<CR>
 "noremap <silent> e j
 "noremap <silent> i l
 noremap k <nop>
-noremap j :Vista!!<CR>
-noremap J :BTags<CR>
-noremap h <nop>
-noremap . <C-I>
-noremap , <C-O>
-noremap = <C-a>
-noremap - <C-x>
-noremap <C-a> <nop>
-noremap <C-x> <nop>
+nnoremap j :Vista!!<CR>
+nnoremap J :BTags<CR>
+nnoremap h <nop>
+nnoremap . <C-I>
+nnoremap , <C-O>
+nnoremap = <C-a>
+nnoremap - <C-x>
+nnoremap <C-a> <nop>
+nnoremap <C-x> <nop>
 noremap <Home> ^
 inoremap <Home> <esc>^i
 inoremap <Del> <ESC>lxi
 " U/E keys for 5 times u/e (faster navigation)
-noremap <silent> F 5k
-noremap <silent> E 5j
-
+nnoremap <silent> F 5k
+nnoremap <silent> E 5j
+xnoremap <silent> F 5k
+xnoremap <silent> E 5j
 
 xnoremap <silent> , ^
 xnoremap <silent> . g_
 xnoremap <silent> <End> g_
 xnoremap <silent> <Home> ^
 " Faster in-line navigation
-noremap W 5w
-noremap B 5b
+nnoremap W 5w
+nnoremap B 5b
+xnoremap W 5w
+xnoremap B 5b
 
 " Go next or forward word under cursor
 nnoremap \\ *
@@ -286,10 +289,10 @@ noremap <LEADER><Right> <C-w>l
 noremap s <nop>
 
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-noremap s<up> :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-noremap s<down> :set splitbelow<CR>:split<CR>
-noremap s<left> :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-noremap s<right> :set splitright<CR>:vsplit<CR>
+nnoremap s<up> :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+nnoremap s<down> :set splitbelow<CR>:split<CR>
+nnoremap s<left> :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+nnoremap s<right> :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
 nnoremap <S-up> :res +5<CR>
@@ -298,13 +301,13 @@ nnoremap <S-left> :vertical resize-5<CR>
 nnoremap <S-right> :vertical resize+5<CR>
 
 " Place the two screens up and down
-noremap sh <C-w>t<C-w>K
+nnoremap sh <C-w>t<C-w>K
 " Place the two screens side by side
-noremap sv <C-w>t<C-w>H
+nnoremap sv <C-w>t<C-w>H
 
 " Rotate screens
-noremap srh <C-w>b<C-w>K
-noremap srv <C-w>b<C-w>H
+nnoremap srh <C-w>b<C-w>K
+nnoremap srv <C-w>b<C-w>H
 
 " Press <SPACE> + q to close the window below the current window
 noremap <LEADER>q <C-w>j:q<CR>
@@ -314,19 +317,21 @@ noremap <LEADER>q <C-w>j:q<CR>
 " === Tab management
 " ===
 " Create a new tab with t/
-noremap t/ :tabe<CR>
+nnoremap t/ :tabe<CR>
 " Move around tabs with t, and t.
-noremap t, :-tabnext<CR>
-noremap t. :+tabnext<CR>
+nnoremap t, :-tabnext<CR>
+nnoremap t. :+tabnext<CR>
 " Move the tabs with tm, and tm.
-noremap tm, :-tabmove<CR>
-noremap tm. :+tabmove<CR>
+nnoremap tm, :-tabmove<CR>
+nnoremap tm. :+tabmove<CR>
 
 " ===
 " === Buffer manage
 " ===
 noremap <C-\> :bprevious<CR>
 noremap <C-]> :bnext<CR>
+nnoremap \b :bprevious<CR>
+nnoremap \B :bnext<CR>
 
 " ===
 " === Markdown Settings
@@ -367,7 +372,7 @@ noremap <C-c> zz
 " autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
-noremap tx :r !figlet
+nnoremap tx :r !figlet
 
 noremap <LEADER>- :lN<CR>
 noremap <LEADER>= :lne<CR>
@@ -549,6 +554,7 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'jesseleite/vim-noh'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'schickling/vim-bufonly'
 " Input Method Autoswitch
 
 " Formatter
@@ -578,7 +584,7 @@ Plug 'luochen1990/rainbow'
 
 " Other useful utilities
 Plug 'tpope/vim-eunuch' " do stuff like :SudoWrite
-Plug 'makerj/vim-pdf'
+" Plug 'makerj/vim-pdf'
 
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -640,7 +646,7 @@ let g:asyncrun_open = 8
 let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.bzr', '_darcs', 'build.xml']
 let g:asyncrun_shell = 'zsh -c'
 let g:asyncrun_status = ''
-nnoremap <leader><leader> :AsyncRun -cwd=<root>
+nnoremap <leader>rr :AsyncRun -cwd=<root>
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 function! QuickFix_toggle()
