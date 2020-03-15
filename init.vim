@@ -30,7 +30,7 @@ let g:python3_host_skip_check = 1
 " === Editor behavior
 " ===
 set number
-" set relativenumber
+set relativenumber
 set mouse=niv
 set cursorline
 set expandtab
@@ -154,6 +154,8 @@ noremap <C-q> :qa<CR>
 nnoremap <silent> S :w<CR>
 noremap <silent> <C-S> :wa<CR>
 inoremap <silent> <C-s> <ESC>:w<CR>i
+inoremap <M-f> <ESC>:Format<CR>a
+
 inoremap <S-CR> <ESC>o
 " Meta key remap
 vnoremap <M-c> "+y
@@ -189,7 +191,7 @@ xnoremap <LEADER>tt :s/    /\t/g
 nnoremap <LEADER>ss :%s/\t/    /g
 xnoremap <leader>ss :s/\t/    /g
 " Folding
-noremap <silent> l za
+" noremap <silent> l za
 
 " Open up lazygit
 nnoremap \g :term lazygit<CR>
@@ -207,10 +209,9 @@ nnoremap \g :term lazygit<CR>
 "noremap <silent> n h
 "noremap <silent> e j
 "noremap <silent> i l
-noremap k <nop>
-nnoremap j :Vista!!<CR>
+" noremap k <nop>
 nnoremap J :BTags<CR>
-nnoremap h <nop>
+" nnoremap h <nop>
 nnoremap . <C-I>
 nnoremap , <C-O>
 nnoremap = <C-a>
@@ -244,16 +245,19 @@ inoremap <M-d> <ESC>viw<C-g>
 nnoremap <M-d> viw<C-g>
 snoremap <M-d> <ESC>*ve<C-g>
 snoremap <M-D> <ESC>#ve<C-g>
+
+" rename a word
+nnoremap cw viwc
+
 snoremap <ESC> <ESC>:noh<CR>
 " Ctrl + U or E will move up/down the view port without moving the cursor
-noremap <C-U> 5<C-y>
+noremap <C-W> 5<C-y>
 noremap <C-E> 5<C-e>
 
 " ===
 " === Insert Mode Cursor Movement
 " ===
-inoremap <C-a> <ESC>A
-
+inoremap jj <ESC>
 
 " ===
 " === Command Mode Cursor Movement
@@ -310,8 +314,8 @@ nnoremap srh <C-w>b<C-w>K
 nnoremap srv <C-w>b<C-w>H
 
 " Press <SPACE> + q to close the window below the current window
-noremap <LEADER>q <C-w>j:q<CR>
-
+nnoremap <LEADER>q <C-w>j:q<CR>
+nnoremap <Leader>Q :BufOnly<CR>
 
 " ===
 " === Tab management
@@ -358,15 +362,13 @@ inoremap <C-u> <ESC>lx$p
 noremap <LEADER>. :set nosplitbelow<CR>:split<CR><C-w>w:terminal<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
-noremap <LEADER>+ <Esc>/<++><CR>:nohlsearch<CR>c4l
+nnoremap <LEADER>+ <Esc>/<++><CR>:nohlsearch<CR>c4l
 
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
 
 " Press ` to change case (instead of ~)
 noremap ` ~<left>
-
-noremap <C-c> zz
 
 " Auto change directory to current dir
 " autocmd BufEnter * silent! lcd %:p:h
@@ -449,23 +451,13 @@ augroup END
 " Plug 'theniceboy/eleline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'bling/vim-bufferline'
-" Plug 'edkolev/tmuxline.vim'
-" Plug 'edkolev/promptline.vim'
-" Plug 'ajmwagar/vim-deus'
-" Plug 'joshdick/onedark.vim'
-" Plug 'camspiers/animate.vim'
-" Plug 'camspiers/lens.vim'
+Plug 'edkolev/tmuxline.vim'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
-" Plug 'RRethy/vim-illuminate'
 Plug 'sakshamgupta05/vim-todo-highlight'
 
 " File navigation
-" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'Shougo/vimfiler.vim'
 Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'yuki-ycino/fzf-preview.vim'
@@ -474,7 +466,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 " Taglist
-Plug 'liuchengxu/vista.vim'
+" Plug 'liuchengxu/vista.vim'
 
 " Error checking, handled by coc
 
@@ -488,14 +480,11 @@ Plug 'honza/vim-snippets'
 Plug 'mbbill/undotree'
 
 " Git
-Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
-Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
-"Plug 'mhinz/vim-signify'
+" Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
+" Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-" Plug 'zivyangll/git-blame.vim'
-" Plug 'tveskag/nvim-blame-line'
 Plug 'rhysd/git-messenger.vim'
 " Tex
 "Plug 'lervag/vimtex'
@@ -516,13 +505,6 @@ Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescriptreact' ] 
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'vue', 'javascript', 'javascriptreact', 'typescriptreact'] }
-" Python
-" Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
-" Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-" Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
-" Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
-" Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
-" Plug 'tweekmonster/braceless.vim'
 Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml', 'bash'], 'on': ['IndentLinesToggle']}
 " Markdown
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
@@ -606,10 +588,6 @@ let g:switch_mapping = ""
 " ===
 let g:material_theme_style = 'palenight'
 let g:material_terminal_italics = 1
-" colorscheme material
-" let g:onedark_terminal_italics = 1
-" colorscheme onedark
-colorscheme material
 " ===
 " === Dress up my vim
 " ===
@@ -622,9 +600,11 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-set background=dark
 
-" color xcodedark
+" set background=dark
+
+" colorscheme material
+color xcodedark
 hi Normal guibg=NONE ctermbg=NONE
 
 "hi SpecialKey ctermfg=blue guifg=grey70
@@ -695,7 +675,7 @@ let g:airline_theme='deus'
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 let g:airline_highlighting_cache = 1
-let g:airline_extensions = ['tabline']
+let g:airline_extensions = ['tabline', 'tmuxline']
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 let g:airline#extensions#tabline#tabs_label = ' '
 let g:airline#extensions#tabline#buffers_label = '﬘'
@@ -742,6 +722,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 
+let g:tmuxline_preset = 'full'
 " ==
 " == GitGutter
 " ==
@@ -918,9 +899,9 @@ au FileType html,vue,javascript,javascriptreact,typescriptreact imap <silent><bu
 " ===
 " === vim-surround
 " ===
-nmap kw ysiw
-nmap ks cs
-nmap kcs yss
+" nmap kw ysiw
+" nmap ks cs
+" nmap kcs yss
 
 " noremap gv :GV<CR>
 
@@ -1057,15 +1038,16 @@ endfunc
 " ===
 " === vim-visual-multi
 " ===
-let g:VM_default_mappings = 0
-let g:VM_maps = {}
-let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
-let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
-let g:VM_mouse_mappings = 1
-let g:VM_leader = { 'default': '\', 'visual': '''', 'buffer': '\'}
-let g:VM_maps["Case Conversion Menu"]                = '<leader>cc'
-let g:VM_maps["Switch Mode"]                 = '<Tab>'
-let g:VM_maps["Tools Menu"]                  = '<leader>`'
+let g:VM_default_mappings             = 0
+let g:VM_maps                         = {}
+let g:VM_maps['Find Under']           = '<C-d>'           " replace C-n
+let g:VM_maps['Find Subword Under']   = '<C-d>'           " replace visual C-n
+let g:VM_maps["Select All"]           = '<leader>A'
+let g:VM_mouse_mappings               = 1
+let g:VM_leader                       = { 'default': '\', 'visual': '''', 'buffer': '\'}
+let g:VM_maps["Case Conversion Menu"] = '<leader>cc'
+let g:VM_maps["Switch Mode"]          = '<Tab>'
+let g:VM_maps["Tools Menu"]           = '<leader>`'
 " ===
 " === Far.vim
 " ===
@@ -1087,26 +1069,21 @@ let g:bullets_enabled_file_types = [
 " ===
 " === Vista.vim
 " ===
-noremap <silent> T :Vista!!<CR>
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'coc'
-let g:vista_fzf_preview = ['right:50%']
-let g:vista_sidebar_width = 70
-let g:vista#renderer#enable_icon = 1
-let g:vista#renderer#icons = {
-      \   "function": "\uf794",
-      \   "variable": "\uf71b",
-      \  }
-function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-set statusline+=%{NearestMethodOrFunction()}
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+" noremap <silent> T :Vista!!<CR>
+" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+" let g:vista_default_executive = 'coc'
+" let g:vista_fzf_preview = ['right:50%']
+" let g:vista_sidebar_width = 70
+" let g:vista#renderer#enable_icon = 1
+" let g:vista#renderer#icons = {
+"       \   "function": "\uf794",
+"       \   "variable": "\uf71b",
+"       \  }
 
 " ===
 " === fzf-gitignore
 " ===
-noremap <LEADER>gi :FzfGitignore<CR>
+" noremap <LEADER>gi :FzfGitignore<CR>
 
 
 " ===
@@ -1130,10 +1107,10 @@ nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
 " === vim-go
 " ===
 let g:go_def_mapping_enabled = 0
-let g:go_template_autocreate = 0
+let g:go_template_autocreate = 1
 let g:go_textobj_enabled = 0
 let g:go_auto_type_info = 1
-let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled = 1
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_chan_whitespace_error = 1
@@ -1153,7 +1130,7 @@ let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types = 1
 let g:go_highlight_variable_assignments = 0
 let g:go_highlight_variable_declarations = 0
-
+let g:go_fmt_command = "goimports"
 
 " ===
 " === AutoFormat
@@ -1266,7 +1243,6 @@ let g:leaderMenu = {'name':  "Shortcut Menu",
       \'SPC tt':  ['spc to tabs'],
       \'SPC o':  ['Open folds'],
       \'SPC q':  ['Close win below'],
-      \'SPC <SPC>':  ['Find <++>'],
       \'SPC sc':  ['Toggle spell-check'],
       \'SPC gf':  ['Fold unchanged'],
       \'SPC rn':  ['Rename variable'],
@@ -1352,11 +1328,10 @@ let g:startify_lists = [
       \ { 'type': 'dir',       'header': ['   Dirs '. getcwd()] },
       \ { 'type': 'files',     'header': ['   Files']            },
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'files',     'header': ['   Files']            },
       \ { 'type': 'commands',  'header': ['   Commands']       },
       \ ]
 
-let g:startify_files_number = 10
+let g:startify_files_number = 5
 let g:startify_change_to_vcs_root = 1
 let g:startify_session_sort = 1
 let g:startify_relative_path = 1
