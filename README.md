@@ -84,14 +84,15 @@ Python:
 
 #### 1.3 Remapped Insert Mode Keys
 
-| Shortcut   | Action                                                               |
-| ---------- | -------------------------------------------------------------------- |
-| `Ctrl` `a` | Move cursor to the end of the line                                   |
-| `Ctrl` `u` | Move the character on the right of the cursor to the end of the line |
-| `Meta` `d` | Select current (next) under cursor word                              |
-| `Meta` `D` | Select prev some word which like under cursor word                   |
-| `Meta` `z` | Move cursor to beginning of non-whitespace characters                |
-| `Meta` `x` | Move cursor to ending of characters                                  |
+| Shortcut      | Action                                                               |
+| ----------    | -------------------------------------------------------------------- |
+| `j` `j`       | Map to `ESC`                                                         |
+| `Ctrl` `a`    | Move cursor to the end of the line                                   |
+| `Ctrl` `u`    | Move the character on the right of the cursor to the end of the line |
+| `Meta` `d`    | Select current (next) under cursor word                              |
+| `Meta` `D`    | Select prev some word which like under cursor word                   |
+| `Meta` `Down` | Swap current line and next line                                      |
+| `Meta` `Up`   | Swap current line and before line                                    |
 
 #### 1.4 Remap Visual Mode Keys
 
@@ -99,8 +100,8 @@ Python:
 |-----------------|---------------------------------------|
 | `Shift` `Left`  | Select to previous word               |
 | `Shift` `Right` | Select to next word                   |
-| `Shift` `Up`    | Move selection up                     |
-| `Shift` `Down`  | Move selection down                   |
+| `Meta` `Up`    | Move selection up                     |
+| `Meta` `Down`  | Move selection down                   |
 | `,`             | Select to the end of line (without $) |
 | `.`             | Select to the beginning of line       |
 
@@ -115,7 +116,6 @@ Python:
 | `=`         | Increase the number under cursor by 1       |
 | `-`         | Decrease the number under cursor by 1       |
 | `X`         | replace a letter into another. Equal to `r` |
-| `Backspace` | equal to `X`                                |
 
 #### 1.6 Other Useful Normal Mode Remapping
 
@@ -127,7 +127,6 @@ Python:
 | `SPACE` `s` `c` | Toggle spell suggestion a              |
 | `SPACE` `d` `w` | Find adjacent duplicated word          |
 | `SPACE` `t` `t` | Convert every 4 Spaces to a tab        |
-| `l`             | Fold                                   |
 | `SPACE` `-`     | Previous quick-fix position            |
 | `SPACE` `+`     | Next quick-fix position                |
 
@@ -177,6 +176,7 @@ Use the **Shift + arrow keys** to resize the current window.
 | `t` `.`     | Go One tab right |
 | `t` `m` `,` | Move tab left    |
 | `t` `m` `.` | Move tab right   |
+| `t` `b`     | Go next tab      |
 
 ### 4 Buffer Management
 
@@ -184,6 +184,7 @@ Use the **Shift + arrow keys** to resize the current window.
 | ------------------------------- | ------------------ |
 | `Ctrl` `\`                      | Toggle prev buffer |
 | `Ctrl` `]`                      | Toggle next buffer |
+| `g` `b`                         | Toggle next buffer |
 
 ### 5 Terminal Keyboard Shortcuts
 

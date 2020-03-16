@@ -44,11 +44,11 @@ set smarttab
 set signcolumn=yes
 set list
 set listchars=tab:→\ ,trail:·
-set scrolloff=4
-set ttimeoutlen=0
-set notimeout
+set scrolloff=8
 set viewoptions=cursor,folds,slash,unix
-set wrap
+set notimeout
+set nowrap
+set sidescroll=8
 set linebreak
 set wrapmargin=8
 set tw=0
@@ -73,6 +73,7 @@ set ttyfast "should make scrolling faster
 set lazyredraw "same as above
 set visualbell
 set autoread
+" set autowrite
 set hidden
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
@@ -84,7 +85,7 @@ if has('persistent_undo')
   set undodir=~/.config/nvim/tmp/undo,.
 endif
 " set colorcolumn=80
-set updatetime=600
+set updatetime=500
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
@@ -128,9 +129,6 @@ let g:terminal_color_11 = '#F4F99D'
 let g:terminal_color_12 = '#CAA9FA'
 let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
-
-" NETRW
-" let g:netrw_winsize = 24
 
 " noremap <C-b> :NERDTreeToggle<CR>
 
@@ -271,14 +269,20 @@ cnoremap <C-f> <Right>
 cnoremap <M-b> <S-Left>
 cnoremap <M-w> <S-Right>
 
-" use shift + arrow keys to move line up/down
+" use shift(Meta) + arrow keys to move line up/down
 inoremap <S-up> <ESC>:m .-2<CR>==gi
 inoremap <S-down> <ESC>:m .+1<CR>==gi
 inoremap <S-left> <ESC>bi
 inoremap <S-right> <Esc>ea
 " multi-lines move up/down in visual mode
-vnoremap <S-up> :m '<-2<CR>gv=gv
-vnoremap <S-down> :m '>+1<CR>gv=gv
+vnoremap <M-up> :m '<-2<CR>gv=gv
+vnoremap <M-down> :m '>+1<CR>gv=gv
+vnoremap <M-left> b
+vnoremap <M-right> e
+vnoremap <S-up> <nop>
+vnoremap <S-down> <nop>
+vnoremap <S-left> <nop>
+vnoremap <S-right> <nop>
 " ===
 " === Window management
 " ===
@@ -299,10 +303,10 @@ nnoremap s<left> :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 nnoremap s<right> :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
-nnoremap <S-up> :res +5<CR>
-nnoremap <S-down> :res -5<CR>
-nnoremap <S-left> :vertical resize-5<CR>
-nnoremap <S-right> :vertical resize+5<CR>
+nnoremap <M-up> :res +5<CR>
+nnoremap <M-down> :res -5<CR>
+nnoremap <M-left> :vertical resize-5<CR>
+nnoremap <M-right> :vertical resize+5<CR>
 
 " Place the two screens up and down
 nnoremap sh <C-w>t<C-w>K
@@ -401,9 +405,7 @@ func! CompileRunGcc()
   elseif &filetype == 'sh'
     :!time bash %
   elseif &filetype == 'python'
-    set splitbelow
-    :sp
-    :term python3 %
+    :AsyncRun python3 %
   elseif &filetype == 'tex'
     silent! exec "VimtexStop"
     silent! exec "VimtexCompile"
@@ -412,9 +414,9 @@ func! CompileRunGcc()
     :sp
     :term go run %
   elseif &filetype == 'javascript'
-    set splitbelow
-    :sp
-    :term node %
+    :AsyncRun node %
+  elseif &filetype == 'typescript'
+    :AsyncRun yarn run babel-node % --extensions ".ts"
   endif
 endfunc
 
@@ -451,7 +453,9 @@ augroup END
 " Plug 'theniceboy/eleline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'edkolev/tmuxline.vim'
+if ($TMUX)
+  Plug 'edkolev/tmuxline.vim'
+endif
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
@@ -489,7 +493,7 @@ Plug 'rhysd/git-messenger.vim'
 " Tex
 "Plug 'lervag/vimtex'
 
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json', { 'for': ['json'] }
@@ -510,7 +514,7 @@ Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml', 'bash'], 'on': ['IndentL
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': 'markdown' }
 Plug 'theniceboy/bullets.vim'
 Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle', 'for': ['text', 'markdown', 'tex'] }
-" swift 
+" swift
 Plug 'keith/swift.vim', { 'for': ['swift'] }
 " Editor Enhancement
 " Plug 'liuchengxu/vim-clap'
@@ -675,7 +679,11 @@ let g:airline_theme='deus'
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 let g:airline_highlighting_cache = 1
-let g:airline_extensions = ['tabline', 'tmuxline']
+if ($TMUX)
+  let g:airline_extensions = ['tabline', 'tmuxline']
+else
+  let g:airline_extensions = ['tabline']
+endif
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 let g:airline#extensions#tabline#tabs_label = ' '
 let g:airline#extensions#tabline#buffers_label = '﬘'
@@ -709,7 +717,7 @@ endfunction
 let g:airline_section_warning = airline#section#create_right(['%{StatusDiagnostic()}'])
 " let g:airline_section_warning = airline#section#create_right(['%{coc#status()}'])
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -731,7 +739,7 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
 autocmd BufWritePost * GitGutter
-nnoremap gf :GitGutterFold<CR>
+" nnoremap gf :GitGutterFold<CR>
 nnoremap <silent> gh :GitGutterPreviewHunk<CR>
 nnoremap g- :GitGutterPrevHunk<CR>
 nnoremap g= :GitGutterNextHunk<CR>
@@ -769,7 +777,7 @@ let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " make esc to exit compl mode if in compl mode
-inoremap <expr> <ESC> pumvisible() ? "\<C-g>u" : "\<ESC>"
+" inoremap <expr> <ESC> pumvisible() ? "\<C-g>u" : "\<ESC>"
 " inoremap <CR> <C-g>u<CR><ESC>:call coc#on_enter()<ESC>a
 imap <expr> <silent> <CR>  "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nnoremap <expr> <silent> o "o\<c-r>=coc#on_enter()\<cr>"
@@ -832,6 +840,7 @@ noremap \d :CocList translators<CR>
 nnoremap <silent> <leader>b :CocCommand actions.open<cr>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
+hi CocHighlightText guifg=#eeffff guibg=#ff5370
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -849,15 +858,9 @@ xmap <leader>f  <Plug>(coc-format-selected)
 
 nmap <leader>o <Plug>(coc-openlink)
 nmap <leader>a <Plug>(coc-refactor)
-" ===
-" === import cost
-" ===
-" augroup import_cost_auto_run
-" autocmd!
-" autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
-" autocmd BufEnter *.js,*.jsx,*.ts,*.tsx ImportCost
-" autocmd CursorHold *.js,*.jsx,*.ts,*.tsx ImportCostSingle
-" augroup END
+
+" set workspace
+autocmd FileType javascript,javascriptreact,typescript,typescriptreact,scss let b:coc_root_patterns = ['node_modules']
 
 " ===
 " === Vue
@@ -926,8 +929,8 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 set rtp+=/usr/local/opt/fzf
 set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 let g:fzf_history_dir = '~/.config/nvim/tmp/fzf-history'
-noremap <C-f> :Ag<CR>
-
+nnoremap <C-f> :Ag<CR>
+nnoremap <C-p> :FZF<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -984,14 +987,6 @@ let g:fzf_preview_rate = 0.4
 let g:fzf_full_preview_toggle_key = '<C-f>'
 let g:fzf_preview_command = 'ccat --color=always {-1}'
 let g:fzf_binary_preview_command = 'echo "It is a binary file"'
-
-
-" ===
-" === CTRLP (Dependency for omnisharp)
-" ===
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
 
 
 " ===
@@ -1144,21 +1139,6 @@ nnoremap <silent> \f :retab<CR>:Autoformat<CR>
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nnoremap <leader>p :Format<CR>
-
-" ===
-" === Colorizer
-" ===
-let g:colorizer_syntax = 1
-
-
-" ===
-" === vim-floaterm
-" ===
-"nnoremap ? :FloatermToggle<CR>
-"let g:floaterm_position = 'center'
-"let g:floaterm_winblend = 20
-"let g:floaterm_height = winheight(0)/3*2
-"let g:floaterm_width = &columns/3*2
 
 
 " ===
