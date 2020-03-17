@@ -11,7 +11,9 @@
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !mkdir -p ~/.config/nvim/autoload
-  silent !cp ~/.config/nvim/plug.vim ~/.config/nvim/autoload/plug.vim
+  " silent !cp ~/.config/nvim/plug.vim ~/.config/nvim/autoload/plug.vim
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \  https://cdn.jsdelivr.net/gh/junegunn/vim-plug@master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -370,7 +372,7 @@ augroup END
 inoremap <C-u> <ESC>lx$p
 
 " Opening a terminal window
-noremap <LEADER>. :set nosplitbelow<CR>:split<CR><C-w>w:terminal<CR>
+noremap <LEADER>. :set nosplitbelow<CR>:split<CR><C-w>w:terminal<CR><C-\><C-n>:set splitbelow<CR>i
 
 " Press space twice to jump to the next '<++>' and edit it
 nnoremap <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>v3l<C-g>
@@ -417,9 +419,7 @@ func! CompileRunGcc()
     silent! exec "VimtexStop"
     silent! exec "VimtexCompile"
   elseif &filetype == 'go'
-    set splitbelow
-    :sp
-    :term go run %
+    exec "GoRun %"
   elseif &filetype == 'javascript'
     :AsyncRun node %
   elseif &filetype == 'typescript'
@@ -460,7 +460,7 @@ augroup END
 " Plug 'theniceboy/eleline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-if ($TMUX)
+if (!empty($TMUX))
   Plug 'edkolev/tmuxline.vim'
 endif
 
@@ -545,7 +545,6 @@ Plug 'jesseleite/vim-noh'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'schickling/vim-bufonly'
-" Input Method Autoswitch
 
 " Formatter
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
@@ -566,7 +565,6 @@ Plug 'osyo-manga/vim-anzu'
 
 " Mini Vim-APP
 Plug 'mhinz/vim-startify'
-Plug 'theniceboy/vim-leader-mapper'
 
 " Other visual enhancement
 Plug 'ryanoasis/vim-devicons'
@@ -578,11 +576,12 @@ Plug 'tpope/vim-eunuch' " do stuff like :SudoWrite
 
 " Dependencies
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'kana/vim-textobj-user'
+" Plug 'kana/vim-textobj-user'
 Plug 'roxma/nvim-yarp'
 
 " ColorScheme
 Plug 'kaicataldo/material.vim'
+" Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 " experimental
@@ -648,7 +647,7 @@ function! QuickFix_toggle()
   copen
 endfunction
 
-nnoremap <silent> cc :call QuickFix_toggle()<cr>
+nnoremap <silent> cC :call QuickFix_toggle()<cr>
 " ===
 " === rnvimr
 " ===
@@ -687,7 +686,7 @@ let g:airline_theme='deus'
 let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 let g:airline_highlighting_cache = 1
-if ($TMUX)
+if (!empty($TMUX))
   let g:airline_extensions = ['tabline', 'tmuxline']
 else
   let g:airline_extensions = ['tabline']
@@ -757,14 +756,15 @@ nnoremap gs :GitGutterStageHunk<CR>
 " ===
 " === Git-fugitive (code review)
 " ===
-nnoremap <leader>gs :Gdiffsplit<CR><C-w>b<C-w>H
+" nnoremap <leader>gs :Gdiffsplit<CR><C-w>b<C-w>H
+nnoremap <leader>gs :Gvdiffsplit<CR>
 nnoremap <leader>gc :Gcommit<CR>
 " nnoremap <leader>gm :Gmerge<CR>
 " nnoremap <leader>gr :Grebase<CR>
 nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>gf :Gfetch<CR>
 nnoremap <leader>gl :Gpull<CR>
-" nnoremap <leader>ga :Gwrite<CR>
+nnoremap <leader>ga :G add .<CR>:G<CR>
 nnoremap <leader>gg :G<CR>
 " let g:git_messenger_include_diff = 'all'
 " autocmd BufEnter * EnableBlameLine
@@ -837,7 +837,7 @@ noremap tc :CocCommand todolist.clearNotice<CR>
 noremap tl :CocList --normal todolist<CR>
 " coc-bookmark
 nmap ma <Plug>(coc-bookmark-annotate)
-nmap mt <Plug>(coc-bookmark-toggle)
+nmap mm <Plug>(coc-bookmark-toggle)
 nmap m, <Plug>(coc-bookmark-prev)
 nmap m. <Plug>(coc-bookmark-next)
 " coc-translator
@@ -1197,36 +1197,6 @@ let g:tagalong_additional_filetypes = ['vue', 'javascript', 'javascriptreact', '
 " ===
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-
-" ===
-" === vim-after-object
-" ===
-" autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
-
-
-" ===
-" === vim-map-leader
-" ===
-let g:leaderMenu = {'name':  "Shortcut Menu",
-      \'SPC Enter':  ['Clear search'],
-      \'SPC dw':  ['Remove adj. dup. words'],
-      \'SPC tt':  ['spc to tabs'],
-      \'SPC o':  ['Open folds'],
-      \'SPC q':  ['Close win below'],
-      \'SPC sc':  ['Toggle spell-check'],
-      \'SPC gf':  ['Fold unchanged'],
-      \'SPC rn':  ['Rename variable'],
-      \'SPC tm':  ['Toggle table-mode'],
-      \'SPC gy':  ['Toggle focus mode'],
-      \'Ctrl V':  ['Open in vsplit fzf'],
-      \'Ctrl T':  ['Open in tab fzf'],
-      \'Meta P':  ['Toggle autopair'],
-      \'Meta e':  ['Move pairs after sections']
-      \}
-nnoremap <silent> ? :call leaderMapper#start() "<Space>"<CR>
-let g:leaderMapperWidth = 80
-
 
 " ===
 " === rainbow
