@@ -46,7 +46,10 @@ set list
 set listchars=tab:→\ ,trail:·
 set scrolloff=8
 set viewoptions=cursor,folds,slash,unix
-set notimeout
+" set notimeout
+set timeout
+set timeoutlen=2000
+set ttimeoutlen=0
 set nowrap
 set sidescroll=8
 set linebreak
@@ -247,7 +250,7 @@ snoremap <M-D> <ESC>#ve<C-g>
 " rename a word
 nnoremap cw viwc
 
-snoremap <ESC> <ESC>:noh<CR>
+smap <ESC> <ESC>:noh<CR>
 " Ctrl + U or E will move up/down the view port without moving the cursor
 noremap <C-W> 5<C-y>
 noremap <C-E> 5<C-e>
@@ -270,6 +273,10 @@ cnoremap <M-b> <S-Left>
 cnoremap <M-w> <S-Right>
 
 " use shift(Meta) + arrow keys to move line up/down
+inoremap <M-up> <ESC>:m .-2<CR>==gi
+inoremap <M-down> <ESC>:m .+1<CR>==gi
+inoremap <M-left> <ESC>bi
+inoremap <M-right> <Esc>ea
 inoremap <S-up> <ESC>:m .-2<CR>==gi
 inoremap <S-down> <ESC>:m .+1<CR>==gi
 inoremap <S-left> <ESC>bi
@@ -366,8 +373,8 @@ inoremap <C-u> <ESC>lx$p
 noremap <LEADER>. :set nosplitbelow<CR>:split<CR><C-w>w:terminal<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
-nnoremap <LEADER>+ <Esc>/<++><CR>:nohlsearch<CR>c4l
-
+nnoremap <silent> <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>v3l<C-g>
+inoremap <silent> <C-p> <++>
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
 
@@ -498,10 +505,11 @@ Plug 'rhysd/git-messenger.vim'
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json', { 'for': ['json'] }
 " Plug 'pangloss/vim-javascript', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact', 'typescript'] }
 Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact', 'typescriptreact'] }
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags
-Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
+Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact', 'typescript'] }
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 " Plug 'nicwest/vim-http', { 'for': 'http' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
@@ -805,7 +813,7 @@ endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
 " Open up coc-commands
-nnoremap <c-c> :CocCommand<CR>
+nnoremap <c-c> :CocList diagnostics<CR>
 " Text Objects
 xmap kf <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
@@ -866,6 +874,13 @@ autocmd FileType javascript,javascriptreact,typescript,typescriptreact,scss let 
 " === Vue
 " ===
 let g:vue_pre_processors = ['typescript', 'scss']
+
+" ===
+" === JsDoc
+" ===
+let g:jsdoc_input_description=1
+let g:jsdoc_allow_input_prompt=0
+let g:jsdoc_enable_es6=1
 
 " ===
 " === emmet
@@ -988,30 +1003,6 @@ let g:fzf_full_preview_toggle_key = '<C-f>'
 let g:fzf_preview_command = 'ccat --color=always {-1}'
 let g:fzf_binary_preview_command = 'echo "It is a binary file"'
 
-
-" ===
-" === vim-bookmarks
-" ===
-" let g:bookmark_no_default_key_mappings = 1
-" nmap mt <Plug>BookmarkToggle
-" nmap ma <Plug>BookmarkAnnotate
-" nmap ml <Plug>BookmarkShowAll
-" nmap m. <Plug>BookmarkNext
-" nmap m, <Plug>BookmarkPrev
-" nmap mc <Plug>BookmarkClear
-" nmap mC <Plug>BookmarkClearAll
-" nmap mu <Plug>BookmarkMoveUp
-" nmap me <Plug>BookmarkMoveDown
-" nmap <Leader>g <Plug>BookmarkMoveToLine
-" let g:bookmark_auto_save = 1
-" let g:bookmark_highlight_lines = 1
-" let g:bookmark_manage_per_buffer = 1
-" let g:bookmark_save_per_working_dir = 1
-" let g:bookmark_center = 1
-" let g:bookmark_auto_close = 1
-" let g:bookmark_location_list = 1
-"
-
 " ===
 " === Undotree
 " ===
@@ -1097,7 +1088,7 @@ let maplocalleader=' '
 " ===
 nmap n <Plug>(anzu-n-with-echo)
 nmap N <Plug>(anzu-N-with-echo)
-nmap <Esc><Esc> <Plug>(anzu-clear-search-status)
+nmap <Esc> <Plug>(anzu-clear-search-status)
 " ===
 " === vim-go
 " ===

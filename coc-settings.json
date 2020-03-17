@@ -45,7 +45,7 @@
     "value": "\uf89f",
     "variable": "\ue71b"
   },
-  "diagnostic.signOffset": 1,
+  "diagnostic.signOffset": 3,
   "diagnostic.errorSign": "×",
   "diagnostic.warningSign": "»",
   "diagnostic.infoSign": " ",
@@ -55,7 +55,7 @@
   "diagnostic.refreshAfterSave": false,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualTextPrefix": "           => ",
-  "diagnostic.virtualText": true,
+  "diagnostic.virtualText": false,
   "diagnostic.messageTarget": "echo",
   "codeLens.enable": true,
   "list.previewHighlightGroup": "Statement",
