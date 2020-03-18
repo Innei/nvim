@@ -6,7 +6,12 @@
   "coc.preferences.snippetStatusText": "Ⓢ ",
   "coc.preferences.extensionUpdateCheck": "weekly",
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "coc.preferences.rootPatterns": [".git", ".hg", ".projections.json", "node_modules"],
+  "coc.preferences.rootPatterns": [
+    ".git",
+    ".hg",
+    ".projections.json",
+    "node_modules"
+  ],
   "suggest.detailMaxLength": 100,
   "suggest.noselect": true,
   "suggest.enablePreselect": false,
@@ -61,7 +66,7 @@
   "list.previewHighlightGroup": "Statement",
   "list.nextKeymap": "<C-e>",
   "list.previousKeymap": "<C-u>",
-  "coc.preferences.jumpCommand": "tab drop",
+  // "coc.preferences.jumpCommand": "tab drop",
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
     "css",
@@ -69,7 +74,8 @@
     "javascriptreact",
     "typescriptreact",
     "typescript",
-    "vue"
+    "vue",
+    "scss"
   ],
   "prettier.eslintIntegration": true,
   "prettier.semi": false,
@@ -112,9 +118,10 @@
     "gl": "expandRecursive",
     "gh": "collapseRecursive",
     "i": "expand",
-    "<cr>": "open",
     "s": "open:vsplit",
-    "o": "open:tab",
+    "<cr>": ["expandable?", "expandOrCollapse", "open"],
+    "o": ["expandable?", "expandOrCollapse", "open"],
+    "t": "open:tab",
     "<bs>": "gotoParent",
     "l": "gotoParent",
 
@@ -146,15 +153,15 @@
     "b": "gotoSource:buffer",
 
     "[[": "sourcePrev",
-      "]]": "sourceNext",
+    "]]": "sourceNext",
 
-      "[d": "diagnosticPrev",
-        "]d": "diagnosticNext",
+    "[d": "diagnosticPrev",
+    "]d": "diagnosticNext",
 
-        "[c": "gitPrev",
-          "]c": "gitNext",
-          "<<": "gitStage",
-          ">>": "gitUnstage"
+    "[c": "gitPrev",
+    "]c": "gitNext",
+    "<<": "gitStage",
+    ">>": "gitUnstage"
   },
   "git.enableGutters": true,
   "git.branchCharacter": "\uf408",

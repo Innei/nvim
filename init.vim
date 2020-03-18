@@ -458,8 +458,10 @@ augroup discord
 augroup END
 " Pretty Dress
 " Plug 'theniceboy/eleline.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+if !exists('g:started_by_firenvim')
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+endif
 if (!empty($TMUX))
   Plug 'edkolev/tmuxline.vim'
 endif
@@ -540,19 +542,20 @@ Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
 "Plug 'tpope/vim-capslock'  " Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
 Plug 'Konfekt/FastFold'
-Plug 'junegunn/vim-peekaboo'
+" Plug 'junegunn/vim-peekaboo'
 Plug 'jesseleite/vim-noh'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'schickling/vim-bufonly'
-
+Plug 'AndrewRadev/splitjoin.vim'
+" Plug 'RRethy/vim-illuminate'
 " Formatter
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
 " For general writing
 Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
 Plug 'amix/vim-zenroom2', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
-
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Bookmarks
 " Plug 'MattesGroeger/vim-bookmarks'
 
@@ -560,18 +563,17 @@ Plug 'amix/vim-zenroom2', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
 Plug 'osyo-manga/vim-anzu'
 
-" Documentation
-"Plug 'KabbAmine/zeavim.vim' " <LEADER>z to find doc
-
 " Mini Vim-APP
+if !exists('g:started_by_firenvim')
 Plug 'mhinz/vim-startify'
-
+endif
 " Other visual enhancement
 Plug 'ryanoasis/vim-devicons'
 Plug 'luochen1990/rainbow'
 
 " Other useful utilities
 Plug 'tpope/vim-eunuch' " do stuff like :SudoWrite
+Plug 'pechorin/any-jump.vim'
 " Plug 'makerj/vim-pdf'
 
 " Dependencies
@@ -659,13 +661,12 @@ nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR
 tnoremap <silent> R <C-\><C-n>:RnvimrResize<CR>
 
 " Customize the initial layout
-let g:rnvimr_layout = {
-      \'relative': 'editor',
-      \ 'width': 100,
-      \ 'height': 100,
+let g:rnvimr_layout = { 'relative': 'editor',
+      \ 'width': &columns,
+      \ 'height': &lines,
       \ 'col': 0,
-      \ 'row': 0
-      \ }
+      \ 'row': 0,
+      \ 'style': 'minimal' }
 " Customize multiple preset layouts
 " '{}' represents the initial layout
 let g:rnvimr_presets = [
@@ -681,63 +682,66 @@ let g:rnvimr_presets = [
 " ===
 " === eleline.vim
 " ===
-let g:airline_powerline_fonts = 1
-let g:airline_theme='deus'
-let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
-let g:airline#extensions#tabline#formatter = 'jsformatter'
-let g:airline_highlighting_cache = 1
-if (!empty($TMUX))
-  let g:airline_extensions = ['tabline', 'tmuxline']
-else
-  let g:airline_extensions = ['tabline']
-endif
-let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
-let g:airline#extensions#tabline#tabs_label = ' '
-let g:airline#extensions#tabline#buffers_label = '﬘'
-let g:airline#extensions#tabline#show_close_button = 0
-let g:airline#extensions#tabline#exclude_preview = 1
-" let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
-" let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+if !exists('g:started_by_firenvim')
+  let g:airline_powerline_fonts = 1
+  let g:airline_theme='deus'
+  let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
+  let g:airline#extensions#tabline#formatter = 'jsformatter'
+  let g:airline_highlighting_cache = 1
+  if (!empty($TMUX))
+    let g:airline_extensions = ['tabline', 'tmuxline']
+  else
+    let g:airline_extensions = ['tabline']
+  endif
+  let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+  let g:airline#extensions#tabline#tabs_label = ' '
+  let g:airline#extensions#tabline#buffers_label = '﬘'
+  let g:airline#extensions#tabline#show_close_button = 0
+  let g:airline#extensions#tabline#exclude_preview = 1
+  " let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+  " let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
-let g:airline_section_c = airline#section#create(['%f  ' , '%{get(b:,''coc_current_function'','''')}'])
-let g:airline_section_b = airline#section#create(['%{get(b:,''coc_git_status'','''')}','%{get(g:,''coc_git_status'','''')}'])
-let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-function! StatusDiagnostic() abort
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info) | return '' | endif
-  let msgs = []
-  if get(info, 'error', 0)
-    call add(msgs, ' ' . info['error'])
+  let g:airline_section_c = airline#section#create(['%f  ' , '%{get(b:,''coc_current_function'','''')}'])
+  let g:airline_section_b = airline#section#create(['%{get(b:,''coc_git_status'','''')}','%{get(g:,''coc_git_status'','''')}'])
+  let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+  function! StatusDiagnostic() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    let msgs = []
+    if get(info, 'error', 0)
+      call add(msgs, ' ' . info['error'])
+    endif
+    if get(info, 'warning', 0)
+      call add(msgs, ' ' . info['warning'])
+    endif
+    if get(info, 'information', 0)
+      call add(msgs, ' ' . info['information'])
+    endif
+    if get(info, 'hint', 0)
+      call add(msgs, ' ' . info['hint'])
+    endif
+    " echo get(g:, 'coc_status', '')
+    return join(msgs, ' ')
+  endfunction
+  let g:airline_section_warning = airline#section#create_right(['%{StatusDiagnostic()}'])
+  " let g:airline_section_warning = airline#section#create_right(['%{coc#status()}'])
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
   endif
-  if get(info, 'warning', 0)
-    call add(msgs, ' ' . info['warning'])
-  endif
-  if get(info, 'information', 0)
-    call add(msgs, ' ' . info['information'])
-  endif
-  if get(info, 'hint', 0)
-    call add(msgs, ' ' . info['hint'])
-  endif
-  " echo get(g:, 'coc_status', '')
-  return join(msgs, ' ')
-endfunction
-let g:airline_section_warning = airline#section#create_right(['%{StatusDiagnostic()}'])
-" let g:airline_section_warning = airline#section#create_right(['%{coc#status()}'])
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
+  let g:airline_left_sep = '»'
+  let g:airline_left_sep = '▶'
+  let g:airline_right_sep = '«'
+  let g:airline_right_sep = '◀'
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
 
-let g:tmuxline_preset = 'full'
+  let g:tmuxline_preset = 'full'
+
+endif
 " ==
 " == GitGutter
 " ==
@@ -772,7 +776,7 @@ nnoremap <leader>gg :G<CR>
 " ===
 " === vim-illuminate
 " ===
-" let g:Illuminate_delay = 750
+" let g:Illuminate_delay = 450
 " hi illuminatedWord cterm=underline gui=underline
 " let g:Illuminate_highlightUnderCursor = 0
 " let g:Illuminate_ftblacklist = ['nerdtree']
@@ -848,7 +852,7 @@ noremap \d :CocList translators<CR>
 nnoremap <silent> <leader>b :CocCommand actions.open<cr>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
-hi CocHighlightText guifg=#eeffff guibg=#ff5370
+hi CocHighlightText guifg=#eeffff guibg=#888888
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -1348,3 +1352,18 @@ fun! SetCursor()
   set guicursor=v:block
 endfun
 au BufEnter * call SetCursor()
+
+if exists('g:started_by_firenvim')
+  colorscheme xcodelight
+  set laststatus=0
+else
+  set laststatus=2
+endif
+au BufEnter github.com_*.txt set filetype=markdown
+let g:firenvim_config = {
+	\ "globalSettings": {
+		\ "alt": "all"
+	\}
+\}
+
+
