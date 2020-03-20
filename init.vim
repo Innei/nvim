@@ -43,7 +43,7 @@ set backspace=2
 set autoindent
 set smartindent
 set smarttab
-set signcolumn=yes
+set signcolumn=yes:2
 set list
 set listchars=tab:→\ ,trail:·
 set scrolloff=8
@@ -135,8 +135,6 @@ let g:terminal_color_12 = '#CAA9FA'
 let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
 
-" noremap <C-b> :NERDTreeToggle<CR>
-
 " ===
 " === Basic Mappings
 " ===
@@ -199,6 +197,8 @@ xnoremap <leader>ss :s/\t/    /g
 " Open up lazygit
 nnoremap \g :term lazygit<CR>
 
+" Toggle wrap
+nnoremap <LEADER>tw :set wrap!<CR>
 " ===
 " === Cursor Movement
 " ===
@@ -260,7 +260,7 @@ noremap <C-E> 5<C-e>
 " ===
 " === Insert Mode Cursor Movement
 " ===
-inoremap jj <ESC>
+inoremap jj <ESC>l
 
 " ===
 " === Command Mode Cursor Movement
@@ -464,6 +464,7 @@ if !exists('g:started_by_firenvim')
 endif
 if (!empty($TMUX))
   Plug 'edkolev/tmuxline.vim'
+  Plug 'wellle/tmux-complete.vim'
 endif
 
 " Genreal Highlighter
@@ -514,7 +515,7 @@ Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 " Plug 'nicwest/vim-http', { 'for': 'http' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
-Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
+Plug 'moll/vim-node', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescriptreact' ] }
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
@@ -549,6 +550,10 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'schickling/vim-bufonly'
 Plug 'AndrewRadev/splitjoin.vim'
 " Plug 'RRethy/vim-illuminate'
+Plug 'Shougo/context_filetype.vim'
+Plug 'sgur/vim-editorconfig'
+Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
+
 " Formatter
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
@@ -658,7 +663,7 @@ let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
 nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
 " Resize floating window by all preset layouts
-tnoremap <silent> R <C-\><C-n>:RnvimrResize<CR>
+" tnoremap <silent> <buffer> R <C-\><C-n>:RnvimrResize<CR>
 
 " Customize the initial layout
 let g:rnvimr_layout = { 'relative': 'editor',
@@ -1355,6 +1360,7 @@ au BufEnter * call SetCursor()
 
 if exists('g:started_by_firenvim')
   colorscheme xcodelight
+  set wrap
   set laststatus=0
 else
   set laststatus=2
