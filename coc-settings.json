@@ -61,7 +61,7 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualTextPrefix": "           => ",
   "diagnostic.virtualText": false,
-  "diagnostic.messageTarget": "echo",
+  "diagnostic.messageTarget": "float",
   "codeLens.enable": true,
   "list.previewHighlightGroup": "Statement",
   "list.nextKeymap": "<C-e>",

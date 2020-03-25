@@ -23,7 +23,7 @@ endif
 " ===
 " === System
 " ===
-"set clipboard=unnamedplus
+" set clipboard=unnamedplus
 let &t_ut=''
 " set autochdir
 let g:python_host_skip_check = 1
@@ -32,7 +32,7 @@ let g:python3_host_skip_check = 1
 " === Editor behavior
 " ===
 set number
-set relativenumber
+" set relativenumber
 set mouse=niv
 set cursorline
 set expandtab
@@ -50,7 +50,7 @@ set scrolloff=8
 set viewoptions=cursor,folds,slash,unix
 " set notimeout
 set timeout
-set timeoutlen=2000
+set timeoutlen=500
 set ttimeoutlen=0
 set nowrap
 set sidescroll=8
@@ -157,6 +157,7 @@ noremap <silent> <C-S> :wa<CR>
 inoremap <silent> <C-s> <ESC>:w<CR>i
 inoremap <M-f> <ESC>:Format<CR>a
 
+nnoremap <S-CR> <ESC>o<ESC>
 inoremap <S-CR> <ESC>o
 " Meta key remap
 vnoremap <M-c> "+y
@@ -170,6 +171,9 @@ nnoremap <LEADER>st :Startify<CR>
 
 " make Y to copy till the end of the line
 nnoremap Y yg_
+
+" Paste from system clipboard
+nnoremap P "+p
 
 " Copy to system clipboard
 xnoremap y "+y
@@ -261,6 +265,8 @@ noremap <C-E> 5<C-e>
 " === Insert Mode Cursor Movement
 " ===
 inoremap jj <ESC>l
+inoremap jk <ESC>l
+inoremap kk <ESC>l
 
 " ===
 " === Command Mode Cursor Movement
@@ -275,6 +281,8 @@ cnoremap <M-b> <S-Left>
 cnoremap <M-w> <S-Right>
 
 " use shift(Meta) + arrow keys to move line up/down
+nnoremap <S-up> :m .-2<CR>
+nnoremap <S-down> :m .+1<CR>
 inoremap <M-up> <ESC>:m .-2<CR>==gi
 inoremap <M-down> <ESC>:m .+1<CR>==gi
 inoremap <M-left> <ESC>bi
@@ -348,7 +356,7 @@ nnoremap tm. :+tabmove<CR>
 nnoremap <C-\> :bprevious<CR>
 nnoremap <C-]> :bnext<CR>
 nnoremap gB :bprevious<CR>
-noremap gb :bnext<CR>
+nnoremap gb :bnext<CR>
 nnoremap tb :enew<CR>
 " ===
 " === Markdown Settings
@@ -459,11 +467,12 @@ augroup END
 " Pretty Dress
 " Plug 'theniceboy/eleline.vim'
 if !exists('g:started_by_firenvim')
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  " Plug 'liuchengxu/eleline.vim'
+  " Plug 'itchyny/lightline.vim'
 endif
 if (!empty($TMUX))
-  Plug 'edkolev/tmuxline.vim'
   Plug 'wellle/tmux-complete.vim'
 endif
 
@@ -476,9 +485,9 @@ Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'haya14busa/incsearch-easymotion.vim'
+" Plug 'haya14busa/incsearch.vim'
+" Plug 'haya14busa/incsearch-fuzzy.vim'
+" Plug 'haya14busa/incsearch-easymotion.vim'
 " Taglist
 " Plug 'liuchengxu/vista.vim'
 
@@ -506,16 +515,12 @@ Plug 'rhysd/git-messenger.vim'
 " Plug 'ctrlpvim/ctrlp.vim'
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
-Plug 'elzr/vim-json', { 'for': ['json'] }
-" Plug 'pangloss/vim-javascript', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact'] }
-Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact', 'typescript'] }
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact', 'typescriptreact'] }
+Plug 'neoclide/jsonc.vim', { 'for': 'json' }
+Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact'] }
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags
-Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact', 'typescriptreact', 'typescript'] }
+Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact'] }
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
-" Plug 'nicwest/vim-http', { 'for': 'http' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
-Plug 'moll/vim-node', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescriptreact' ] }
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
@@ -528,7 +533,6 @@ Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle', 'for': ['text', 'markdown'
 " swift
 Plug 'keith/swift.vim', { 'for': ['swift'] }
 " Editor Enhancement
-" Plug 'liuchengxu/vim-clap'
 Plug 'airblade/vim-rooter'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'terryma/vim-multiple-cursors'
@@ -540,7 +544,6 @@ Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or 
 " Plug 'junegunn/vim-after-object' " da= to delete what's after =
 Plug 'wellle/targets.vim'
 Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
-"Plug 'tpope/vim-capslock'  " Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
 Plug 'Konfekt/FastFold'
 " Plug 'junegunn/vim-peekaboo'
@@ -548,12 +551,11 @@ Plug 'jesseleite/vim-noh'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'schickling/vim-bufonly'
-Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'RRethy/vim-illuminate'
+Plug 'AndrewRadev/splitjoin.vim'  " gS to split line, gJ to join lines
 Plug 'Shougo/context_filetype.vim'
 Plug 'sgur/vim-editorconfig'
 Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
-
+" Plug 'haya14busa/vim-asterisk'
 " Formatter
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
@@ -561,8 +563,6 @@ Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
 Plug 'amix/vim-zenroom2', { 'for': ['markdown', 'text', 'tex'], 'on': 'Goyo' }
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
-" Bookmarks
-" Plug 'MattesGroeger/vim-bookmarks'
 
 " Find & Replace
 Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
@@ -570,7 +570,7 @@ Plug 'osyo-manga/vim-anzu'
 
 " Mini Vim-APP
 if !exists('g:started_by_firenvim')
-Plug 'mhinz/vim-startify'
+  Plug 'mhinz/vim-startify'
 endif
 " Other visual enhancement
 Plug 'ryanoasis/vim-devicons'
@@ -588,11 +588,14 @@ Plug 'roxma/nvim-yarp'
 
 " ColorScheme
 Plug 'kaicataldo/material.vim'
+" Plug 'jacoborus/tender.vim'
+Plug 'dracula/vim'
 " Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 " experimental
 set lazyredraw
+syntax sync minlines=256
 set regexpengine=1
 
 "
@@ -622,12 +625,12 @@ endif
 " set background=dark
 
 " colorscheme material
-color xcodedark
-hi Normal guibg=NONE ctermbg=NONE
+" color xcodedark
+" hi Normal guibg=NONE ctermbg=NONE
 
 "hi SpecialKey ctermfg=blue guifg=grey70
-hi NonText guibg=NONE ctermbg=NONE ctermfg=NONE guifg=NONE
-
+" hi NonText guibg=NONE ctermbg=NONE ctermfg=NONE guifg=NONE
+colorscheme dracula
 
 " let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -693,11 +696,7 @@ if !exists('g:started_by_firenvim')
   let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
   let g:airline#extensions#tabline#formatter = 'jsformatter'
   let g:airline_highlighting_cache = 1
-  if (!empty($TMUX))
-    let g:airline_extensions = ['tabline', 'tmuxline']
-  else
-    let g:airline_extensions = ['tabline']
-  endif
+  let g:airline_extensions = ['coc', 'tabline']
   let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
   let g:airline#extensions#tabline#tabs_label = ' '
   let g:airline#extensions#tabline#buffers_label = '﬘'
@@ -705,8 +704,9 @@ if !exists('g:started_by_firenvim')
   let g:airline#extensions#tabline#exclude_preview = 1
   " let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
   " let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-
-  let g:airline_section_c = airline#section#create(['%f  ' , '%{get(b:,''coc_current_function'','''')}'])
+  let R_setwidth = 0
+  let R_clear_line = 0
+  " let g:airline_section_c = airline#section#create(['%f  ' , '%{get(b:,''coc_current_function'','''')}'])
   let g:airline_section_b = airline#section#create(['%{get(b:,''coc_git_status'','''')}','%{get(g:,''coc_git_status'','''')}'])
   let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
   function! StatusDiagnostic() abort
@@ -743,8 +743,6 @@ if !exists('g:started_by_firenvim')
   let g:airline_right_alt_sep = ''
   let g:airline_symbols.branch = ''
   let g:airline_symbols.readonly = ''
-
-  let g:tmuxline_preset = 'full'
 
 endif
 " ==
@@ -788,14 +786,9 @@ nnoremap <leader>gg :G<CR>
 " ===
 " === coc
 " ===
-" fix the most annoying bug that coc has
-" silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions', 'coc-spell-checker', 'coc-post', 'coc-go', 'coc-template', 'coc-marketplace', 'coc-calc', 'coc-bookmark', 'coc-todolist']
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" make esc to exit compl mode if in compl mode
-" inoremap <expr> <ESC> pumvisible() ? "\<C-g>u" : "\<ESC>"
-" inoremap <CR> <C-g>u<CR><ESC>:call coc#on_enter()<ESC>a
 imap <expr> <silent> <CR>  "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nnoremap <expr> <silent> o "o\<c-r>=coc#on_enter()\<cr>"
 inoremap <silent><expr> <TAB>
@@ -823,6 +816,7 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 " Open up coc-commands
 nnoremap <c-c> :CocList diagnostics<CR>
+nnoremap <leader>f :CocList
 " Text Objects
 xmap kf <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
@@ -857,16 +851,19 @@ noremap \d :CocList translators<CR>
 nnoremap <silent> <leader>b :CocCommand actions.open<cr>
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
-hi CocHighlightText guifg=#eeffff guibg=#888888
+" hi CocHighlightText guifg=#eeffff guibg=#888888
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" Add `:Format` command to format current buffer.
+
 command! -nargs=0 Format :call CocAction('format')
 
-" Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-" Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+command! -nargs=0 C             CocConfig
+command! -nargs=0 R             CocRestart
+command! -nargs=0 L             CocListResume
+command! -nargs=0 -range D      CocCommand
 
 nmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <TAB> <Plug>(coc-range-select)
@@ -1046,7 +1043,6 @@ let g:VM_maps["Tools Menu"]           = '<leader>`'
 " ===
 " === Far.vim
 " ===
-nnoremap <LEADER>f :F  %<left><left>
 let g:far#source='ag'
 
 " ===
@@ -1157,29 +1153,22 @@ nnoremap U <Plug>(easymotion-k)
 "nmap 'l <Plug>(easymotion-overwin-line)
 "map  'w <Plug>(easymotion-bd-w)
 "nmap 'w <Plug>(easymotion-overwin-w)
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-        \   'converters': [incsearch#config#fuzzyword#converter()],
-        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-        \   'is_expr': 0,
-        \   'is_stay': 1
-        \ }), get(a:, 1, {}))
-endfunction
-
-noremap <silent><expr> z' incsearch#go(<SID>config_easyfuzzymotion())
-map  z/ <Plug>(incsearch-fuzzy-/)
+" function! s:config_easyfuzzymotion(...) abort
+"   return extend(copy({
+"         \   'converters': [incsearch#config#fuzzyword#converter()],
+"         \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"         \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+"         \   'is_expr': 0,
+"         \   'is_stay': 1
+"         \ }), get(a:, 1, {}))
+" endfunction
+"
+" noremap <silent><expr> z' incsearch#go(<SID>config_easyfuzzymotion())
+" nmap  z/ <Plug>(incsearch-fuzzy-/)
 " ===
 " === goyo
 " ===
-map <LEADER>gy :Goyo<CR>
-
-
-" ===
-" === jsx
-" ===
-let g:vim_jsx_pretty_colorful_config = 1
-
+nmap <LEADER>gy :Goyo<CR>
 
 " ===
 " === fastfold
@@ -1264,7 +1253,7 @@ let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 "let g:session_autosave_periodic = 1
 let g:session_autosave_silent = 1
-set sessionoptions-=buffers
+set sessionoptions+=buffers
 set sessionoptions-=options
 noremap sl :OpenSession<CR>
 noremap ss :SaveSession<CR>
@@ -1314,6 +1303,7 @@ function! NERDCommenter_after()
   endif
 endfunction
 map <Leader>/ <plug>NERDCommenterToggle
+imap <C-c> <plug>NERDCommenterInsert
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDToggleCheckAllLines = 1
@@ -1321,11 +1311,11 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDCommentEmptyLines = 1
 let g:NERDCreateDefaultMappings = 0
-" ===
-" === discord RPC
-"
-noremap <Leader>d :DiscordUpdatePresence<CR>
 
+" vim-rooter
+
+let g:rooter_patterns = ['.root', 'package.json', '.git/']
+let g:rooter_change_directory_for_non_project_files = 'current'
 " ===================== End of Plugin Settings =====================
 
 " ===
@@ -1367,9 +1357,9 @@ else
 endif
 au BufEnter github.com_*.txt set filetype=markdown
 let g:firenvim_config = {
-	\ "globalSettings": {
-		\ "alt": "all"
-	\}
-\}
+      \ "globalSettings": {
+      \ "alt": "all"
+      \}
+      \}
 
 
