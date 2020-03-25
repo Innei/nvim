@@ -495,6 +495,7 @@ Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'kizza/actionmenu.nvim'
 
 " Snippets
 Plug 'honza/vim-snippets'
@@ -786,7 +787,40 @@ nnoremap <leader>gg :G<CR>
 " ===
 " === coc
 " ===
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint', 'coc-tslint', 'coc-git', 'coc-explorer', 'coc-pyright', 'coc-translator', 'coc-prettier', 'coc-snippets', 'coc-eslint', 'coc-highlight', 'coc-zi', 'coc-github-users', 'coc-actions', 'coc-spell-checker', 'coc-post', 'coc-go', 'coc-template', 'coc-marketplace', 'coc-calc', 'coc-bookmark', 'coc-todolist']
+let g:coc_global_extensions = ['coc-python',
+    \ 'coc-vimlsp',
+    \ 'coc-html',
+    \ 'coc-json',
+    \ 'coc-css',
+    \ 'coc-tsserver',
+    \ 'coc-yank',
+    \ 'coc-lists',
+    \ 'coc-gitignore',
+    \ 'coc-vimlsp',
+    \ 'coc-tailwindcss',
+    \ 'coc-stylelint',
+    \ 'coc-tslint',
+    \ 'coc-git',
+    \ 'coc-explorer',
+    \ 'coc-pyright',
+    \ 'coc-translator',
+    \ 'coc-prettier',
+    \ 'coc-snippets',
+    \ 'coc-eslint',
+    \ 'coc-highlight',
+    \ 'coc-zi',
+    \ 'coc-github-users',
+    \ 'coc-actions',
+    \ 'coc-spell-checker',
+    \ 'coc-post',
+    \ 'coc-go',
+    \ 'coc-template',
+    \ 'coc-marketplace',
+    \ 'coc-calc',
+    \ 'coc-bookmark',
+    \ 'coc-todolist',
+    \ 'coc-postfix'
+    \ ]
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <expr> <silent> <CR>  "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -816,7 +850,7 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 " Open up coc-commands
 nnoremap <c-c> :CocList diagnostics<CR>
-nnoremap <leader>f :CocList
+nnoremap <leader>l :CocList<CR>
 " Text Objects
 xmap kf <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
@@ -952,6 +986,7 @@ set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 let g:fzf_history_dir = '~/.config/nvim/tmp/fzf-history'
 nnoremap <C-f> :Ag<CR>
 nnoremap <C-p> :FZF<CR>
+nnoremap <leader>f :BLines<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -1070,11 +1105,6 @@ let g:bullets_enabled_file_types = [
 "       \   "function": "\uf794",
 "       \   "variable": "\uf71b",
 "       \  }
-
-" ===
-" === fzf-gitignore
-" ===
-" noremap <LEADER>gi :FzfGitignore<CR>
 
 
 " ===
@@ -1316,25 +1346,33 @@ let g:NERDCreateDefaultMappings = 0
 
 let g:rooter_patterns = ['.root', 'package.json', '.git/']
 let g:rooter_change_directory_for_non_project_files = 'current'
+
+" actionmenu
+" let s:code_actions = []
+"
+" func! ActionMenuCodeActions() abort
+"   if coc#util#has_float()
+"     call coc#util#float_hide()
+"   endif
+"
+"   let s:code_actions = CocAction('codeActions')
+"   let l:menu_items = map(copy(s:code_actions), { index, item -> item['title'] })
+"   call actionmenu#open(l:menu_items, 'ActionMenuCodeActionsCallback')
+" endfunc
+"
+" func! ActionMenuCodeActionsCallback(index, item) abort
+"   if a:index >= 0
+"     let l:selected_code_action = s:code_actions[a:index]
+"     let l:response = CocAction('doCodeAction', l:selected_code_action)
+"   endif
+" endfunc
+" nnoremap <silent> <Leader>s :call ActionMenuCodeActions()<CR>
 " ===================== End of Plugin Settings =====================
 
 " ===
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
-
-
-
-" if has("autocmd")
-"   au VimEnter,InsertLeave * silent execute '!echo -ne "\e[7 q"' | redraw!
-"   au InsertEnter,InsertChange *
-"         \ if v:insertmode == 'i' |
-"         \   silent execute '!echo -ne "\e[5 q"' | redraw! |
-"         \ elseif v:insertmode == 'r' |
-"         \   silent execute '!echo -ne "\e[4 q"' | redraw! |
-"         \ endif
-"   au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
-" endif
 
 fun! SetCursor()
   " Don't strip on these filetypes
