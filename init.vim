@@ -1330,4 +1330,39 @@ let g:firenvim_config = {
       \}
       \}
 
+" ---------------------------------------------------------------------
+" About Chinese: f[[
+" punctuations auto changing has unexpected problems
+imap （ (
+imap ） )
+imap 』 }
+imap 『 {
+imap 【 [
+imap 】 ]
+imap 。 .
+imap ， ,
+imap ； ;
+imap ： :
+imap “ "
+imap ” "
+imap ‘ '
+imap ’ '
+imap ？ ?
+imap ！ !
+imap 》 >
+imap 《 <
+imap 、 /
+imap ￥ $
+imap 》 >
+imap 《 <
+map ： :
 
+" func! Replace_Chn()                     " for writing latex
+" 	let chinese={"（" : "(" , "）" : ")" , "，" : ",", "；" : ";", "：" : ":",
+" 	"？" : "?", "！" : "!", "“" : "\"", "’" : "'" ,
+" 	""”" : "\"", "℃" : "\\\\textcelsius", "μ" : "$\\\\mu$"}
+" 	for i in keys(chinese)
+" 		silent! exec '%substitute/' . i . '/'. chinese[i] . '/g'
+" 	endfor
+" endfunc
+" nnoremap <leader>rch :call Replace_Chn()<cr>
