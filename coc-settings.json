@@ -262,5 +262,10 @@
     "**/*.dll",
     "init.vim"
   ],
-  "yaml.format.enable": true
+  "yaml.format.enable": true,
+  "coc-actions.hideCursor": true,
+  "coc-actions.useCursorLine": true,
+  "cSpell.userWords": [
+    "consola"
+  ]
 }

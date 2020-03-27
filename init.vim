@@ -28,12 +28,17 @@ let &t_ut=''
 " set autochdir
 let g:python_host_skip_check = 1
 let g:python3_host_skip_check = 1
+let g:loaded_node_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_python_provider = 0
+" let g:loaded_python3_provider = 0
 " ===
 " === Editor behavior
 " ===
 set number
 " set relativenumber
 set mouse=niv
+set mousehide
 set cursorline
 set expandtab
 set tabstop=4
@@ -71,7 +76,7 @@ set showcmd
 set wildmenu
 set ignorecase
 set smartcase
-set shortmess+=c
+set shortmess+=cOtT
 set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
 set ttyfast "should make scrolling faster
@@ -212,15 +217,11 @@ nnoremap <LEADER>tw :set wrap!<CR>
 " < n   i >
 "     e
 "     v
-"noremap <silent> u k
-"noremap <silent> n h
-"noremap <silent> e j
-"noremap <silent> i l
-" noremap k <nop>
 nnoremap J :BTags<CR>
 " nnoremap h <nop>
 nnoremap . <C-I>
 nnoremap , <C-O>
+noremap " .
 nnoremap = <C-a>
 nnoremap - <C-x>
 nnoremap <C-a> <nop>
@@ -469,8 +470,6 @@ augroup END
 if !exists('g:started_by_firenvim')
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  " Plug 'liuchengxu/eleline.vim'
-  " Plug 'itchyny/lightline.vim'
 endif
 if (!empty($TMUX))
   Plug 'wellle/tmux-complete.vim'
@@ -485,17 +484,11 @@ Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
-" Plug 'haya14busa/incsearch.vim'
-" Plug 'haya14busa/incsearch-fuzzy.vim'
-" Plug 'haya14busa/incsearch-easymotion.vim'
 " Taglist
 " Plug 'liuchengxu/vista.vim'
 
-" Error checking, handled by coc
-
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'kizza/actionmenu.nvim'
 
 " Snippets
 Plug 'honza/vim-snippets'
@@ -504,8 +497,6 @@ Plug 'honza/vim-snippets'
 Plug 'mbbill/undotree'
 
 " Git
-" Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
-" Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
@@ -513,7 +504,6 @@ Plug 'rhysd/git-messenger.vim'
 " Tex
 "Plug 'lervag/vimtex'
 
-" Plug 'ctrlpvim/ctrlp.vim'
 
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'neoclide/jsonc.vim', { 'for': 'json' }
@@ -533,12 +523,16 @@ Plug 'theniceboy/bullets.vim'
 Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle', 'for': ['text', 'markdown', 'tex'] }
 " swift
 Plug 'keith/swift.vim', { 'for': ['swift'] }
+
+
 " Editor Enhancement
+
 Plug 'airblade/vim-rooter'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'terryma/vim-multiple-cursors'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'scrooloose/nerdcommenter' " in <space>cn to comment a line
+Plug 'scrooloose/nerdcommenter'
+Plug 'tyru/caw.vim'
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
@@ -556,7 +550,9 @@ Plug 'AndrewRadev/splitjoin.vim'  " gS to split line, gJ to join lines
 Plug 'Shougo/context_filetype.vim'
 Plug 'sgur/vim-editorconfig'
 Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
+Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 " Plug 'haya14busa/vim-asterisk'
+
 " Formatter
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
@@ -579,7 +575,6 @@ Plug 'luochen1990/rainbow'
 
 " Other useful utilities
 Plug 'tpope/vim-eunuch' " do stuff like :SudoWrite
-Plug 'pechorin/any-jump.vim'
 " Plug 'makerj/vim-pdf'
 
 " Dependencies
@@ -591,6 +586,7 @@ Plug 'roxma/nvim-yarp'
 Plug 'kaicataldo/material.vim'
 " Plug 'jacoborus/tender.vim'
 Plug 'dracula/vim'
+Plug 'iamcco/onedark.vim'
 " Plug 'flazz/vim-colorschemes'
 call plug#end()
 
@@ -623,7 +619,6 @@ if (empty($TMUX))
   endif
 endif
 
-" set background=dark
 
 " colorscheme material
 " color xcodedark
@@ -631,7 +626,7 @@ endif
 
 "hi SpecialKey ctermfg=blue guifg=grey70
 " hi NonText guibg=NONE ctermbg=NONE ctermfg=NONE guifg=NONE
-colorscheme dracula
+colorscheme onedark
 
 " let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -775,8 +770,6 @@ nnoremap <leader>gl :Gpull<CR>
 nnoremap <leader>ga :G add .<CR>:G<CR>
 nnoremap <leader>gg :G<CR>
 " let g:git_messenger_include_diff = 'all'
-" autocmd BufEnter * EnableBlameLine
-" let g:blameLineVirtualTextPrefix = '     ~ '
 " ===
 " === vim-illuminate
 " ===
@@ -787,7 +780,8 @@ nnoremap <leader>gg :G<CR>
 " ===
 " === coc
 " ===
-let g:coc_global_extensions = ['coc-python',
+let g:coc_global_extensions = [
+    \ 'coc-python',
     \ 'coc-vimlsp',
     \ 'coc-html',
     \ 'coc-json',
@@ -819,7 +813,8 @@ let g:coc_global_extensions = ['coc-python',
     \ 'coc-calc',
     \ 'coc-bookmark',
     \ 'coc-todolist',
-    \ 'coc-postfix'
+    \ 'coc-postfix',
+    \ 'coc-imselect'
     \ ]
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -929,43 +924,11 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,vue,javascript,javascriptreact,typescriptreact EmmetInstall
 let g:user_emmet_leader_key='<M-e>'
 au FileType html,vue,javascript,javascriptreact,typescriptreact imap <silent><buffer> ,, <plug>(emmet-expand-abbr)
-" ===
-" === MarkdownPreview
-" ===
-" let g:mkdp_auto_start = 0
-" let g:mkdp_auto_close = 1
-" let g:mkdp_refresh_slow = 0
-" let g:mkdp_command_for_global = 0
-" let g:mkdp_open_to_the_world = 0
-" let g:mkdp_open_ip = ''
-" let g:mkdp_echo_preview_url = 0
-" let g:mkdp_browserfunc = ''
-" let g:mkdp_preview_options = {
-"       \ 'mkit': {},
-"       \ 'katex': {},
-"       \ 'uml': {},
-"       \ 'maid': {},
-"       \ 'disable_sync_scroll': 0,
-"       \ 'sync_scroll_type': 'middle',
-"       \ 'hide_yaml_meta': 1
-"       \ }
-" let g:mkdp_markdown_css = ''
-" let g:mkdp_highlight_css = ''
-" let g:mkdp_port = ''
-" let g:mkdp_page_title = '「${name}」'
-
-" ===
-" === vim-surround
-" ===
-" nmap kw ysiw
-" nmap ks cs
-" nmap kcs yss
-
-" noremap gv :GV<CR>
 
 " ===
 " === Python-syntax
 " ===
+
 let g:python_highlight_all = 1
 " let g:python_slow_sync = 0
 
@@ -1174,27 +1137,7 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_smartcase = 1
 nmap ' <Plug>(easymotion-bd-f)
-"map E <Plug>(easymotion-j)
 nnoremap U <Plug>(easymotion-k)
-"nmap f <Plug>(easymotion-overwin-f)
-"map \; <Plug>(easymotion-prefix)
-"nmap ' <Plug>(easymotion-overwin-f2)
-"map 'l <Plug>(easymotion-bd-jk)
-"nmap 'l <Plug>(easymotion-overwin-line)
-"map  'w <Plug>(easymotion-bd-w)
-"nmap 'w <Plug>(easymotion-overwin-w)
-" function! s:config_easyfuzzymotion(...) abort
-"   return extend(copy({
-"         \   'converters': [incsearch#config#fuzzyword#converter()],
-"         \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-"         \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-"         \   'is_expr': 0,
-"         \   'is_stay': 1
-"         \ }), get(a:, 1, {}))
-" endfunction
-"
-" noremap <silent><expr> z' incsearch#go(<SID>config_easyfuzzymotion())
-" nmap  z/ <Plug>(incsearch-fuzzy-/)
 " ===
 " === goyo
 " ===
@@ -1218,6 +1161,9 @@ let g:r_syntax_folding = 1
 let g:rust_fold = 1
 let g:php_folding = 1
 
+" ===
+" === tagalong
+" ===
 let g:tagalong_additional_filetypes = ['vue', 'javascript', 'javascriptreact', 'typescriptreact']
 
 " ===
@@ -1346,27 +1292,6 @@ let g:NERDCreateDefaultMappings = 0
 
 let g:rooter_patterns = ['.root', 'package.json', '.git/']
 let g:rooter_change_directory_for_non_project_files = 'current'
-
-" actionmenu
-" let s:code_actions = []
-"
-" func! ActionMenuCodeActions() abort
-"   if coc#util#has_float()
-"     call coc#util#float_hide()
-"   endif
-"
-"   let s:code_actions = CocAction('codeActions')
-"   let l:menu_items = map(copy(s:code_actions), { index, item -> item['title'] })
-"   call actionmenu#open(l:menu_items, 'ActionMenuCodeActionsCallback')
-" endfunc
-"
-" func! ActionMenuCodeActionsCallback(index, item) abort
-"   if a:index >= 0
-"     let l:selected_code_action = s:code_actions[a:index]
-"     let l:response = CocAction('doCodeAction', l:selected_code_action)
-"   endif
-" endfunc
-" nnoremap <silent> <Leader>s :call ActionMenuCodeActions()<CR>
 " ===================== End of Plugin Settings =====================
 
 " ===
@@ -1374,17 +1299,17 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 " ===
 exec "nohlsearch"
 
-fun! SetCursor()
-  " Don't strip on these filetypes
-  if &ft =~ 'list'
-    return
-  endif
-
+" fun! SetCursor()
+"   " Don't strip on these filetypes
+"   if &ft =~ 'list'
+"     return
+"   endif
+"
   set guicursor=i:ver100-iCursor-blinkwait200-blinkon400-blinkoff250
   set guicursor=n:block-blinkon400
   set guicursor=v:block
-endfun
-au BufEnter * call SetCursor()
+" endfun
+" au BufEnter * call SetCursor()
 
 if exists('g:started_by_firenvim')
   colorscheme xcodelight
