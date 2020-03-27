@@ -236,7 +236,7 @@
     }
   },
   "snippets.textmateSnippetsRoots": [],
-  "coc.githubUsers.githubAccessToken": "c6b281f8f5507d2bb036872f378bac6aa998a091",
+  "snippets.extends": [{ "vue": "javascript" }],
   "html.filetypes": ["html", "handlebars", "htmldjango", "vue"],
   "vetur.useWorkspaceDependencies": true,
   "vetur.format.enable": true,
@@ -265,7 +265,5 @@
   "yaml.format.enable": true,
   "coc-actions.hideCursor": true,
   "coc-actions.useCursorLine": true,
-  "cSpell.userWords": [
-    "consola"
-  ]
+  "cSpell.userWords": ["consola"]
 }

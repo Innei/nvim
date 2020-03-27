@@ -531,7 +531,7 @@ Plug 'airblade/vim-rooter'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'terryma/vim-multiple-cursors'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 Plug 'tyru/caw.vim'
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
@@ -661,8 +661,6 @@ nnoremap <silent> cC :call QuickFix_toggle()<cr>
 let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
 nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
-" Resize floating window by all preset layouts
-" tnoremap <silent> <buffer> R <C-\><C-n>:RnvimrResize<CR>
 
 " Customize the initial layout
 let g:rnvimr_layout = { 'relative': 'editor',
@@ -1259,34 +1257,41 @@ let g:startify_bookmarks = [
 " === nerdcommenter
 " ===
 " Vue comment hook
-let g:ft = ''
-function! NERDCommenter_before()
-  if &ft == 'vue'
-    let g:ft = 'vue'
-    let stack = synstack(line('.'), col('.'))
-    if len(stack) > 0
-      let syn = synIDattr((stack)[0], 'name')
-      if len(syn) > 0
-        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-      endif
-    endif
-  endif
-endfunction
-function! NERDCommenter_after()
-  if g:ft == 'vue'
-    setf vue
-    let g:ft = ''
-  endif
-endfunction
-map <Leader>/ <plug>NERDCommenterToggle
-imap <C-c> <plug>NERDCommenterInsert
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDToggleCheckAllLines = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDTrimTrailingWhitespace = 1
-let g:NERDCommentEmptyLines = 1
-let g:NERDCreateDefaultMappings = 0
+" let g:ft = ''
+" function! NERDCommenter_before()
+"   if &ft == 'vue'
+"     let g:ft = 'vue'
+"     let stack = synstack(line('.'), col('.'))
+"     if len(stack) > 0
+"       let syn = synIDattr((stack)[0], 'name')
+"       if len(syn) > 0
+"         exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+"       endif
+"     endif
+"   endif
+" endfunction
+" function! NERDCommenter_after()
+"   if g:ft == 'vue'
+"     setf vue
+"     let g:ft = ''
+"   endif
+" endfunction
+" map <Leader>/ <plug>NERDCommenterToggle
+" imap <C-c> <plug>NERDCommenterInsert
+" let g:NERDSpaceDelims = 1
+" let g:NERDCompactSexyComs = 1
+" let g:NERDToggleCheckAllLines = 1
+" let g:NERDDefaultAlign = 'left'
+" let g:NERDTrimTrailingWhitespace = 1
+" let g:NERDCommentEmptyLines = 1
+" let g:NERDCreateDefaultMappings = 0
+
+" ===
+" === caw.vim
+" ===
+
+map <leader>/ <plug>(caw:hatpos:toggle)
+imap <C-c> <ESC><Plug>(caw:dollarpos:comment)
 
 " vim-rooter
 
