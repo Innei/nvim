@@ -186,7 +186,7 @@
   "javascript.suggest.names": true,
   "javascript.suggestionActions.enabled": true,
   "javascript.format.enabled": true,
-  "tsserver.locale": "/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/typescript-language-features",
+  /* "tsserver.locale": "/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/typescript-language-features", */
   "snippets.priority": 3,
   "snippets.autoTrigger": false,
   "snippets.userSnippetsDirectory": "~/.config/nvim/Ultisnips",
@@ -246,7 +246,7 @@
   "vetur.format.defaultFormatter.css": "prettier",
   "vetur.format.defaultFormatter.html": "prettier",
   "vetur.completion.useScaffoldSnippets": true,
-  "vetur.dev.vlsPath": "/Users/innei/.vscode/extensions/octref.vetur-0.24.0/server",
+  /* "vetur.dev.vlsPath": "/Users/innei/.vscode/extensions/octref.vetur-0.24.0/server", */
   // "emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact", "typescript": "typescriptreact"},
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.optimizeStylesheetParsing": true,

@@ -85,6 +85,7 @@ set visualbell
 set autoread
 " set autowrite
 set hidden
+set pastetoggle=<F10>
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
 silent !mkdir -p ~/.config/nvim/tmp/sessions
@@ -229,6 +230,8 @@ nnoremap <C-x> <nop>
 noremap <Home> ^
 inoremap <Home> <esc>^i
 inoremap <Del> <ESC>lxi
+nnoremap <Del> "_x
+xnoremap <Del> "_d
 " U/E keys for 5 times u/e (faster navigation)
 nnoremap <silent> F 5k
 nnoremap <silent> E 5j
@@ -510,6 +513,7 @@ Plug 'neoclide/jsonc.vim', { 'for': 'json' }
 Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact'] }
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags
 Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact'] }
+Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact', 'typescriptreact'] }
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescriptreact' ] }
@@ -551,8 +555,7 @@ Plug 'Shougo/context_filetype.vim'
 Plug 'sgur/vim-editorconfig'
 Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
-" Plug 'haya14busa/vim-asterisk'
-
+Plug 'wellle/context.vim'
 " Formatter
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
@@ -583,9 +586,9 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'roxma/nvim-yarp'
 
 " ColorScheme
-Plug 'kaicataldo/material.vim'
+" Plug 'kaicataldo/material.vim'
 " Plug 'jacoborus/tender.vim'
-Plug 'dracula/vim'
+" Plug 'dracula/vim'
 Plug 'iamcco/onedark.vim'
 " Plug 'flazz/vim-colorschemes'
 call plug#end()
@@ -924,6 +927,10 @@ let g:user_emmet_leader_key='<M-e>'
 au FileType html,vue,javascript,javascriptreact,typescriptreact imap <silent><buffer> ,, <plug>(emmet-expand-abbr)
 
 " ===
+" === jsx
+" ===
+let g:vim_jsx_pretty_colorful_config = 1
+" ===
 " === Python-syntax
 " ===
 
@@ -1196,7 +1203,7 @@ let g:rainbow_conf = {
       \     'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
       \   },
       \   'css': 0,
-      \ }
+      \}
       \}
 
 " ===
@@ -1297,6 +1304,12 @@ imap <C-c> <ESC><Plug>(caw:dollarpos:comment)
 
 let g:rooter_patterns = ['.root', 'package.json', '.git/']
 let g:rooter_change_directory_for_non_project_files = 'current'
+
+" ===
+" === context.vim
+" ===
+let g:context_nvim_no_redraw = 1
+let g:context_enabled = 0
 " ===================== End of Plugin Settings =====================
 
 " ===
