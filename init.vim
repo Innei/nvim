@@ -123,8 +123,8 @@ set wildignore+=*.png,*.jpg,*.gif
 " ===
 let g:neoterm_autoscroll = 1
 autocmd TermOpen term://* startinsert
-tnoremap <C-N> <C-\><C-N>
-tnoremap <C-O> <C-\><C-N><C-O>
+" tnoremap <C-N> <C-\><C-N>
+" tnoremap <C-O> <C-\><C-N><C-O>
 let g:terminal_color_0  = '#000000'
 let g:terminal_color_1  = '#FF5555'
 let g:terminal_color_2  = '#50FA7B'
@@ -488,7 +488,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 " Taglist
-" Plug 'liuchengxu/vista.vim'
+Plug 'liuchengxu/vista.vim'
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -954,6 +954,7 @@ set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
 let g:fzf_history_dir = '~/.config/nvim/tmp/fzf-history'
 nnoremap <C-f> :Ag<CR>
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-r> :Rg<CR>
 nnoremap <leader>f :BLines<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -1039,11 +1040,14 @@ let g:VM_maps['Find Under']           = '<C-d>'           " replace C-n
 let g:VM_maps['Find Subword Under']   = '<C-d>'           " replace visual C-n
 let g:VM_maps["Select All"]           = '<leader>A'
 let g:VM_mouse_mappings               = 1
-let g:VM_leader                       = { 'default': '\', 'visual': '''', 'buffer': '\'}
+" let g:VM_leader                       = { 'default': '\', 'visual': '''', 'buffer': '\'}
 let g:VM_maps["Case Conversion Menu"] = '<leader>cc'
 let g:VM_maps["Switch Mode"]          = '<Tab>'
 let g:VM_maps["Tools Menu"]           = '<leader>`'
-" ===
+let g:VM_maps['Skip Region']          = '<c-n>'
+let g:VM_maps["Undo"]                 = 'u'
+let g:VM_maps["Redo"]                 = 'r'
+let g:VM_maps['Remove Region']        = 'q'
 " === Far.vim
 " ===
 let g:far#source='ag'
@@ -1063,16 +1067,16 @@ let g:bullets_enabled_file_types = [
 " ===
 " === Vista.vim
 " ===
-" noremap <silent> T :Vista!!<CR>
-" let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-" let g:vista_default_executive = 'coc'
-" let g:vista_fzf_preview = ['right:50%']
-" let g:vista_sidebar_width = 70
-" let g:vista#renderer#enable_icon = 1
-" let g:vista#renderer#icons = {
-"       \   "function": "\uf794",
-"       \   "variable": "\uf71b",
-"       \  }
+noremap <silent> T :Vista!!<CR>
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'coc'
+let g:vista_fzf_preview = ['right:50%']
+let g:vista_sidebar_width = 70
+let g:vistarendererenable_icon = 1
+" let g:vistarenderer#icons = {
+      \   "function": "\uf794",
+      \   "variable": "\uf71b",
+      \  }
 
 
 " ===
