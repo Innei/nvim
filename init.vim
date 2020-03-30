@@ -514,7 +514,7 @@ Plug 'yuezk/vim-js', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'java
 Plug 'AndrewRadev/tagalong.vim' " auto rename tags
 Plug 'jelera/vim-javascript-syntax', { 'for': ['php', 'html', 'javascript', 'css', 'less', 'javascriptreact'] }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact', 'typescriptreact'] }
-Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
+" Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript', 'typescriptreact' ] }
 " Go
@@ -530,7 +530,9 @@ Plug 'keith/swift.vim', { 'for': ['swift'] }
 
 
 " Editor Enhancement
-
+Plug 'kkoomen/vim-doge', { 'on': ['DogeGenerate', 'DogeCreateDocStandard'] } " document genertor  
+Plug 'kristijanhusak/vim-carbon-now-sh', { 'on': 'CarbonNowSh' }
+Plug 'andymass/vim-matchup' " Extends vim's % motion to language-specific words.
 Plug 'airblade/vim-rooter'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'terryma/vim-multiple-cursors'
@@ -815,7 +817,8 @@ let g:coc_global_extensions = [
     \ 'coc-bookmark',
     \ 'coc-todolist',
     \ 'coc-postfix',
-    \ 'coc-imselect'
+    \ 'coc-imselect',
+    \ 'coc-cssmodules',
     \ ]
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -914,9 +917,9 @@ let g:vue_pre_processors = ['typescript', 'scss']
 " ===
 " === JsDoc
 " ===
-let g:jsdoc_input_description=1
-let g:jsdoc_allow_input_prompt=0
-let g:jsdoc_enable_es6=1
+" let g:jsdoc_input_description=1
+" let g:jsdoc_allow_input_prompt=0
+" let g:jsdoc_enable_es6=1
 
 " ===
 " === emmet
@@ -1378,7 +1381,7 @@ imap ￥ $
 imap 》 >
 imap 《 <
 map ： :
-
+map ； :
 " func! Replace_Chn()                     " for writing latex
 " 	let chinese={"（" : "(" , "）" : ")" , "，" : ",", "；" : ";", "：" : ":",
 " 	"？" : "?", "！" : "!", "“" : "\"", "’" : "'" ,
