@@ -265,5 +265,9 @@
   "yaml.format.enable": true,
   "coc-actions.hideCursor": true,
   "coc-actions.useCursorLine": true,
-  "cSpell.userWords": ["consola"]
+  "cSpell.userWords": [
+    "Innei",
+    "Typegoose",
+    "consola"
+  ]
 }

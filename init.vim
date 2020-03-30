@@ -736,8 +736,8 @@ if !exists('g:started_by_firenvim')
   let g:airline_right_sep = '◀'
   let g:airline_left_sep = ''
   let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
   let g:airline_symbols.branch = ''
   let g:airline_symbols.readonly = ''
 
@@ -1314,6 +1314,11 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 " ===
 let g:context_nvim_no_redraw = 1
 let g:context_enabled = 0
+
+" ===
+" === autopair
+" ===
+let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''", "<": ">"}
 " ===================== End of Plugin Settings =====================
 
 " ===

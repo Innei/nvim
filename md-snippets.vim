@@ -15,3 +15,31 @@ autocmd Filetype markdown inoremap <buffer> ,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,l --------<Enter>
+
+
+augroup unmapChn
+  au!
+  au FileType markdown  :inoremap <buffer> （ （
+  au FileType markdown  :inoremap <buffer> ） ）
+  au FileType markdown  :inoremap <buffer> 』 』
+  au FileType markdown  :inoremap <buffer> 『 『
+  au FileType markdown  :inoremap <buffer> 【 【
+  au FileType markdown  :inoremap <buffer> 】 】
+  au FileType markdown  :inoremap <buffer> 。 。
+  au FileType markdown  :inoremap <buffer> ， ，
+  au FileType markdown  :inoremap <buffer> ； ；
+  au FileType markdown  :inoremap <buffer> ： ：
+  au FileType markdown  :inoremap <buffer> “  “
+  au FileType markdown  :inoremap <buffer> ”  ”
+  au FileType markdown  :inoremap <buffer> ‘  ‘
+  au FileType markdown  :inoremap <buffer> ’  ’
+  au FileType markdown  :inoremap <buffer> ？ ？
+  au FileType markdown  :inoremap <buffer> ！ ！
+  au FileType markdown  :inoremap <buffer> 》 》
+  au FileType markdown  :inoremap <buffer> 《 《
+  au FileType markdown  :inoremap <buffer> 、 、
+  au FileType markdown  :inoremap <buffer> ￥ ￥
+  au FileType markdown  :inoremap <buffer> 》 》
+  au FileType markdown  :inoremap <buffer> 《 《
+augroup END
+
