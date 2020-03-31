@@ -42,4 +42,4 @@ augroup unmapChn
   au FileType markdown  :inoremap <buffer> 》 》
   au FileType markdown  :inoremap <buffer> 《 《
 augroup END
-
+au FileType markdown setlocal wrap

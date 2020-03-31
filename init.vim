@@ -59,7 +59,7 @@ set timeoutlen=500
 set ttimeoutlen=0
 set nowrap
 set sidescroll=8
-set linebreak
+" set linebreak
 set wrapmargin=8
 set tw=0
 set indentexpr=
@@ -494,7 +494,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
-Plug 'honza/vim-snippets'
+Plug 'Innei/vim-snippets'
 
 " Undo Tree
 Plug 'mbbill/undotree'
@@ -627,12 +627,21 @@ endif
 
 " colorscheme material
 " color xcodedark
+" let g:xcodedark_green_comments = 1
+" let g:xcodedark_emph_types = 1
+" let g:xcodedark_emph_funcs = 1
+" let g:xcodedark_emph_idents = 1
+" let g:xcodedark_match_paren_style = 1
+" let g:xcodedark_dim_punctuation = 1
 " hi Normal guibg=NONE ctermbg=NONE
 
 "hi SpecialKey ctermfg=blue guifg=grey70
 " hi NonText guibg=NONE ctermbg=NONE ctermfg=NONE guifg=NONE
 colorscheme onedark
-
+let g:onedark_terminal_italics=1
+" ===
+" === intentLine
+" ===
 " let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " ===================== Start of Plugin Settings =====================
@@ -641,7 +650,7 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " === AsyncRun
 " ===
 let g:asyncrun_open = 8
-let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.bzr', '_darcs', 'build.xml']
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.bzr', '_darcs', 'build.xml', 'node_modules']
 let g:asyncrun_shell = 'zsh -c'
 let g:asyncrun_status = ''
 nnoremap <leader>rr :AsyncRun -cwd=<root>
@@ -691,7 +700,7 @@ let g:rnvimr_presets = [
 " ===
 if !exists('g:started_by_firenvim')
   let g:airline_powerline_fonts = 1
-  let g:airline_theme='deus'
+  let g:airline_theme='onedark'
   let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
   let g:airline#extensions#tabline#formatter = 'jsformatter'
   let g:airline_highlighting_cache = 1
