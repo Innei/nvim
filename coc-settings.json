@@ -85,7 +85,7 @@
   "signature.target": "echo",
   /* "signature.target": "float", */
   "signature.enable": true,
-  "yank.enableCompletion": false,
+  "yank.priority": 30,
   "explorer.width": 38,
   "explorer.quitOnOpen": true,
   "explorer.activeMode": true,
