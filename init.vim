@@ -28,4 +28,3 @@ endfor
 " Free memory
 unlet s:script_path
 unlet s:sourceList
-

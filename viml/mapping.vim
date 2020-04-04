@@ -6,7 +6,6 @@ scriptencoding utf-8
 " ===
 " === Basic Mappings
 " ===
-" Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
 noremap ; :
 " noremap : q:i
@@ -15,10 +14,16 @@ nnoremap X r
 " map 0 To the first non-blank character of the line.
 nnoremap 0 ^
 nnoremap ) g_
-" nnoremap <BS> X
-" Save & quit
-nnoremap Q :bd<CR>
-command! -nargs=0 Q :q!
+
+
+if exists('g:vscode')
+  nnoremap Q :tabc<CR>
+  command! -nargs=0 Q :tabonly
+else
+  command! -nargs=0 Q :q!
+  nnoremap Q :bd<CR>
+endif
+
 noremap <C-q> :qa<CR>
 nnoremap <silent> S :w<CR>
 noremap <silent> <C-S> :wa<CR>
@@ -60,11 +65,6 @@ nnoremap <LEADER>tt :%s/    /\t/g
 xnoremap <LEADER>tt :s/    /\t/g
 nnoremap <LEADER>ss :%s/\t/    /g
 xnoremap <leader>ss :s/\t/    /g
-" Folding
-" noremap <silent> l za
-
-" Open up lazygit
-nnoremap \g :term lazygit<CR>
 
 " Toggle wrap
 nnoremap <LEADER>tw :set wrap!<CR>
@@ -100,121 +100,127 @@ nnoremap B 5b
 xnoremap W 5w
 xnoremap B 5b
 
-" Go next or forward word under cursor
-nnoremap \\ *
-nnoremap \| #
-" select word
-inoremap <M-d> <ESC>viw<C-g>
-nnoremap <M-d> viw<C-g>
-snoremap <M-d> <ESC>*ve<C-g>
-snoremap <M-D> <ESC>#ve<C-g>
-
 " rename a word
 nnoremap cw viwc
 
-smap <ESC> <ESC>:noh<CR>
-" Ctrl + U or E will move up/down the view port without moving the cursor
-noremap <C-W> 5<C-y>
-noremap <C-E> 5<C-e>
+" Go next or forward word under cursor
+nnoremap \\ *
+nnoremap \| #
+if !exists('g:vscode')
+  " select word
+  inoremap <M-d> <ESC>viw<C-g>
+  nnoremap <M-d> viw<C-g>
+  snoremap <M-d> <ESC>*ve<C-g>
+  snoremap <M-D> <ESC>#ve<C-g>
 
-" ===
-" === Insert Mode Cursor Movement
-" ===
-inoremap jj <ESC>l
-inoremap jk <ESC>l
-inoremap kk <ESC>l
-" undo
-inoremap <M-z> <ESC>u
-" ===
-" === Command Mode Cursor Movement
-" ===
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <M-b> <S-Left>
-cnoremap <M-w> <S-Right>
+  smap <ESC> <ESC>:noh<CR>
 
-" use shift(Meta) + arrow keys to move line up/down
-nnoremap <S-up> :m .-2<CR>
-nnoremap <S-down> :m .+1<CR>
-inoremap <M-up> <ESC>:m .-2<CR>==gi
-inoremap <M-down> <ESC>:m .+1<CR>==gi
-inoremap <M-left> <ESC>bi
-inoremap <M-right> <Esc>ea
-inoremap <S-up> <ESC>:m .-2<CR>==gi
-inoremap <S-down> <ESC>:m .+1<CR>==gi
-inoremap <S-left> <ESC>bi
-inoremap <S-right> <Esc>ea
-" multi-lines move up/down in visual mode
-vnoremap <M-up> :m '<-2<CR>gv=gv
-vnoremap <M-down> :m '>+1<CR>gv=gv
-vnoremap <M-left> b
-vnoremap <M-right> e
-vnoremap <S-up> <nop>
-vnoremap <S-down> <nop>
-vnoremap <S-left> <nop>
-vnoremap <S-right> <nop>
-" ===
-" === Window management
-" ===
-" Use <space> + new arrow keys for moving the cursor around windows
-noremap <LEADER>w <C-w>w
-noremap <LEADER><Up> <C-w>k
-noremap <LEADER><Down> <C-w>j
-noremap <LEADER><Left> <C-w>h
-noremap <LEADER><Right> <C-w>l
+  " Ctrl + U or E will move up/down the view port without moving the cursor
+  noremap <C-W> 5<C-y>
+  noremap <C-E> 5<C-e>
+  " ===
+  " === Insert Mode Cursor Movement
+  " ===
+  inoremap jj <ESC>l
+  inoremap jk <ESC>l
+  inoremap kk <ESC>l
+  " undo
+  inoremap <M-z> <ESC>u
+  " ===
+  " === Command Mode Cursor Movement
+  " ===
+  cnoremap <C-a> <Home>
+  cnoremap <C-e> <End>
+  cnoremap <C-p> <Up>
+  cnoremap <C-n> <Down>
+  cnoremap <C-b> <Left>
+  cnoremap <C-f> <Right>
+  cnoremap <M-b> <S-Left>
+  cnoremap <M-w> <S-Right>
 
-" Disable the default s key
-noremap s <nop>
+  " use shift(Meta) + arrow keys to move line up/down
+  nnoremap <S-up> :m .-2<CR>
+  nnoremap <S-down> :m .+1<CR>
+  inoremap <M-up> <ESC>:m .-2<CR>==gi
+  inoremap <M-down> <ESC>:m .+1<CR>==gi
+  inoremap <M-left> <ESC>bi
+  inoremap <M-right> <Esc>ea
+  inoremap <S-up> <ESC>:m .-2<CR>==gi
+  inoremap <S-down> <ESC>:m .+1<CR>==gi
+  inoremap <S-left> <ESC>bi
+  inoremap <S-right> <Esc>ea
+  " multi-lines move up/down in visual mode
+  vnoremap <M-up> :m '<-2<CR>gv=gv
+  vnoremap <M-down> :m '>+1<CR>gv=gv
+  vnoremap <M-left> b
+  vnoremap <M-right> e
+  vnoremap <S-up> <nop>
+  vnoremap <S-down> <nop>
+  vnoremap <S-left> <nop>
+  vnoremap <S-right> <nop>
+  " ===
+  " === Window management
+  " ===
+  " Use <space> + new arrow keys for moving the cursor around windows
+  noremap <LEADER>w <C-w>w
+  noremap <LEADER><Up> <C-w>k
+  noremap <LEADER><Down> <C-w>j
+  noremap <LEADER><Left> <C-w>h
+  noremap <LEADER><Right> <C-w>l
 
-" split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-nnoremap s<up> :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-nnoremap s<down> :set splitbelow<CR>:split<CR>
-nnoremap s<left> :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-nnoremap s<right> :set splitright<CR>:vsplit<CR>
+  " Disable the default s key
+  noremap s <nop>
 
-" Resize splits with arrow keys
-nnoremap <M-up> :res +5<CR>
-nnoremap <M-down> :res -5<CR>
-nnoremap <M-left> :vertical resize-5<CR>
-nnoremap <M-right> :vertical resize+5<CR>
+  " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
+  nnoremap s<up> :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+  nnoremap s<down> :set splitbelow<CR>:split<CR>
+  nnoremap s<left> :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+  nnoremap s<right> :set splitright<CR>:vsplit<CR>
 
-" Place the two screens up and down
-nnoremap sh <C-w>t<C-w>K
-" Place the two screens side by side
-nnoremap sv <C-w>t<C-w>H
+  " Resize splits with arrow keys
+  nnoremap <M-up> :res +5<CR>
+  nnoremap <M-down> :res -5<CR>
+  nnoremap <M-left> :vertical resize-5<CR>
+  nnoremap <M-right> :vertical resize+5<CR>
 
-" Rotate screens
-nnoremap srh <C-w>b<C-w>K
-nnoremap srv <C-w>b<C-w>H
+  " Place the two screens up and down
+  nnoremap sh <C-w>t<C-w>K
+  " Place the two screens side by side
+  nnoremap sv <C-w>t<C-w>H
 
-" Press <SPACE> + q to close the window below the current window
-nnoremap <LEADER>q <C-w>j:q<CR>
-nnoremap <Leader>Q :BufOnly<CR>
+  " Rotate screens
+  nnoremap srh <C-w>b<C-w>K
+  nnoremap srv <C-w>b<C-w>H
 
+  " Press <SPACE> + q to close the window below the current window
+  nnoremap <LEADER>q <C-w>j:q<CR>
+endif
 " ===
 " === Tab management
 " ===
-" Create a new tab with t/
-nnoremap t/ :tabe<CR>
-" Move around tabs with t, and t.
-nnoremap t, :-tabnext<CR>
-nnoremap t. :+tabnext<CR>
-" Move the tabs with tm, and tm.
-nnoremap tm, :-tabmove<CR>
-nnoremap tm. :+tabmove<CR>
-
+if !exists('g:vscode')
+  " Create a new tab with t/
+  nnoremap t/ :tabe<CR>
+  " Move around tabs with t, and t.
+  nnoremap t, :-tabnext<CR>
+  nnoremap t. :+tabnext<CR>
+  " Move the tabs with tm, and tm.
+  nnoremap tm, :-tabmove<CR>
+  nnoremap tm. :+tabmove<CR>
+endif
 " ===
 " === Buffer manage
 " ===
-nnoremap <C-\> :bprevious<CR>
-nnoremap <C-]> :bnext<CR>
-nnoremap gB :bprevious<CR>
-nnoremap gb :bnext<CR>
-nnoremap tb :enew<CR>
+if exists('g:vscode')
+  nnoremap gB :tabp<CR>
+  nnoremap gb :tabn<CR>
+  nnoremap tb :tabnew<CR>
+  nnoremap <Leader>Q tabo<CR>
+else
+  nnoremap gB :bprevious<CR>
+  nnoremap gb :bnext<CR>
+  nnoremap tb :enew<CR>
+endif
 " ===
 " === Markdown Settings
 " ===
