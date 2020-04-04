@@ -37,7 +37,7 @@ let g:loaded_python_provider = 0
 " ===
 set number
 " set relativenumber
-set mouse=niv
+set mouse=nv
 set mousehide
 set cursorline
 set expandtab
@@ -271,7 +271,8 @@ noremap <C-E> 5<C-e>
 inoremap jj <ESC>l
 inoremap jk <ESC>l
 inoremap kk <ESC>l
-
+" undo
+inoremap <M-z> <ESC>u
 " ===
 " === Command Mode Cursor Movement
 " ===
@@ -460,8 +461,8 @@ if has_machine_specific_file == 0
   exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 " Plug 'mg979/vim-xtabline'
-Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc' " vim-session dep
+" Plug 'xolox/vim-session'
+" Plug 'xolox/vim-misc' vim-session dep
 Plug 'ananagame/vimsence', { 'on': [] }
 augroup discord
   au!
@@ -558,6 +559,8 @@ Plug 'sgur/vim-editorconfig'
 Plug 'tpope/vim-sleuth' " auto adjust tabwidth base on current file
 Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
 Plug 'wellle/context.vim'
+Plug 'thaerkh/vim-workspace'
+
 " Formatter
 Plug 'Chiel92/vim-autoformat', { 'on': 'Autoformat' }
 
@@ -941,6 +944,7 @@ au FileType html,vue,javascript,javascriptreact,typescriptreact imap <silent><bu
 " ===
 " === jsx
 " ===
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.typescriptreact
 let g:vim_jsx_pretty_colorful_config = 1
 " ===
 " === Python-syntax
@@ -1245,18 +1249,25 @@ let g:rainbow_conf = {
 " ===
 " === vim session
 " ===
-let g:session_directory = $HOME."/.config/nvim/tmp/sessions"
-let g:session_autosave = 'no'
-let g:session_autoload = 'no'
-"let g:session_autosave_periodic = 1
-let g:session_autosave_silent = 1
-set sessionoptions+=buffers
-set sessionoptions-=options
-noremap sl :OpenSession<CR>
-noremap ss :SaveSession<CR>
-noremap sc :CloseSession<CR>
-noremap sD :DeleteSession<CR>
-noremap sA :AppendTabSession<CR>
+" let g:session_directory = $HOME."/.config/nvim/tmp/sessions"
+" let g:session_autosave = 'no'
+" let g:session_autoload = 'no'
+" "let g:session_autosave_periodic = 1
+" let g:session_autosave_silent = 1
+" set sessionoptions+=buffers
+" set sessionoptions-=options
+" noremap sl :OpenSession<CR>
+" noremap ss :SaveSession<CR>
+" noremap sc :CloseSession<CR>
+" noremap sD :DeleteSession<CR>
+" noremap sA :AppendTabSession<CR>
+
+" ===
+" === vim-workspace
+" ===
+let g:workspace_session_directory = $HOME . '/.config/nvim/tmp/sessions/'
+let g:workspace_autosave = 0
+nnoremap ss :ToggleWorkspace<CR>
 " === startify
 let g:startify_session_dir= $HOME."/.config/nvim/tmp/sessions"
 let g:startify_lists = [
@@ -1327,10 +1338,6 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 let g:context_nvim_no_redraw = 1
 let g:context_enabled = 0
 
-" ===
-" === autopair
-" ===
-let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', "`":"`", '```':'```', '"""':'"""', "'''":"'''", "<": ">"}
 " ===================== End of Plugin Settings =====================
 
 " ===
@@ -1391,12 +1398,20 @@ imap 》 >
 imap 《 <
 map ： :
 map ； :
-" func! Replace_Chn()                     " for writing latex
-" 	let chinese={"（" : "(" , "）" : ")" , "，" : ",", "；" : ";", "：" : ":",
-" 	"？" : "?", "！" : "!", "“" : "\"", "’" : "'" ,
-" 	""”" : "\"", "℃" : "\\\\textcelsius", "μ" : "$\\\\mu$"}
-" 	for i in keys(chinese)
-" 		silent! exec '%substitute/' . i . '/'. chinese[i] . '/g'
-" 	endfor
-" endfunc
-" nnoremap <leader>rch :call Replace_Chn()<cr>
+func! Replace_Chn()                     " for writing latex
+	let chinese={"（" : "(" , "）" : ")" , "，" : ",", "；" : ";", "：" : ":",
+	"？" : "?", "！" : "!", "“" : "\"", "’" : "'" ,
+	""”" : "\"", "℃" : "\\\\textcelsius", "μ" : "$\\\\mu$"}
+	for i in keys(chinese)
+		silent! exec '%substitute/' . i . '/'. chinese[i] . '/g'
+	endfor
+endfunc
+function! ToggleVerbose()
+ if !&verbose
+ set verbosefile=/tmp/vim-verbose.log
+ set verbose=15
+ else
+ set verbose=0
+ set verbosefile=
+ endif
+endfunction

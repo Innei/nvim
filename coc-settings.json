@@ -1,7 +1,9 @@
 {
   "npm.binPath": "yarn",
   "coc.preferences.hoverTarget": "float",
+  /* "coc.preferences.hoverTarget": "echo", */
   "coc.preferences.formatOnInsertLeave": true,
+  /* "coc.preferences.enableFloatHighlight": false, */
   "coc.preferences.enableFloatHighlight": true,
   "coc.preferences.snippetStatusText": "Ⓢ ",
   "coc.preferences.extensionUpdateCheck": "weekly",
@@ -61,12 +63,12 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualTextPrefix": "           => ",
   "diagnostic.virtualText": false,
+  /* "diagnostic.messageTarget": "echo", */
   "diagnostic.messageTarget": "float",
   "codeLens.enable": true,
   "list.previewHighlightGroup": "Statement",
   "list.nextKeymap": "<C-e>",
   "list.previousKeymap": "<C-u>",
-  // "coc.preferences.jumpCommand": "tab drop",
   "coc.preferences.formatOnSaveFiletypes": [
     "python",
     "css",
@@ -80,7 +82,8 @@
   "prettier.eslintIntegration": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
-  "signature.target": "float",
+  "signature.target": "echo",
+  /* "signature.target": "float", */
   "signature.enable": true,
   "yank.enableCompletion": false,
   "explorer.width": 38,
