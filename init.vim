@@ -20,6 +20,7 @@ let s:sourceList = [
       \ 'neovim',
       \ 'plugins.config',
       \ 'style',
+      \ 'vscode',
       \]
 for s:item in s:sourceList
   exec 'source ' . s:script_path . '/viml/' . s:item . '.vim'

@@ -8,7 +8,6 @@ Plug 'jiangmiao/auto-pairs'
 " Plug 'terryma/vim-multiple-cursors'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Plug 'scrooloose/nerdcommenter'
-Plug 'tyru/caw.vim'
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
 " Plug 'junegunn/vim-after-object' " da= to delete what's after =
@@ -21,6 +20,7 @@ Plug 'AndrewRadev/splitjoin.vim'  " gS to split line, gJ to join lines
 if !exists('g:vscode')
   Plug 'wellle/context.vim'
   Plug 'jesseleite/vim-noh'
+  Plug 'tyru/caw.vim'
   Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
   Plug 'Shougo/context_filetype.vim'
   Plug 'sgur/vim-editorconfig'
@@ -38,8 +38,9 @@ if !exists('g:vscode')
   Plug 'MarcWeber/vim-addon-mw-utils'
   " Plug 'kana/vim-textobj-user'
   Plug 'roxma/nvim-yarp'
+  if !exists('g:started_by_firenvim')
+    Plug 'mhinz/vim-startify'
+  endif
 endif
-if !exists('g:started_by_firenvim')
-  Plug 'mhinz/vim-startify'
-endif
+
 
