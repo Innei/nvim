@@ -15,6 +15,7 @@ Plug 'wellle/targets.vim'
 Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
 Plug 'easymotion/vim-easymotion'
 Plug 'Konfekt/FastFold'
+Plug 'AndrewRadev/tagalong.vim' " auto rename tags
 " Plug 'junegunn/vim-peekaboo'
 Plug 'AndrewRadev/splitjoin.vim'  " gS to split line, gJ to join lines
 if !exists('g:vscode')
@@ -33,6 +34,7 @@ if !exists('g:vscode')
   Plug 'skywind3000/asyncrun.vim'
   Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'schickling/vim-bufonly'
+  Plug '907th/vim-auto-save', { 'on': 'AutoSaveToggle', 'for': ['text', 'markdown', 'tex'] }
 
   " Dependencies
   Plug 'MarcWeber/vim-addon-mw-utils'

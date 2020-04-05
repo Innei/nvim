@@ -2,6 +2,7 @@
 if !exists('g:vscode')
   " Plug 'theniceboy/eleline.vim'
   " Plug 'mg979/vim-xtabline'
+  Plug 'Yggdroot/indentLine', { 'for': ['python', 'yaml', 'bash'], 'on': ['IndentLinesToggle']}
   Plug 'luochen1990/rainbow'
   if !exists('g:started_by_firenvim')
     Plug 'vim-airline/vim-airline'

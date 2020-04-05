@@ -27,7 +27,6 @@ set backspace=2
 set autoindent
 set smartindent
 set smarttab
-set signcolumn=yes:2
 set list
 set listchars=tab:→\ ,trail:·
 set scrolloff=8
@@ -56,7 +55,6 @@ set wildmenu
 set ignorecase
 set smartcase
 set shortmess+=cOtT
-set inccommand=split
 set completeopt=longest,noinsert,menuone,noselect,preview
 set ttyfast "should make scrolling faster
 set lazyredraw "same as above
@@ -69,6 +67,11 @@ set pastetoggle=<F10>
 set updatetime=500
 
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" experimental
+set lazyredraw
+syntax sync minlines=256
+set regexpengine=0
 
 " ===
 " === Ignore File
@@ -87,12 +90,4 @@ set wildignore+=*.gem
 set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
-
-" ===
-" === Terminal Behaviors
-" ===
-let g:neoterm_autoscroll = 1
-autocmd TermOpen term://* startinsert
-" tnoremap <C-N> <C-\><C-N>
-" tnoremap <C-O> <C-\><C-N><C-O>
 

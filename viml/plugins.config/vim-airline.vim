@@ -12,8 +12,6 @@ if !exists('g:started_by_firenvim')
   let g:airline#extensions#tabline#exclude_preview = 1
   " let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
   " let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
-  let R_setwidth = 0
-  let R_clear_line = 0
   " let g:airline_section_c = airline#section#create(['%f  ' , '%{get(b:,''coc_current_function'','''')}'])
   let g:airline_section_b = airline#section#create(['%{get(b:,''coc_git_status'','''')}','%{get(g:,''coc_git_status'','''')}'])
   let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])

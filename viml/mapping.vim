@@ -231,6 +231,8 @@ endif
 " ===
 " === Other useful stuff
 " ===
+xnoremap L <ESC>^v$h
+nnoremap [p o<ESC>p
 " Move the next character to the end of the line with ctrl+9
 inoremap <C-u> <ESC>lx$p
 
@@ -251,9 +253,6 @@ noremap ` ~<left>
 
 " Call figlet
 nnoremap tx :r !figlet
-
-noremap <LEADER>- :lN<CR>
-noremap <LEADER>= :lne<CR>
 
 " find and replace
 noremap \s :%s//g<left><left>

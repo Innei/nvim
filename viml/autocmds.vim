@@ -24,14 +24,6 @@ autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,l --------<Enter>
 
-
-let g:auto_save = 0
-augroup ft_markdown
-  au!
-  au FileType markdown let b:auto_save = 1
-augroup END
-" let g:auto_save_write_all_buffers = 1  " write all open buffers as if you would use :wa
-" let g:auto_save_silent = 1  " do not display the auto-save notification
 augroup unmapChn
   au!
   au FileType markdown  :inoremap <buffer> （ （
@@ -58,3 +50,6 @@ augroup unmapChn
   au FileType markdown  :inoremap <buffer> 《 《
 augroup END
 au FileType markdown setlocal wrap
+autocmd BufRead,BufNewFile *.{md,mkd,markdown,mdown,mkdn,mdwn} set filetype=markdown
+autocmd BufRead,BufNewFile *.{json} set ft=json5
+autocmd BufRead,BufNewFile {coc}.json set ft=jsonc

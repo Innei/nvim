@@ -1,7 +1,4 @@
 " Author:   Innei
-" Author:   Innei
-" Github:   https://github.com/innei
-" License:  MIT
 " Github:   https://github.com/innei
 " License:  MIT
 
@@ -17,14 +14,20 @@ let s:sourceList = [
       \ 'functions',
       \ 'commands',
       \ 'autocmds',
-      \ 'neovim',
       \ 'plugins.config',
       \ 'style',
-      \ 'vscode',
       \]
 for s:item in s:sourceList
   exec 'source ' . s:script_path . '/viml/' . s:item . '.vim'
 endfor
+
+if exists('g:vscode')
+  exec 'source ' . s:script_path . '/viml/vscode.vim'
+endif
+
+if has('nvim')
+  exec 'source ' . s:script_path . '/viml/neovim.vim'
+endif
 
 " Free memory
 unlet s:script_path
