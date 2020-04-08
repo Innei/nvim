@@ -74,21 +74,17 @@ nnoremap <LEADER>tw :set wrap!<CR>
 " nnoremap h <nop>
 nnoremap . <C-I>
 nnoremap , <C-O>
-noremap " .
+noremap ' .
 nnoremap = <C-a>
 nnoremap - <C-x>
+map ! %
 nnoremap <C-a> <nop>
 nnoremap <C-x> <nop>
-noremap <Home> ^
 inoremap <Home> <esc>^i
 inoremap <Del> <ESC>lxi
 nnoremap <Del> "_x
 xnoremap <Del> "_d
 " U/E keys for 5 times u/e (faster navigation)
-nnoremap <silent> F 5k
-nnoremap <silent> E 5j
-xnoremap <silent> F 5k
-xnoremap <silent> E 5j
 
 xnoremap <silent> , ^
 xnoremap <silent> . g_
@@ -101,7 +97,7 @@ xnoremap W 5w
 xnoremap B 5b
 
 " rename a word
-nnoremap cw viwc
+nnoremap cw ciw
 
 " Go next or forward word under cursor
 nnoremap \\ *

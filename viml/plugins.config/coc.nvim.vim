@@ -130,3 +130,11 @@ autocmd FileType javascript,javascriptreact,typescript,typescriptreact,scss let 
 
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nnoremap <leader>p :Format<CR>
+
+" coc-smartf
+nmap f <Plug>(coc-smartf-forward)
+nmap F <Plug>(coc-smartf-backward)
+augroup Smartf
+  autocmd User SmartfEnter :hi Conceal ctermfg=220 guifg=#e74c3c
+  autocmd User SmartfLeave :hi Conceal ctermfg=239 guifg=#504945
+augroup end

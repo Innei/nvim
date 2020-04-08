@@ -1,1 +1,1 @@
-let g:tagalong_additional_filetypes = ['vue', 'javascript', 'javascriptreact', 'typescriptreact']
+let g:tagalong_filetypes = ['vue', 'javascript', 'javascriptreact', 'typescriptreact']

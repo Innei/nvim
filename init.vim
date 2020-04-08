@@ -8,7 +8,6 @@ let s:script_path = expand('<sfile>:p:h')
 
 let s:sourceList = [
       \ 'init',
-      \ 'general',
       \ 'mapping',
       \ 'plugins',
       \ 'functions',
@@ -17,12 +16,15 @@ let s:sourceList = [
       \ 'plugins.config',
       \ 'style',
       \]
+
 for s:item in s:sourceList
   exec 'source ' . s:script_path . '/viml/' . s:item . '.vim'
 endfor
 
 if exists('g:vscode')
   exec 'source ' . s:script_path . '/viml/vscode.vim'
+else
+  exec 'source ' . s:script_path . '/viml/general.vim'
 endif
 
 if has('nvim')

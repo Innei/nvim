@@ -5,4 +5,6 @@ if !exists('g:vscode')
   Plug 'liuchengxu/vista.vim'
   Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
   Plug 'yuki-ycino/fzf-preview.vim'
+else
+  Plug 'easymotion/vim-easymotion'
 endif

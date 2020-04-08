@@ -7,7 +7,7 @@
   "coc.preferences.enableFloatHighlight": true,
   "coc.preferences.snippetStatusText": "Ⓢ ",
   "coc.preferences.extensionUpdateCheck": "weekly",
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  /* "coc.preferences.currentFunctionSymbolAutoUpdate": true, */
   "coc.preferences.rootPatterns": [
     ".git",
     ".hg",
@@ -250,7 +250,10 @@
   "vetur.format.defaultFormatter.html": "prettier",
   "vetur.completion.useScaffoldSnippets": true,
   /* "vetur.dev.vlsPath": "/Users/innei/.vscode/extensions/octref.vetur-0.24.0/server", */
-  // "emmet.includeLanguages": {"vue-html": "html", "javascript": "javascriptreact", "typescript": "typescriptreact"},
+  "emmet.includeLanguages": {       
+    "javascript": "javascriptreact",
+    "typescriptreact": "typescriptreact" 
+  },                                
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.optimizeStylesheetParsing": true,
   "cSpell.maxNumberOfProblems": 10,
@@ -268,9 +271,7 @@
   "yaml.format.enable": true,
   "coc-actions.hideCursor": true,
   "coc-actions.useCursorLine": true,
-  "cSpell.userWords": [
-    "Innei",
-    "Typegoose",
-    "consola"
-  ]
+  "sourcekit.commandPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+  "cSpell.userWords": ["Innei", "Typegoose", "consola"],
+  "smartf.timeout": 5000
 }

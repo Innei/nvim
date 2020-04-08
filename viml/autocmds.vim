@@ -51,5 +51,5 @@ augroup unmapChn
 augroup END
 au FileType markdown setlocal wrap
 autocmd BufRead,BufNewFile *.{md,mkd,markdown,mdown,mkdn,mdwn} set filetype=markdown
-autocmd BufRead,BufNewFile *.{json} set ft=json5
-autocmd BufRead,BufNewFile {coc}.json set ft=jsonc
+autocmd BufRead,BufNewFile *.{json} set ft=jsonc
+

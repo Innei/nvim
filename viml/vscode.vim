@@ -1,3 +1,6 @@
+set hidden
+set ignorecase
+set smartcase
 xmap gc  <Plug>VSCodeCommentary
 nmap gc  <Plug>VSCodeCommentary
 map gcc <Plug>VSCodeCommentaryLine

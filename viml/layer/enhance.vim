@@ -1,27 +1,27 @@
 " Editor Enhancement
+Plug 'wellle/targets.vim'
+Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
+Plug 'kristijanhusak/vim-carbon-now-sh', { 'on': 'CarbonNowSh' }
+Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
+Plug 'andymass/vim-matchup' " Extends vim's % motion to language-specific words.
+Plug 'AndrewRadev/switch.vim' " gs to switch
+Plug 'AndrewRadev/splitjoin.vim'  " gS to split line, gJ to join lines
 " Plug 'xolox/vim-session'
 " Plug 'xolox/vim-misc' vim-session dep
-Plug 'kkoomen/vim-doge', { 'on': ['DogeGenerate', 'DogeCreateDocStandard'] } " document genertor
-Plug 'kristijanhusak/vim-carbon-now-sh', { 'on': 'CarbonNowSh' }
-Plug 'andymass/vim-matchup' " Extends vim's % motion to language-specific words.
-Plug 'jiangmiao/auto-pairs'
 " Plug 'terryma/vim-multiple-cursors'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Plug 'scrooloose/nerdcommenter'
-Plug 'AndrewRadev/switch.vim' " gs to switch
-Plug 'tpope/vim-surround' " type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
-" Plug 'junegunn/vim-after-object' " da= to delete what's after =
-Plug 'wellle/targets.vim'
-Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
-Plug 'easymotion/vim-easymotion'
-Plug 'Konfekt/FastFold'
-Plug 'AndrewRadev/tagalong.vim' " auto rename tags
 " Plug 'junegunn/vim-peekaboo'
-Plug 'AndrewRadev/splitjoin.vim'  " gS to split line, gJ to join lines
+" Plug 'junegunn/vim-after-object' " da= to delete what's after =
+
 if !exists('g:vscode')
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'kkoomen/vim-doge', { 'on': ['DogeGenerate', 'DogeCreateDocStandard'] } " document genertor
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+  Plug 'Konfekt/FastFold'
   Plug 'wellle/context.vim'
   Plug 'jesseleite/vim-noh'
-  Plug 'tyru/caw.vim'
+  " Plug 'tyru/caw.vim'
+  Plug 'tomtom/tcomment_vim'
   Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
   Plug 'Shougo/context_filetype.vim'
   Plug 'sgur/vim-editorconfig'
@@ -30,7 +30,7 @@ if !exists('g:vscode')
   Plug 'tweekmonster/startuptime.vim', { 'on': 'StartupTime' }
   Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
   Plug 'thaerkh/vim-workspace'
-  Plug 'osyo-manga/vim-anzu'
+  " Plug 'osyo-manga/vim-anzu'
   Plug 'skywind3000/asyncrun.vim'
   Plug 'ConradIrwin/vim-bracketed-paste'
   Plug 'schickling/vim-bufonly'
