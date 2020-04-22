@@ -27,7 +27,12 @@ snippet cl "Log to console" b
 console.log($1)$2
 endsnippet
 
-snippet /* "Block comment"
-	/**
-	* $1
-	*/
+snippet import "import statement" b
+import { $2 } from '$1'
+$3
+endsnippet
+
+snippet cf "const statement"
+const { $2 } = $1
+$3
+endsnippet

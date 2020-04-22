@@ -38,6 +38,7 @@ let g:coc_global_extensions = [
     \ 'coc-postfix',
     \ 'coc-imselect',
     \ 'coc-cssmodules',
+    \ 'coc-smartf',
     \ ]
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -48,7 +49,7 @@ inoremap <silent><expr> <TAB>
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'

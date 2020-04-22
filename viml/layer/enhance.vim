@@ -6,6 +6,9 @@ Plug 'junegunn/vim-easy-align' " gaip= to align the = in paragraph,
 Plug 'andymass/vim-matchup' " Extends vim's % motion to language-specific words.
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'AndrewRadev/splitjoin.vim'  " gS to split line, gJ to join lines
+Plug 'tomtom/tcomment_vim'
+Plug 'jesseleite/vim-noh'
+Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
 " Plug 'xolox/vim-session'
 " Plug 'xolox/vim-misc' vim-session dep
 " Plug 'terryma/vim-multiple-cursors'
@@ -19,10 +22,7 @@ if !exists('g:vscode')
   Plug 'mg979/vim-visual-multi', {'branch': 'master'}
   Plug 'Konfekt/FastFold'
   Plug 'wellle/context.vim'
-  Plug 'jesseleite/vim-noh'
   " Plug 'tyru/caw.vim'
-  Plug 'tomtom/tcomment_vim'
-  Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
   Plug 'Shougo/context_filetype.vim'
   Plug 'sgur/vim-editorconfig'
   Plug 'airblade/vim-rooter'
