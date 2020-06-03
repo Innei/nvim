@@ -15,7 +15,7 @@ let &t_ut=''
 " === Editor behavior
 " ===
 set number
-" set relativenumber
+set relativenumber
 set mouse=nv
 set mousehide
 set cursorline
