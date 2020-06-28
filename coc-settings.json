@@ -115,7 +115,7 @@
     "*": "toggleSelection",
     "<tab>": "actionMenu",
 
-    "n": "expandOrCollapse",
+    "n": "expanded?",
     "E": ["toggleSelection", "normal:j"],
     "U": ["toggleSelection", "normal:k"],
     "gl": "expandRecursive",
@@ -227,16 +227,6 @@
       "filetypes": ["sh"],
       "ignoredRootPaths": []
     },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json"],
-      "initializationOptions": {
-        "cache": {
-          "directory": ".ccls-cache"
-        }
-      }
-    }
   },
   "snippets.textmateSnippetsRoots": [],
   "snippets.extends": [{ "vue": "javascript" }],
@@ -249,7 +239,6 @@
   "vetur.format.defaultFormatter.css": "prettier",
   "vetur.format.defaultFormatter.html": "prettier",
   "vetur.completion.useScaffoldSnippets": true,
-  /* "vetur.dev.vlsPath": "/Users/innei/.vscode/extensions/octref.vetur-0.24.0/server", */
   "emmet.includeLanguages": {       
     "javascript": "javascriptreact",
     "typescriptreact": "typescriptreact" 
