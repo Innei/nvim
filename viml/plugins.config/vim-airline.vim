@@ -1,5 +1,6 @@
 if !exists('g:started_by_firenvim')
   let g:airline_powerline_fonts = 1
+  let g:airline#extensions#vista#enabled = 0
   let g:airline_theme='onedark'
   let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
   let g:airline#extensions#tabline#formatter = 'jsformatter'

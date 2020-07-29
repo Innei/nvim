@@ -1,7 +1,7 @@
 " Make Ranger replace netrw and be the file explorer
 let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
-nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+nnoremap <silent> R :RnvimrToggle<CR>
 
 " Customize the initial layout
 let g:rnvimr_layout = { 'relative': 'editor',

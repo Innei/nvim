@@ -1,3 +1,9 @@
+ May you be blessed by the world with its tenderness.
+ File              : README.md
+ Author            : Innei <tukon479@gmail.com>
+ Date              : 29.07.2020
+ Last Modified Date: 29.07.2020
+ Last Modified By  : Innei <tukon479@gmail.com>
 # NeoVim Config For Front-end Developer
 
 Forked from [theniceboy/nvim](https://github.com/theniceboy/nvim)
@@ -204,6 +210,11 @@ Use the **Shift + arrow keys** to resize the current window.
 | `v` `i` + pairs | Select section which in pairs                               |
 | `v` `I` + pairs | Same as above, but ignore surrounding space                 |
 
+More useful object actions. Like 
+
+- `c` + `b` (change this block content under the cursor) (`{} ()`)
+- `c` + `q` (change this quote content under the cursor) (`"" ''`)
+
 Other: See [targets.vim](https://github.com/wellle/targets.vim)
 
 ## Plugins
@@ -228,17 +239,6 @@ CoC is a modern completion, which had most vscode feature. It's all configs wrot
 | `tt`     | Open coc-explorer                     |
 | `ts`     | Translate word which under the cursor |
 | `\d`     | Open dictatory                        |
-
-#### NERDTree
-
-| Shortcut          | Action              |
-| ----------------- | ------------------- |
-| `<Ctrl-b>`        | **Toggle NerdTree** |
-| `I`               | Open in new split   |
-| `O`               | Open in new tab     |
-| `l`               | Change root         |
-| `z` `h`           | Toggle hidden       |
-| `,` (in NERDTREE) | Toggle menu         |
 
 #### rnvimr
 
@@ -279,7 +279,7 @@ See `:help table-mode.txt` for more.
 
 | Shortcut   | Action                              |
 | ---------- | ----------------------------------- |
-| `T` or `j` | toggle function and variable list   |
+| `T`        | toggle function and variable list   |
 | `Ctrl` `t` | open function/class/variable finder |
 
 #### Fuzzy find
@@ -287,8 +287,6 @@ See `:help table-mode.txt` for more.
 | Shortcut   | Action                     |
 | ---------- | -------------------        |
 | `Ctrl` `f` | **Active FZF (ag)**        |
-| `z` `/`    | Fuzzy find in current file |
-| `z` `'`    | Fuzzy find with easymotion |
 
 #### Undotree
 

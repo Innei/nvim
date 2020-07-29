@@ -9,6 +9,7 @@ Plug 'AndrewRadev/splitjoin.vim'  " gS to split line, gJ to join lines
 Plug 'tomtom/tcomment_vim'
 Plug 'jesseleite/vim-noh'
 Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or type i) i] i} ip
+Plug 'alpertuna/vim-header'
 " Plug 'xolox/vim-session'
 " Plug 'xolox/vim-misc' vim-session dep
 " Plug 'terryma/vim-multiple-cursors'
