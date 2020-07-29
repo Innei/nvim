@@ -8,7 +8,8 @@ if !exists('g:vscode')
   " Plug 'ruanyl/vim-sort-imports', { 'for': ['javascript', 'typescript', 'typescriptreact'] }
   Plug 'posva/vim-vue', { 'for': 'vue' }
   Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
-  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescriptreact'] }
+  " Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescriptreact'] }
+  Plug 'peitalin/vim-jsx-typescript'
   " Go
   Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
