@@ -1,9 +1,3 @@
- May you be blessed by the world with its tenderness.
- File              : README.md
- Author            : Innei <tukon479@gmail.com>
- Date              : 29.07.2020
- Last Modified Date: 29.07.2020
- Last Modified By  : Innei <tukon479@gmail.com>
 # NeoVim Config For Front-end Developer
 
 Forked from [theniceboy/nvim](https://github.com/theniceboy/nvim)
@@ -74,8 +68,6 @@ Python:
 | `↓`        | Cursor down a terminal line                               |
 | `←`        | Cursor left                                               |
 | `→`        | Cursor right                                              |
-| `F`        | Cursor up 5 terminal lines                                |
-| `E`        | Cursor down 5 terminal lines                              |
 | `Ctrl` `u` | Move the view port up 5 lines without moving the cursor   |
 | `Ctrl` `e` | Move the view port down 5 lines without moving the cursor |
 | `W`        | Move cursor five words forward                            |
@@ -93,8 +85,7 @@ Python:
 | Shortcut      | Action                                                               |
 | ----------    | -------------------------------------------------------------------- |
 | `j` `j`       | Map to `ESC`                                                         |
-| `Ctrl` `a`    | Move cursor to the end of the line                                   |
-| `Ctrl` `u`    | Move the character on the right of the cursor to the end of the line |
+| `j` `k`       | Map to undo                                                          |
 | `Meta` `d`    | Select current (next) under cursor word                              |
 | `Meta` `D`    | Select prev some word which like under cursor word                   |
 | `Meta` `Down` | Swap current line and next line                                      |
@@ -106,8 +97,8 @@ Python:
 |-----------------|---------------------------------------|
 | `Shift` `Left`  | Select to previous word               |
 | `Shift` `Right` | Select to next word                   |
-| `Meta` `Up`    | Move selection up                     |
-| `Meta` `Down`  | Move selection down                   |
+| `Meta` `Up`     | Move selection up                     |
+| `Meta` `Down`   | Move selection down                   |
 | `,`             | Select to the end of line (without $) |
 | `.`             | Select to the beginning of line       |
 
@@ -130,7 +121,7 @@ Python:
 | `F5`            | **Compile/Run the current file**       |
 | `y`             | Copy selected text to system clipboard |
 | `z` `=`         | Show spell suggestions                 |
-| `SPACE` `s` `c` | Toggle spell suggestion a              |
+| `SPACE` `s` `c` | Toggle spell suggestion mode           |
 | `SPACE` `d` `w` | Find adjacent duplicated word          |
 | `SPACE` `t` `t` | Convert every 4 Spaces to a tab        |
 | `SPACE` `-`     | Previous quick-fix position            |
@@ -165,11 +156,11 @@ Python:
 
 Use the **Shift + arrow keys** to resize the current window.
 
-#### 2.4 Closing Windows
+#### 2.4 Closing Windows And Buffer
 
 | Shortcut     | Action                                                                                                     |
 | ------------ | ---------------------------------------------------------------------------------------------------------- |
-| `Q`          | Close the current window                                                                                   |
+| `Q`          | Close the current buffer                                                                                   |
 | `SPACE` `q`  | Close the window below the current window. (The current window will be closed if there is no window below) |
 | `Ctrl` + `q` | Exit all windows                                                                                           |
 
@@ -298,15 +289,15 @@ See `:help table-mode.txt` for more.
 
 #### Vim Bookmarks
 
-| Shortcut    | Action                          | Command |
-| ----------- | ------------------------------- | ------- |
-| `ma`        | Add mark at current line        |         |
-| `m.`        | Move to next mark               |         |
-| `m,`        | Move to prev mark               |         |
-| `mc`        | Clear mark                      |         |
-| `mC`        | Clear All mark                  |         |
-| `ml`        | List all marks                  |         |
-| `mSPACE`    | Jump to the next mark in buffer |         |
+| Shortcut    | Action                          |
+| ----------- | ------------------------------- |
+| `ma`        | Add mark at current line        |
+| `m.`        | Move to next mark               |
+| `m,`        | Move to prev mark               |
+| `mc`        | Clear mark                      |
+| `mC`        | Clear All mark                  |
+| `ml`        | List all marks                  |
+| `mSPACE`    | Jump to the next mark in buffer |
 
 For more commands, see [here](https://github.com/MattesGroeger/vim-bookmarks#usage)
 
@@ -356,6 +347,17 @@ To add surround (`string` -> `"string"`):
 | --------------- | ------------------------------------------- |
 | `SPACE` `f`     | Find in the current file (required ag)      |
 | `SPACE` `f` `r` | Find and replace                            |
+
+#### vim-workspace
+
+| Shortcut | Action                                        |
+|----------|-----------------------------------------------|
+| `ss`     | Save this session as a workspace like vscode. |
+| `srm`    | Remove all session.                           |
+
+#### vim-fileheader
+
+    Press `F4` to add file-header this file.
 
 #### fzf-gitignore
 

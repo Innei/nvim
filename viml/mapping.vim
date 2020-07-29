@@ -71,7 +71,6 @@ nnoremap <LEADER>tw :set wrap!<CR>
 " ===
 " === Cursor Movement
 " ===
-" nnoremap h <nop>
 nnoremap . <C-I>
 nnoremap , <C-O>
 noremap ' .
@@ -84,8 +83,6 @@ inoremap <Home> <esc>^i
 inoremap <Del> <ESC>lxi
 nnoremap <Del> "_x
 xnoremap <Del> "_d
-" U/E keys for 5 times u/e (faster navigation)
-
 xnoremap <silent> , ^
 xnoremap <silent> . g_
 xnoremap <silent> <End> g_
@@ -118,10 +115,9 @@ if !exists('g:vscode')
   " === Insert Mode Cursor Movement
   " ===
   inoremap jj <ESC>l
-  inoremap jk <ESC>l
-  inoremap kk <ESC>l
   " undo
   inoremap <M-z> <ESC>u
+  inoremap jk <ESC>u
   " ===
   " === Command Mode Cursor Movement
   " ===
