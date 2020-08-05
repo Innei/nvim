@@ -1,5 +1,7 @@
 # NeoVim Config For Front-end Developer
 
+Archived. Please go <https://github.com/Innei/dotfiles>
+
 Forked from [theniceboy/nvim](https://github.com/theniceboy/nvim)
 
 Support Language:
